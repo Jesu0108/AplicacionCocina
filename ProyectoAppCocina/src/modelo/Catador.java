@@ -1,6 +1,6 @@
 package modelo;
 
-public class Catador extends Persona{
+public class Catador extends Persona implements ICatador{
 	
 	private byte bCriterio;
 
@@ -17,10 +17,12 @@ public class Catador extends Persona{
 	
 	//Getters and Setters
 	
+	@Override
 	public byte getCriterio() {
 		return bCriterio;
 	}
 
+	@Override
 	public boolean setCriterio(byte bCriterio) {
 		boolean bExito = false;
 		if(bCriterio > -1) {
@@ -29,4 +31,14 @@ public class Catador extends Persona{
 		}
 		return bExito;
 	}
+
+	@Override
+	public String toString() {
+		String sResultado= "";
+		sResultado += "El Catador: "+super.getsNombre()+ " "+super.getsApellidos()+"/n";
+		sResultado+= "Tiene un criterio de: "+getCriterio();
+		return sResultado;
+	}
+	
+	
 }

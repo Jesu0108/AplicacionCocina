@@ -1,6 +1,6 @@
 package modelo;
 
-public class Cocinero extends Persona{
+public class Cocinero extends Persona implements ICocinero{
 	
 	private String sEspecialidad;
 	
@@ -18,10 +18,12 @@ public class Cocinero extends Persona{
 
 	//Getters and Setters
 	
+	@Override
 	public String getsEspecialidad() {
 		return sEspecialidad;
 	}
 
+	@Override
 	public boolean setsEspecialidad(String sEspecialidad) {
 		boolean bExito=false;
 		if(sEspecialidad != null) {
@@ -31,5 +33,12 @@ public class Cocinero extends Persona{
 		return bExito;
 	}
 
+	@Override
+	public String toString() {
+		String sResultado= "";
+		sResultado += "El Cocinero: "+super.getsNombre()+ " "+super.getsApellidos()+"/n";
+		sResultado+= "Tiene una especialidad: "+getsEspecialidad();
+		return sResultado;
+	}
 	
 }
