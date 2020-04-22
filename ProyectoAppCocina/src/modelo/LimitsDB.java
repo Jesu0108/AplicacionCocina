@@ -16,5 +16,4 @@ public interface LimitsDB {
     public final int LIMITSEGURIDADSOCIAL = 12;
     public final int LIMITPHONE = 9;
     public final int LIMITDNI = 9;
-    
 }

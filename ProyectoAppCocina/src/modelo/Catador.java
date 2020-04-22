@@ -29,6 +29,4 @@ public class Catador extends Persona{
 		}
 		return bExito;
 	}
-	
-	
 }
