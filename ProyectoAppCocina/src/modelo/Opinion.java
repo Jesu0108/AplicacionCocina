@@ -1,6 +1,6 @@
 package modelo;
 
-public class Opinion {
+public class Opinion implements IOpinion{
 	private int iId_opinion;
 	private String sCritica;
 	private byte iPuntuacion;
@@ -11,10 +11,12 @@ public class Opinion {
 		setiPuntuacion(iPuntuacion);
 	}
 	
+	@Override
 	public int getiId_opinion() {
 		return iId_opinion;
 	}
 	
+	@Override
 	public boolean setiId_opinion(int iId_opinion) {
 		boolean bExito=false;
 		if(iId_opinion>-1) {
@@ -24,10 +26,12 @@ public class Opinion {
 		return bExito;
 	}
 	
+	@Override
 	public String getsCritica() {
 		return sCritica;
 	}
 	
+	@Override
 	public boolean setsCritica(String sCritica) {
 		boolean bExito=false;
 		if(sCritica != null) {
@@ -37,10 +41,12 @@ public class Opinion {
 		return bExito;
 	}
 	
+	@Override
 	public byte getiPuntuacion() {
 		return iPuntuacion;
 	}
 	
+	@Override
 	public boolean setiPuntuacion(byte iPuntuacion) {
 		boolean bExito=false;
 		if(iPuntuacion > -1) {
