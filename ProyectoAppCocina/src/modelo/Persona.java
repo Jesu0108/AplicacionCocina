@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public abstract class Persona implements LimitsDB {
+public abstract class Persona implements LimitsDB, IPersona{
 	private String sEmail; // PK
 	private String sContrasenia, sNombre, sApellidos, sTelefono; // Valores NN
 	private String sExperiencia, sCiudad;
@@ -29,6 +29,7 @@ public abstract class Persona implements LimitsDB {
 		return sEmail;
 	}
 
+	@Override
 	public boolean setsEmail(String sEmail) {
 		boolean bExito = false;
 		if (sEmail != null && sEmail.contains("@")) {
@@ -42,6 +43,7 @@ public abstract class Persona implements LimitsDB {
 		return sContrasenia;
 	}
 
+	@Override
 	public boolean setsContrasenia(String sContrasenia) {
 		boolean bExito = false;
 		if (sContrasenia != null && sContrasenia.length() > MINCHARPASSWORD
@@ -52,10 +54,12 @@ public abstract class Persona implements LimitsDB {
 		return bExito;
 	}
 
+	@Override
 	public String getsNombre() {
 		return sNombre;
 	}
 
+	@Override
 	public boolean setsNombre(String sNombre) {
 		boolean bExito = false;
 		if(sNombre != null) {
@@ -65,10 +69,12 @@ public abstract class Persona implements LimitsDB {
 		return bExito;
 	}
 
+	@Override
 	public String getsApellidos() {
 		return sApellidos;
 	}
 
+	@Override
 	public boolean setsApellidos(String sApellidos) {
 		boolean bExito = false;
 		if(sNombre != null) {
@@ -78,10 +84,12 @@ public abstract class Persona implements LimitsDB {
 		return bExito;
 	}
 
+	@Override
 	public String getsTelefono() {
 		return sTelefono;
 	}
 
+	@Override
 	public boolean setsTelefono(String sTelefono) {
 		boolean bExito = false;
 		if(sNombre != null) {
@@ -91,10 +99,12 @@ public abstract class Persona implements LimitsDB {
 		return bExito;
 	}
 
+	@Override
 	public String getsExperiencia() {
 		return sExperiencia;
 	}
 
+	@Override
 	public boolean setsExperiencia(String sExperiencia) {
 		boolean bExito = false;
 		if(sNombre != null) {
@@ -104,10 +114,12 @@ public abstract class Persona implements LimitsDB {
 		return bExito;
 	}
 
+	@Override
 	public String getsCiudad() {
 		return sCiudad;
 	}
 
+	@Override
 	public boolean setsCiudad(String sCiudad) {
 		boolean bExito = false;
 		if(sNombre != null) {
@@ -132,7 +144,6 @@ public abstract class Persona implements LimitsDB {
 	}
 
 	@Override
-
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -153,6 +164,7 @@ public abstract class Persona implements LimitsDB {
 	// ---------------------------------------------------------------------------------------------------
 
 	// Metodo de encriptacion de la contrasenia
+	@Override
 	public String encryptSha512(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -169,6 +181,7 @@ public abstract class Persona implements LimitsDB {
 	}
 
 	// Metodo para comprobar que el usuario intriduce bien los datos NN
+	@Override
 	public boolean checkUser() {
 		boolean bExito = false;
 		if (this.sEmail != null && this.sContrasenia != null && this.sNombre != null && 
@@ -179,6 +192,7 @@ public abstract class Persona implements LimitsDB {
 	}
 
 	//Metodo para comprobar si el login de un usuario es correcto
+	@Override
     public boolean checkLogin(Object obj) {
 	boolean bExito = false;
 	Persona other = (Persona) obj;
