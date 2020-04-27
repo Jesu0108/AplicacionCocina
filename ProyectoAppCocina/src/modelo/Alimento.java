@@ -8,6 +8,10 @@ public class Alimento implements IAlimento{
 		setbCantidad(bCantidad);
 		setsNombre_alimento(sNombre_alimento);
 	}
+	
+	public Alimento(String sNombre_alimento) {
+		setbCantidad(bCantidad);
+	}
 
 	//-------------------------------------------------------------------------------
 	//Getters and Setters

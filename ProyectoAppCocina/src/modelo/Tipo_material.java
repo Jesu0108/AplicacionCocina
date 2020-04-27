@@ -9,6 +9,11 @@ public class Tipo_material implements ITipo_material{
 		setsNombre_tipo_material(sNombre_tipo_material);
 		setiCalidad(iCalidad);
 	}
+	
+	public Tipo_material(String sNombre_tipo_material) {
+		setsNombre_tipo_material(sNombre_tipo_material);
+	}
+
 
 	//---------------------------------------------------------
 	//Getters and Setters

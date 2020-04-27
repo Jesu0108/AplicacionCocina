@@ -8,6 +8,10 @@ public class Material implements IMaterial{
 		setsNombre_material(sNombre_material);
 		setoNombre_tipo_material(oNombre_tipo_material);
 	}
+	
+	public Material(String sNombre_material) {
+		setsNombre_material(sNombre_material);
+	}
 
 	//----------------------------------------------------------
 	//Getters and Setters

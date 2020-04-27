@@ -11,6 +11,10 @@ public class Opinion implements IOpinion{
 		setiPuntuacion(iPuntuacion);
 	}
 	
+	public Opinion(int iId_opinion) {
+		setiId_opinion(iId_opinion);
+	}
+	
 	@Override
 	public int getiId_opinion() {
 		return iId_opinion;
