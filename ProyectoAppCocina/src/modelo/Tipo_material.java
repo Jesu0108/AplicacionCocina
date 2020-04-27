@@ -1,6 +1,6 @@
 package modelo;
 
-public class Tipo_material {
+public class Tipo_material implements ITipo_material{
 	private String sNombre_tipo_material; //PK
 	private int iCalidad; //NN
 	
@@ -12,6 +12,8 @@ public class Tipo_material {
 
 	//---------------------------------------------------------
 	//Getters and Setters
+	
+	@Override
 	public String getsNombre_tipo_material() {
 		return sNombre_tipo_material;
 	}
@@ -26,12 +28,12 @@ public class Tipo_material {
 		return bExito;
 	}
 	
-	
+	@Override
 	public int getiCalidad() {
 		return iCalidad;
 	}
 	
-	
+	@Override
 	public boolean setiCalidad(int iCalidad) {
 		boolean bExito=false;
 		if(iCalidad > -1) {
