@@ -1,6 +1,6 @@
 package modelo;
 
-public class Alimento {
+public class Alimento implements IAlimento{
 	private String sNombre_alimento; //PK
 	private byte bCantidad; //NN
 		
@@ -12,6 +12,7 @@ public class Alimento {
 	//-------------------------------------------------------------------------------
 	//Getters and Setters
 	
+	@Override
 	public String getsNombre_alimento() {
 		return sNombre_alimento;
 	}
@@ -24,10 +25,12 @@ public class Alimento {
 		return bExito;
 	}
 	
+	@Override
 	public byte getbCantidad() {
 		return bCantidad;
 	}
 	
+	@Override
 	public boolean setbCantidad(byte bCantidad) {
 		boolean bExito=false;
 		if(bCantidad > -1) {
