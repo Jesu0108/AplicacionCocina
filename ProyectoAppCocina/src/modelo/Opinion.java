@@ -1,7 +1,7 @@
 package modelo;
 
 public class Opinion implements IOpinion{
-	private int iId_opinion;
+	private int iId_opinion; //PK
 	private String sCritica;
 	private byte iPuntuacion;
 		
