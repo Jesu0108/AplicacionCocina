@@ -21,6 +21,7 @@ public class Alimento implements IAlimento{
 		boolean bExito=false;
 		if(sNombre_alimento != null) {
 			this.sNombre_alimento = sNombre_alimento;
+			 bExito = true;
 		}
 		return bExito;
 	}
@@ -35,6 +36,7 @@ public class Alimento implements IAlimento{
 		boolean bExito=false;
 		if(bCantidad > -1) {
 			this.bCantidad = bCantidad;
+			 bExito = true;
 		}
 		return bExito;
 	}
