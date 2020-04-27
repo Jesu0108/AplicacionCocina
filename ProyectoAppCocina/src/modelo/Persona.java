@@ -28,9 +28,8 @@ public abstract class Persona implements LimitsDB, IPersona{
 	public String getsEmail() {
 		return sEmail;
 	}
-
-	@Override
-	public boolean setsEmail(String sEmail) {
+	
+	private boolean setsEmail(String sEmail) {
 		boolean bExito = false;
 		if (sEmail != null && sEmail.contains("@")) {
 			this.sEmail = sEmail;

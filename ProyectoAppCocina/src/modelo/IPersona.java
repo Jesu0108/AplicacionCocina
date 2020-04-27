@@ -2,8 +2,6 @@ package modelo;
 
 public interface IPersona {
 
-	public boolean setsEmail(String sEmail);
-
 	public boolean setsContrasenia(String sContrasenia);
 
 	public String getsNombre();
