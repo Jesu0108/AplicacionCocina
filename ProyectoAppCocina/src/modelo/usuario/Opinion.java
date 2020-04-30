@@ -1,4 +1,4 @@
-package modelo;
+package modelo.usuario;
 
 public class Opinion implements IOpinion{
 	private int iId_opinion; //PK
