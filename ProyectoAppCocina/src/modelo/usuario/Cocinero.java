@@ -1,4 +1,4 @@
-package modelo;
+package modelo.usuario;
 
 public class Cocinero extends Persona implements ICocinero{
 	

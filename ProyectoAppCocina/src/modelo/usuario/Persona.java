@@ -1,8 +1,10 @@
-package modelo;
+package modelo.usuario;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import modelo.LimitsDB;
 
 public abstract class Persona implements LimitsDB, IPersona{
 	private String sEmail; // PK
