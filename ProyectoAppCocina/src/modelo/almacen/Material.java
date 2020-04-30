@@ -1,4 +1,4 @@
-package modelo;
+package modelo.almacen;
 
 public class Material implements IMaterial{
 	private String sNombre_material; //PK

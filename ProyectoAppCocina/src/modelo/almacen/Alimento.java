@@ -1,4 +1,4 @@
-package modelo;
+package modelo.almacen;
 
 public class Alimento implements IAlimento{
 	private String sNombre_alimento; //PK

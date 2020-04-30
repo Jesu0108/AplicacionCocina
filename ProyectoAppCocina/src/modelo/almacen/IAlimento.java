@@ -1,4 +1,4 @@
-package modelo;
+package modelo.almacen;
 
 public interface IAlimento {
 
