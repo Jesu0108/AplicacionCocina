@@ -1,5 +1,6 @@
-package controlador;
+package controlador.usuario;
 
+import controlador.ConexionDB;
 import modelo.usuario.Persona;
 
 public class PersonaController {
