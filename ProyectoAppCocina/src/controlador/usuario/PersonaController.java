@@ -19,7 +19,7 @@ public class PersonaController {
 	
 	//Operaciones de checking
 	
-	public int existeUsuario (Persona oPersona) {
+	public int existePersona (Persona oPersona) {
 		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oPersona.getsEmail() + "\"";
 		return ConexionDB.executeCount(sql);
 	    }
