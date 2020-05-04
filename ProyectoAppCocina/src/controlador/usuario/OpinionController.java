@@ -7,29 +7,33 @@ import java.util.ArrayList;
 import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Opinion;
-import modelo.usuario.Servicio;
 
-public class OpinionController {
+public class OpinionController implements IOpinionController {
+	
 	// Operaciones CRUD
-
+	
+	@Override
 	public int add(Opinion oOpinion) {
 		String sql = "INSERT INTO opinion VALUES (\"" + oOpinion.getiPuntuacion() + "\",\"" + oOpinion.getsCritica()
 				+ "\",\"" + oOpinion.getiId_opinion() + ")";
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	@Override
 	public int remove(Opinion oOpinion) {
 		String sql = "DELETE FROM opinion WHERE id_opinion LIKE \"" + oOpinion.getiId_opinion() + "\"";
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	@Override
 	public int existeOpinion(Opinion oOpinion) {
 		String sql = "SELECT COUNT(*) FROM opinion WHERE id_opinion LIKE \"" + oOpinion.getiId_opinion() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
-	
-	//Operacion de búsqueda por el ID
-	
+
+	// Operacion de búsqueda por el ID
+
+	@Override
 	public List<Opinion> buscarOpinionPorId(Opinion oOpinion) {
 
 		List<Opinion> lOpiniones = new ArrayList<Opinion>();
@@ -43,7 +47,7 @@ public class OpinionController {
 				int iId_opinion = rs.getInt(1);
 				String sCritica = rs.getString(2);
 				byte bPuntuacion = (byte) rs.getInt(3);
-				lOpiniones.add(new Opinion(iId_opinion,sCritica,bPuntuacion));
+				lOpiniones.add(new Opinion(iId_opinion, sCritica, bPuntuacion));
 			}
 			stm.close();
 		} catch (SQLException e) {
