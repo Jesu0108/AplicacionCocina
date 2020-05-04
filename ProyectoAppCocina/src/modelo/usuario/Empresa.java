@@ -13,6 +13,11 @@ public class Empresa implements IEmpresa{
 		setsTelefono(sTelefono);
 	}
 	
+	//Constructor solo con PK
+	public Empresa(String sCif) {
+		setsCif(sCif);
+	}
+	
 	//Getters and Setters
 	
 	@Override
