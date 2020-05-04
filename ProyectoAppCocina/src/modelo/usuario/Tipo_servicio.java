@@ -1,6 +1,6 @@
 package modelo.usuario;
 
-public class Tipo_servicio {
+public class Tipo_servicio implements ITipo_servicio{
 	private String sNombre_tipo_servicio; //PK
 	private int iCalidad; //NN
 	
@@ -12,9 +12,11 @@ public class Tipo_servicio {
 	
 	//Getters and Setters
 	
+	@Override
 	public String getsNombre_tipo_servicio() {
 		return sNombre_tipo_servicio;
 	}
+	
 	private boolean setsNombre_tipo_servicio(String sNombre_tipo_servicio) {
 		boolean bExito=false;
 		if(sNombre_tipo_servicio != null) {
@@ -24,9 +26,13 @@ public class Tipo_servicio {
 		return bExito;
 		
 	}
+	
+	@Override
 	public int getiCalidad() {
 		return iCalidad;
 	}
+	
+	@Override
 	public boolean setiCalidad(int iCalidad) {
 		boolean bExito=false;
 		if(iCalidad > -1) {
