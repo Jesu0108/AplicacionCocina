@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Opinion;
+import modelo.usuario.Servicio;
 
 public class OpinionController {
 	// Operaciones CRUD
@@ -22,6 +23,11 @@ public class OpinionController {
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	public int existeOpinion(Opinion oOpinion) {
+		String sql = "SELECT COUNT(*) FROM opinion WHERE id_opinion LIKE \"" + oOpinion.getiId_opinion() + "\"";
+		return ConexionDB.executeCount(sql);
+	}
+	
 	//Operacion de búsqueda por el ID
 	
 	public List<Opinion> buscarOpinionPorId(Opinion oOpinion) {
