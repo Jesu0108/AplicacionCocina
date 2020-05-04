@@ -9,10 +9,11 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Empresa;
 
-public class EmpresaController {
+public class EmpresaController implements IEmpresaController{
 
 	// Operaciones CRUD
 
+	@Override
 	public int add(Empresa oEmpresa) {
 		String sql = "INSERT INTO empresa VALUES (";
 		sql += "\"" + oEmpresa.getsCif() + "\",";
@@ -24,12 +25,13 @@ public class EmpresaController {
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	@Override
 	public int remove(Empresa oEmpresa) {
 		String sql = "DELETE FROM empresa WHERE cif LIKE \"" + oEmpresa.getsCif() + "\"";
 		return ConexionDB.executeUpdate(sql);
 	}
 
-	
+	@Override
 	public int existeEmpresa(Empresa oEmpresa) {
 		String sql = "SELECT COUNT(*) FROM empresa WHERE cif LIKE \"" + oEmpresa.getsCif() + "\"";
 		return ConexionDB.executeCount(sql);
@@ -37,6 +39,7 @@ public class EmpresaController {
 	
 	// Operacion de búsqueda por la PK
 
+	@Override
 	public List<Empresa> buscarEmpresaPorCif(Empresa oEmpresa) {
 
 		List<Empresa> lEmpresas = new ArrayList<Empresa>();
