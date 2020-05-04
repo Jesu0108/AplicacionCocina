@@ -30,7 +30,7 @@ public class EmpresaController {
 	}
 
 	
-	public int existeCliente(Empresa oEmpresa) {
+	public int existeEmpresa(Empresa oEmpresa) {
 		String sql = "SELECT COUNT(*) FROM empresa WHERE cif LIKE \"" + oEmpresa.getsCif() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
