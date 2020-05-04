@@ -2,7 +2,7 @@ package modelo.usuario;
 
 import java.sql.Date;
 
-public class Servicio {
+public class Servicio implements IServicio{
 	private int iId_servicio; //PK
 	private String sNombre_tipo_servicio, sCif;
 	private Date dFecha;
@@ -19,6 +19,7 @@ public class Servicio {
 
 	//Getters and Setters
 	
+	@Override
 	public int getiId_servicio() {
 		return iId_servicio;
 	}
@@ -32,10 +33,12 @@ public class Servicio {
 		return bExito;
 	}
 
+	@Override
 	public String getsNombre_tipo_servicio() {
 		return sNombre_tipo_servicio;
 	}
 
+	@Override
 	public boolean setsNombre_tipo_servicio(String sNombre_tipo_servicio) {
 		boolean bExito=false;
 		if(sNombre_tipo_servicio != null) {
@@ -45,10 +48,12 @@ public class Servicio {
 		return bExito;		
 	}
 
+	@Override
 	public String getsCif() {
 		return sCif;
 	}
 
+	@Override
 	public boolean setsCif(String sCif) {
 		boolean bExito=false;
 		if(sCif != null) {
@@ -58,18 +63,22 @@ public class Servicio {
 		return bExito;	
 	}
 
+	@Override
 	public Date getdFecha() {
 		return dFecha;
 	}
 
+	@Override
 	public void setdFecha(Date dFecha) {
 		this.dFecha = dFecha;
 	}
 
+	@Override
 	public byte getbTiempo_servicio() {
 		return bTiempo_servicio;
 	}
 
+	@Override
 	public boolean setbTiempo_servicio(byte bTiempo_servicio) {
 		boolean bExito=false;
 		if(bTiempo_servicio > -1) {
