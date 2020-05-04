@@ -112,7 +112,4 @@ public class Servicio {
 		sResultado+="Para domicilio con CIF: "+getsCif();
 		return sResultado;
 	}
-	
-	
-	
 }
