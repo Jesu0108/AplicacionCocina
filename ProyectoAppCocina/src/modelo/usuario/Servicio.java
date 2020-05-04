@@ -4,15 +4,16 @@ import java.sql.Date;
 
 public class Servicio implements IServicio{
 	private int iId_servicio; //PK
-	private String sNombre_tipo_servicio, sCif;
+	private String sNombre_tipo_servicio;
+	private Empresa cif;
 	private Date dFecha;
 	private byte bTiempo_servicio; //NN
 	
-	public Servicio(int iId_servicio, String sNombre_tipo_servicio, String sCif, Date dFecha, byte bTiempo_servicio) {
+	public Servicio(int iId_servicio, String sNombre_tipo_servicio, Empresa cif, Date dFecha, byte bTiempo_servicio) {
 		
 		setiId_servicio(iId_servicio);
 		setsNombre_tipo_servicio(sNombre_tipo_servicio);
-		setsCif(sCif);
+		setCif(cif);
 		setdFecha(dFecha);
 		setbTiempo_servicio(bTiempo_servicio);		
 	}
@@ -49,18 +50,18 @@ public class Servicio implements IServicio{
 	}
 
 	@Override
-	public String getsCif() {
-		return sCif;
+	public Empresa getCif() {
+		return cif;
 	}
 
 	@Override
-	public boolean setsCif(String sCif) {
+	public boolean setCif(Empresa cif) {
 		boolean bExito=false;
-		if(sCif != null) {
-			this.sCif = sCif;
+		if(cif != null) {
+			this.cif = cif;
 			bExito = true;
 		}
-		return bExito;	
+		return bExito;		
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class Servicio implements IServicio{
 		result = prime * result + bTiempo_servicio;
 		result = prime * result + ((dFecha == null) ? 0 : dFecha.hashCode());
 		result = prime * result + iId_servicio;
-		result = prime * result + ((sCif == null) ? 0 : sCif.hashCode());
+		result = prime * result + ((cif == null) ? 0 : cif.hashCode());
 		result = prime * result + ((sNombre_tipo_servicio == null) ? 0 : sNombre_tipo_servicio.hashCode());
 		return result;
 	}
@@ -118,7 +119,7 @@ public class Servicio implements IServicio{
 		sResultado+="Servicio: "+getsNombre_tipo_servicio()+"\n";
 		sResultado+="Tiempo de servicio estimado: "+getbTiempo_servicio()+"\n";
 		sResultado+="Con fecha: "+getdFecha()+"\n";
-		sResultado+="Para domicilio con CIF: "+getsCif();
+		sResultado+="Para domicilio con CIF: "+getCif();
 		return sResultado;
 	}
 }

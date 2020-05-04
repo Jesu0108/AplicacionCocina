@@ -10,9 +10,9 @@ public interface IServicio {
 
 	public boolean setsNombre_tipo_servicio(String sNombre_tipo_servicio);
 
-	public String getsCif();
+	public Empresa getCif();
 
-	public boolean setsCif(String sCif);
+	public boolean setCif(Empresa cif);
 
 	public Date getdFecha();
 
@@ -21,5 +21,9 @@ public interface IServicio {
 	public byte getbTiempo_servicio();
 
 	public boolean setbTiempo_servicio(byte bTiempo_servicio);
+
+	
+
+	
 
 }
