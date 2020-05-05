@@ -8,4 +8,8 @@ public interface IMaterial {
 
 	public boolean setoNombre_tipo_material(Tipo_material oNombre_tipo_material);
 
+	public int getiCantidad();
+
+	public boolean setiCantidad(int iCantidad);
+
 }

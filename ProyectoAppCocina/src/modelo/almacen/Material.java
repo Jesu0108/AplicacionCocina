@@ -3,7 +3,14 @@ package modelo.almacen;
 public class Material implements IMaterial{
 	private String sNombre_material; //PK
 	private Tipo_material oNombre_tipo_material; //FK
+	private int iCantidad;
 
+	public Material(String sNombre_material, Tipo_material oNombre_tipo_material, int Icantidad) {
+		setsNombre_material(sNombre_material);
+		setoNombre_tipo_material(oNombre_tipo_material);
+		setiCantidad(iCantidad);
+	}
+	
 	public Material(String sNombre_material, Tipo_material oNombre_tipo_material) {
 		setsNombre_material(sNombre_material);
 		setoNombre_tipo_material(oNombre_tipo_material);
@@ -45,7 +52,21 @@ public class Material implements IMaterial{
 		}
 		return bExito;
 	}
-	
+
+	@Override
+	public int getiCantidad() {
+		return iCantidad;
+	}
+
+	@Override
+	public boolean setiCantidad(int iCantidad) {
+		boolean bExito=false;
+		if(iCantidad > -1) {
+			this.iCantidad = iCantidad;
+			bExito = true;
+		}
+		return bExito;
+	}
 	//----------------------------------------------------------
 	
 	@Override
