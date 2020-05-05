@@ -19,6 +19,11 @@ public class Material implements IMaterial{
 	public Material(String sNombre_material) {
 		setsNombre_material(sNombre_material);
 	}
+	
+	public Material(String sNombre_material,int Icantidad) {
+		setsNombre_material(sNombre_material);
+		setiCantidad(iCantidad);
+	}
 
 	//----------------------------------------------------------
 	//Getters and Setters
