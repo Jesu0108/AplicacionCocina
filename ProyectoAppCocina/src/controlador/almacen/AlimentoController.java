@@ -3,7 +3,7 @@ package controlador.almacen;
 import controlador.ConexionDB;
 import modelo.almacen.Alimento;
 
-public class AlimentoController {
+public class AlimentoController implements IAlimento{
 	// Operaciones CRUD
 
 	@Override
