@@ -8,7 +8,6 @@ import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.almacen.Tipo_material;
-import modelo.almacen.Tipo_material;
 
 
 public class Tipo_materialController implements ITipo_materialController{
