@@ -47,7 +47,7 @@ public class AlimentoController implements IAlimento {
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				String sNombre_alimento = rs.getString(1);
-				byte bCantidad = (byte) rs.getByte(2);
+				byte bCantidad = rs.getByte(2);
 				lAlimentos.add(new Alimento(sNombre_alimento,bCantidad));
 			}
 			stm.close();
