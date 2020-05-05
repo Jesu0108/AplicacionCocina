@@ -8,9 +8,10 @@ import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.almacen.Material;
+import modelo.almacen.Tipo_material;
 
 
-public class MaterialController {
+public class MaterialController implements IMaterialController{
 	
 	// Operaciones CRUD
 
@@ -19,37 +20,37 @@ public class MaterialController {
 		String sql = "INSERT INTO material VALUES (";
 		sql += "\"" + oMaterial.getsNombre_material() + "\",";
 		sql += "\"" + oMaterial.getoNombre_tipo_material() + "\",";
+		sql += "\"" + oMaterial.getiCantidad() + "\",";
 		sql += ")";
 		return ConexionDB.executeUpdate(sql);
 	}
 
 	@Override
 	public int remove(Material oMaterial) {
-		String sql = "DELETE FROM Material WHERE nombre_Material LIKE \"" + oMaterial.getsNombre_Material() + "\"";
+		String sql = "DELETE FROM material WHERE nombre_material LIKE \"" + oMaterial.getsNombre_material() + "\"";
 		return ConexionDB.executeUpdate(sql);
 	}
 
 	@Override
 	public int existeCliente(Material oMaterial) {
-		String sql = "SELECT COUNT(*) FROM Material WHERE nombre_Material LIKE \"" + oMaterial.getsNombre_Material()
-				+ "\"";
+		String sql = "SELECT COUNT(*) FROM Material WHERE nombre_material LIKE \"" + oMaterial.getsNombre_material()+ "\"";
 		return ConexionDB.executeCount(sql);
 	}
 
 	@Override
-	public List<Material> searchMaterialesPorNombre(Material oMaterial) {
+	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial) {
 
 		List<Material> lMateriales = new ArrayList<Material>();
-		String sql = "SELECT * FROM Material WHERE nombre_Material=" + oMaterial.getsNombre_Material();
+		String sql = "SELECT * FROM material WHERE nombre_tipo_material=" + oTMaterial.getsNombre_tipo_material();
 		Statement stm = null;
 
 		try {
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String sNombre_Material = rs.getString(1);
-				byte bCantidad = (byte) rs.getByte(2);
-				lMateriales.add(new Material(sNombre_Material, bCantidad));
+				String sNombre_material = rs.getString(1);
+				int iCantidad = rs.getInt(2);
+				lMateriales.add(new Material(sNombre_material, oTMaterial, iCantidad));
 			}
 			stm.close();
 		} catch (SQLException e) {
