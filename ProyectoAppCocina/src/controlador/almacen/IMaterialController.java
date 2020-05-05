@@ -15,4 +15,6 @@ public interface IMaterialController {
 
 	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial);
 
+	public List<Material> searchMaterialesPorNombre(Material oMaterial);
+
 }

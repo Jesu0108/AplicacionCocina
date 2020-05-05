@@ -58,4 +58,26 @@ public class MaterialController implements IMaterialController{
 		}
 		return lMateriales;
 	}
+	
+	@Override
+	public List<Material> searchMaterialesPorNombre(Material oMaterial) {
+
+		List<Material> lMateriales = new ArrayList<Material>();
+		String sql = "SELECT * FROM material WHERE nombre_material=" + oMaterial.getsNombre_material();
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sNombre_material = rs.getString(1);
+				int iCantidad = rs.getInt(2);
+				lMateriales.add(new Material(sNombre_material, iCantidad));
+			}
+			stm.close();
+		} catch (SQLException e) {
+			lMateriales = null;
+		}
+		return lMateriales;
+	}
 }
