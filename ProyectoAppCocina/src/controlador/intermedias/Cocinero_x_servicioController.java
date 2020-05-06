@@ -6,8 +6,9 @@ import controlador.usuario.ServicioController;
 import modelo.intermedias.Cocinero_x_servicio;
 
 
-public class Cocinero_x_servicioController {
+public class Cocinero_x_servicioController implements ICocinero_x_servicioController{
 
+	@Override
 	public int add(Cocinero_x_servicio oCocXserv, CocineroController oCocinero, ServicioController oServicio) {
 
 		oCocinero.add(oCocXserv.getEmail());
@@ -21,6 +22,7 @@ public class Cocinero_x_servicioController {
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	@Override
 	public int remove(Cocinero_x_servicio oCocXserv) {
 
 		String sql = "DELETE FROM cocinero_x_servicio WHERE id_servicio LIKE ";
