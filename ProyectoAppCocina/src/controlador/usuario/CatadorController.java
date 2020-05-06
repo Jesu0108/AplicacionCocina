@@ -2,13 +2,13 @@ package controlador.usuario;
 
 import controlador.ConexionDB;
 import modelo.usuario.Catador;
-import modelo.usuario.Persona;
 
 public class CatadorController {
 	
 	public int add (Catador oCatador, PersonaController oPersona) {
 		
-		//oPersona.add(oPersona);
+		oPersona.add(oCatador.getsEmail(), oCatador.getsContrasenia(), oCatador.getsNombre(), oCatador.getsApellidos(),
+				oCatador.getsTelefono(), oCatador.getsExperiencia(), oCatador.getsCiudad());
 		
 		String sql = "INSERT INTO catador VALUES (";
 		sql += "\"" + oCatador.getsEmail() + "\",";
