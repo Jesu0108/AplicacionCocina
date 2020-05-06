@@ -12,7 +12,8 @@ public class Alimento_x_servicioController{
 	public int add(Alimento_x_servicio oAlimXserv, AlimentoController oAlimento, ServicioController oServicio) {
 
 		oAlimento.add(oAlimXserv.getNombre_alimento());
-
+		oServicio.add(oAlimXserv.getiIdSevicio());
+		
 		String sql = "INSERT INTO alimento_x_servicio VALUES (";
 		sql += "\"" + oAlimXserv.getiIdSevicio() + "\",";
 		sql += "\"" + oAlimXserv.getNombre_alimento() + "\",";
