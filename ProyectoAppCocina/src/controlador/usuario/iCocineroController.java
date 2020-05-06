@@ -6,7 +6,7 @@ import modelo.usuario.Cocinero;
 
 public interface iCocineroController {
 
-	public int add(Cocinero oCocinero, PersonaController oPersona);
+	public int add(Cocinero oCocinero);
 
 	public int remove(Cocinero oCocinero);
 

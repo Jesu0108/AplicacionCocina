@@ -6,7 +6,7 @@ import modelo.usuario.Catador;
 
 public interface ICatadorController {
 
-	public int add(Catador oCatador, PersonaController oPersona);
+	public int add(Catador oCatador);
 
 	public int remove(Catador oCatador);
 

@@ -11,14 +11,17 @@ import modelo.usuario.Cocinero;
 
 public class CocineroController implements iCocineroController{
 	@Override
-	public int add(Cocinero oCocinero, PersonaController oPersona) {
-
-		oPersona.add(oCocinero.getsEmail(), oCocinero.getsContrasenia(), oCocinero.getsNombre(), oCocinero.getsApellidos(),
-				oCocinero.getsTelefono(), oCocinero.getsExperiencia(), oCocinero.getsCiudad());
+	public int add(Cocinero oCocinero) {
 
 		String sql = "INSERT INTO cocinero VALUES (";
 		sql += "\"" + oCocinero.getsEmail() + "\",";
 		sql += "\"" + oCocinero.getsEspecialidad() + "\",";
+		sql += "\"" + oCocinero.getsContrasenia() + "\",";
+		sql += "\"" + oCocinero.getsNombre() + "\",";
+		sql += "\"" + oCocinero.getsApellidos() + "\",";
+		sql += "\"" + oCocinero.getsTelefono() + "\",";
+		sql += "\"" + oCocinero.getsExperiencia() + "\",";
+		sql += "\"" + oCocinero.getsCiudad() + "\",";
 		sql += ")";
 
 		return ConexionDB.executeUpdate(sql);

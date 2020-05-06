@@ -12,14 +12,17 @@ import modelo.usuario.Catador;
 public class CatadorController implements ICatadorController{
 	
 	@Override
-	public int add (Catador oCatador, PersonaController oPersona) {
-		
-		oPersona.add(oCatador.getsEmail(), oCatador.getsContrasenia(), oCatador.getsNombre(), oCatador.getsApellidos(),
-				oCatador.getsTelefono(), oCatador.getsExperiencia(), oCatador.getsCiudad());
+	public int add (Catador oCatador) {
 		
 		String sql = "INSERT INTO catador VALUES (";
 		sql += "\"" + oCatador.getsEmail() + "\",";
-		sql += "\"" + oCatador.getCriterio()+ "\",";
+		sql += "\"" + oCatador.getCriterio() + "\",";
+		sql += "\"" + oCatador.getsContrasenia() + "\",";
+		sql += "\"" + oCatador.getsNombre() + "\",";
+		sql += "\"" + oCatador.getsApellidos() + "\",";
+		sql += "\"" + oCatador.getsTelefono() + "\",";
+		sql += "\"" + oCatador.getsExperiencia() + "\",";
+		sql += "\"" + oCatador.getsCiudad() + "\",";
 		sql += ")";
 		
 		return ConexionDB.executeUpdate(sql);
