@@ -3,7 +3,6 @@ package controlador.usuario;
 
 public class UsuarioContoller {
 	private CatadorController catadorCtrl;
-	private PersonaController personaCtrl;
 	private CocineroController cocineroCtrl;
 	private OpinionController OpinionCtrl;
 	private ServicioController servicioCtrl;
@@ -12,7 +11,6 @@ public class UsuarioContoller {
 	
 	public UsuarioContoller() {
 		catadorCtrl = new CatadorController();
-		personaCtrl = new PersonaController();
 		cocineroCtrl = new CocineroController();
 		OpinionCtrl = new OpinionController();
 		servicioCtrl = new ServicioController();
@@ -23,10 +21,6 @@ public class UsuarioContoller {
 
 	public CatadorController getCatadorCtrl() {
 		return catadorCtrl;
-	}
-
-	public PersonaController getPersonaCtrl() {
-		return personaCtrl;
 	}
 
 	public CocineroController getCocineroCtrl() {
