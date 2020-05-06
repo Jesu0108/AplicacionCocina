@@ -6,8 +6,9 @@ import controlador.usuario.ServicioController;
 import modelo.intermedias.Material_x_servicio;
 
 
-public class Material_x_servicioController {
+public class Material_x_servicioController implements IMaterial_x_servicioController{
 	
+	@Override
 	public int add(Material_x_servicio oMatXserv, MaterialController oMaterial, ServicioController oServicio) {
 
 		oMaterial.add(oMatXserv.getNombre_material());
@@ -21,6 +22,7 @@ public class Material_x_servicioController {
 		return ConexionDB.executeUpdate(sql);
 	}
 
+	@Override
 	public int remove(Material_x_servicio oMatXserv) {
 
 		String sql = "DELETE FROM material_x_servicio WHERE id_servicio LIKE ";
