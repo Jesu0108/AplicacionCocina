@@ -9,7 +9,7 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Cocinero;
 
-public class CocineroController {
+public class CocineroController implements iCocineroController{
 	@Override
 	public int add(Cocinero oCocinero, PersonaController oPersona) {
 
