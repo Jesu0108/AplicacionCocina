@@ -6,9 +6,9 @@ import controlador.usuario.ServicioController;
 import modelo.intermedias.Alimento_x_servicio;
 
 
-public class Alimento_x_servicioController{
+public class Alimento_x_servicioController implements IAlimento_x_servicioController{
 	
-	
+	@Override
 	public int add(Alimento_x_servicio oAlimXserv, AlimentoController oAlimento, ServicioController oServicio) {
 
 		oAlimento.add(oAlimXserv.getNombre_alimento());
@@ -22,7 +22,7 @@ public class Alimento_x_servicioController{
 		return ConexionDB.executeUpdate(sql);
 	}
 
-	
+	@Override
 	public int remove(Alimento_x_servicio oAlimXserv) {
 
 		String sql = "DELETE FROM Alimento_x_servicio WHERE id_servicio LIKE ";
