@@ -15,6 +15,10 @@ public class Catador extends Persona implements ICatador{
 		setCriterio(bCriterio);
 	}
 	
+	public Catador(String sEmail) {
+		super(sEmail);
+	}
+	
 	//Getters and Setters
 	
 	@Override

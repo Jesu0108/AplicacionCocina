@@ -15,6 +15,10 @@ public class Cocinero extends Persona implements ICocinero{
 		super(sEmail);
 		setsEspecialidad(sEspecialidad);
 	}
+	
+	public Cocinero(String sEmail) {
+		super(sEmail);
+	}
 
 	//Getters and Setters
 	
