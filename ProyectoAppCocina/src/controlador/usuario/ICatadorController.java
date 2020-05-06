@@ -1,5 +1,7 @@
 package controlador.usuario;
 
+import java.util.List;
+
 import modelo.usuario.Catador;
 
 public interface ICatadorController {
@@ -9,5 +11,7 @@ public interface ICatadorController {
 	public int remove(Catador oCatador);
 
 	public int existeCatador(Catador oCatador);
+
+	public List<Catador> searchCatadorPorEmail(Catador oCatador);
 
 }
