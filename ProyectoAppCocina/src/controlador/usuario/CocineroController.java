@@ -40,6 +40,13 @@ public class CocineroController implements iCocineroController{
 	}
 
 	@Override
+	public int checkLogin(Cocinero oCocinero) {
+		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCocinero.getsEmail() 
+		+ "\" AND contraseña LIKE \"" + oCocinero.getsContrasenia() + "\"";
+		return ConexionDB.executeCount(sql);
+	}
+	
+	@Override
 	public List<Cocinero> searchCocineroPorEmail(Cocinero oCocinero) {
 
 		List<Cocinero> lCocineros = new ArrayList<Cocinero>();

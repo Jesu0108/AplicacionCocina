@@ -41,6 +41,14 @@ public class CatadorController implements ICatadorController{
     }
 	
 	@Override
+	public int checkLogin(Catador oCatador) {
+		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCatador.getsEmail() 
+		+ "\" AND contraseña LIKE \"" + oCatador.getsContrasenia() + "\"";
+		return ConexionDB.executeCount(sql);
+	}
+	
+	
+	@Override
 	public List<Catador> searchCatadorPorEmail(Catador oCatador) {
 
 		List<Catador> lCatadores = new ArrayList<Catador>();
@@ -67,4 +75,5 @@ public class CatadorController implements ICatadorController{
 		}
 		return lCatadores;
 	}
+	
 }

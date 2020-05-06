@@ -14,4 +14,6 @@ public interface iCocineroController {
 
 	public List<Cocinero> searchCocineroPorEmail(Cocinero oCocinero);
 
+	public int checkLogin(Cocinero oCocinero);
+
 }
