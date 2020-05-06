@@ -55,8 +55,8 @@ public class CatadorController implements ICatadorController{
 				String sTelefono = rs.getString(5);
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
-				lCatadores.add(new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono,
-						sExperiencia, sCiudad));
+				byte bCriterio = rs.getByte(8);
+				lCatadores.add(new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio));
 			}
 			stm.close();
 		} catch (SQLException e) {

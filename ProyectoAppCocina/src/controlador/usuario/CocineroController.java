@@ -54,8 +54,8 @@ public class CocineroController implements iCocineroController{
 				String sTelefono = rs.getString(5);
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
-				lCocineros
-						.add(new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad));
+				String sEspecialidad = rs.getString(8);
+				lCocineros.add(new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, sEspecialidad));
 			}
 			stm.close();
 		} catch (SQLException e) {

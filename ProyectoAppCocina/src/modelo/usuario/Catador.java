@@ -5,7 +5,7 @@ public class Catador extends Persona implements ICatador{
 	private byte bCriterio;
 
 	public Catador(String sEmail, String sContrasenia, String sNombre, String sApellidos, String sTelefono,
-			String sExperiencia, String sCiudad) {
+			String sExperiencia, String sCiudad, byte bCriterio) {
 		super(sEmail, sContrasenia, sCiudad, sNombre, sApellidos, sTelefono, sCiudad);
 		setCriterio(bCriterio);
 	}
