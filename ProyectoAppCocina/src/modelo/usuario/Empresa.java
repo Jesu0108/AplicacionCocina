@@ -1,11 +1,14 @@
 package modelo.usuario;
 
-public class Empresa implements IEmpresa{
+public class Empresa extends Persona implements IEmpresa{
 	private String sCif; //PK
 	private String sDomilio,sCiudad;
 	private String sNombre,sTelefono; //NN
 		
-	public Empresa(String sCif, String sDomilio, String sCiudad, String sNombre, String sTelefono) {
+	public Empresa(String sCif, String sDomilio, String sCiudad, String sNombre, 
+			String sTelefono, String sEmail, String sContrasenia, String sApellidos) {
+		
+		super(sEmail, sContrasenia, sCiudad, sNombre, sApellidos, sTelefono, sCiudad);
 		setsCif(sCif);
 		setsDomilio(sDomilio);
 		setsCiudad(sCiudad);
@@ -13,8 +16,14 @@ public class Empresa implements IEmpresa{
 		setsTelefono(sTelefono);
 	}
 	
+	public Empresa(String sEmail, String sContrasenia) {
+		super(sEmail,sContrasenia);
+	}
+	
+	
 	//Constructor solo con PK
 	public Empresa(String sCif) {
+		super(sCif);
 		setsCif(sCif);
 	}
 	
