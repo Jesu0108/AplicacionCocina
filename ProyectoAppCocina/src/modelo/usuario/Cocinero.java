@@ -11,9 +11,8 @@ public class Cocinero extends Persona implements ICocinero{
 	}
 	
 	
-	public Cocinero(String sEmail, String sEspecialidad) {
-		super(sEmail);
-		setsEspecialidad(sEspecialidad);
+	public Cocinero(String sEmail, String sContrasenia) {
+		super(sEmail, sContrasenia);
 	}
 	
 	public Cocinero(String sEmail) {
