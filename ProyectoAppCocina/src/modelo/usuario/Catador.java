@@ -10,9 +10,8 @@ public class Catador extends Persona implements ICatador{
 		setCriterio(bCriterio);
 	}
 	
-	public Catador(String sEmail, byte bCriterio) {
-		super(sEmail);
-		setCriterio(bCriterio);
+	public Catador(String sEmail, String sContrasenia) {
+		super(sEmail,sContrasenia);
 	}
 	
 	public Catador(String sEmail) {
