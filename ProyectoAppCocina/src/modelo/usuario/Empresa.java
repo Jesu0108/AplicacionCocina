@@ -6,9 +6,9 @@ public class Empresa extends Persona implements IEmpresa{
 	private String sNombre,sTelefono; //NN
 		
 	public Empresa(String sCif, String sDomilio, String sCiudad, String sNombre, 
-			String sTelefono, String sEmail, String sContrasenia, String sApellidos) {
+			String sTelefono, String sEmail, String sContrasenia, String sApellidos,String sExperencia) {
 		
-		super(sEmail, sContrasenia, sCiudad, sNombre, sApellidos, sTelefono, sCiudad);
+		super(sEmail, sContrasenia, sCiudad, sNombre, sApellidos, sTelefono, sExperencia);
 		setsCif(sCif);
 		setsDomilio(sDomilio);
 		setsCiudad(sCiudad);
