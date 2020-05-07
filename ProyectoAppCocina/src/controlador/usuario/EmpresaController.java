@@ -64,7 +64,7 @@ public class EmpresaController implements IEmpresaController{
 				String sApellidos = rs.getString(8);
 				String sExperiencia = rs.getString(9);
 				
-				lEmpresas.add(new Empresa(sCif, sDomicilio, sCiudad, sNombre,sTelefono, sEmail, sContrasenia, sApellidos));
+				lEmpresas.add(new Empresa(sCif, sDomicilio, sCiudad, sNombre,sTelefono, sEmail, sContrasenia, sApellidos, sExperiencia));
 			}
 			stm.close();
 		} catch (SQLException e) {
