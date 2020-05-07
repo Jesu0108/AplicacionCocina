@@ -29,22 +29,22 @@ public class AplicacionCocina {
 						3, 3);
 
 				if (bEleccion == 1) {
-					Cocinero oCocinero = LoginView.login(controlador);
+					Cocinero oCocinero = LoginView.loginCocinero(controlador);
 					while (oCocinero == null) {
 						System.out.println("Acceso no autorizado, intentelo de nuevo.\n");
-						oCocinero = LoginView.login(controlador);
+						oCocinero = LoginView.loginCocinero(controlador);
 					}
 				} else if (bEleccion == 2) {
-					Catador oCatador = LoginView.login(controlador);
+					Catador oCatador = LoginView.loginCatador(controlador);
 					while (oCatador == null) {
 						System.out.println("Acceso no autorizado, intentelo de nuevo.\n");
-						oCatador = LoginView.login(controlador);
+						oCatador = LoginView.loginCatador(controlador);
 					}
 				} else {
-					Empresa oEmpresa = LoginView.login(controlador);
+					Empresa oEmpresa = LoginView.loginEmpresa(controlador);
 					while (oEmpresa == null) {
 						System.out.println("Acceso no autorizado, intentelo de nuevo.\n");
-						oEmpresa = LoginView.login(controlador);
+						oEmpresa = LoginView.loginEmpresa(controlador);
 					}
 				}
 
