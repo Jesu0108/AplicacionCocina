@@ -160,7 +160,7 @@ public class AplicacionCocina {
 
 				controlador.getUsuarioCtrl().getCocineroCtrl().add(oNewCocinero);
 				
-				System.out.println("Felicidades, ya dispone de cuenta como COCINERO");
+				System.out.println("Felicidades, ya tiene una cuenta como COCINERO");
 			}
 		}
 	}
