@@ -111,7 +111,7 @@ public class LoginView {
 
 			//Comprobamos que existe una empresa con esos datos
 			
-			if (controlador > 0) {
+			if (controlador.getUsuarioCtrl().getEmpresaCtrl().existeEmpresa(oEmpresa) > 0) {
 				oLoginEmpresa = oEmpresa;
 			}
 			return oLoginEmpresa;
