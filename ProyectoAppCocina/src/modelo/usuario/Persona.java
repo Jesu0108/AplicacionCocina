@@ -22,6 +22,11 @@ public abstract class Persona implements LimitsDB, IPersona{
 		setsCiudad(sCiudad);
 	}
 
+	public Persona(String sEmail,String sContrasenia) {
+		setsEmail(sEmail);
+		setsContrasenia(sContrasenia);
+	}
+	
 	public Persona(String sEmail) {
 		setsEmail(sEmail);
 	}
