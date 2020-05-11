@@ -2,32 +2,40 @@ package modelo.usuario;
 
 import java.sql.Date;
 
-public class Servicio implements IServicio{
-	private int iId_servicio; //PK
+public class Servicio implements IServicio {
+	private int iId_servicio; // PK
 	private String sNombre_tipo_servicio;
 	private Empresa cif;
 	private Date dFecha;
-	private byte bTiempo_servicio; //NN
-	
+	private byte bTiempo_servicio; // NN
+
 	public Servicio(int iId_servicio, String sNombre_tipo_servicio, Empresa cif, Date dFecha, byte bTiempo_servicio) {
-		
+
 		setiId_servicio(iId_servicio);
 		setsNombre_tipo_servicio(sNombre_tipo_servicio);
 		setCif(cif);
 		setdFecha(dFecha);
-		setbTiempo_servicio(bTiempo_servicio);		
+		setbTiempo_servicio(bTiempo_servicio);
 	}
 
-	//Getters and Setters
-	
+	public Servicio(int iId_servicio, String sNombre_tipo_servicio, Date dFecha, byte bTiempo_servicio) {
+
+		setiId_servicio(iId_servicio);
+		setsNombre_tipo_servicio(sNombre_tipo_servicio);
+		setdFecha(dFecha);
+		setbTiempo_servicio(bTiempo_servicio);
+	}
+
+	// Getters and Setters
+
 	@Override
 	public int getiId_servicio() {
 		return iId_servicio;
 	}
 
 	private boolean setiId_servicio(int iId_servicio) {
-		boolean bExito=false;
-		if(iId_servicio > -1) {
+		boolean bExito = false;
+		if (iId_servicio > -1) {
 			this.iId_servicio = iId_servicio;
 			bExito = true;
 		}
@@ -41,12 +49,12 @@ public class Servicio implements IServicio{
 
 	@Override
 	public boolean setsNombre_tipo_servicio(String sNombre_tipo_servicio) {
-		boolean bExito=false;
-		if(sNombre_tipo_servicio != null) {
+		boolean bExito = false;
+		if (sNombre_tipo_servicio != null) {
 			this.sNombre_tipo_servicio = sNombre_tipo_servicio;
 			bExito = true;
 		}
-		return bExito;		
+		return bExito;
 	}
 
 	@Override
@@ -56,12 +64,12 @@ public class Servicio implements IServicio{
 
 	@Override
 	public boolean setCif(Empresa cif) {
-		boolean bExito=false;
-		if(cif != null) {
+		boolean bExito = false;
+		if (cif != null) {
 			this.cif = cif;
 			bExito = true;
 		}
-		return bExito;		
+		return bExito;
 	}
 
 	@Override
@@ -81,16 +89,16 @@ public class Servicio implements IServicio{
 
 	@Override
 	public boolean setbTiempo_servicio(byte bTiempo_servicio) {
-		boolean bExito=false;
-		if(bTiempo_servicio > -1) {
+		boolean bExito = false;
+		if (bTiempo_servicio > -1) {
 			this.bTiempo_servicio = bTiempo_servicio;
 			bExito = true;
 		}
 		return bExito;
 	}
-	
-	//----------------------------------------------------------------------------
-	
+
+	// ----------------------------------------------------------------------------
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,19 +115,19 @@ public class Servicio implements IServicio{
 	public boolean equals(Object obj) {
 		boolean bExito = false;
 		Servicio other = (Servicio) obj;
-		if(this.iId_servicio == other.iId_servicio) {
-		    bExito = true;
+		if (this.iId_servicio == other.iId_servicio) {
+			bExito = true;
 		}
 		return bExito;
 	}
 
 	@Override
 	public String toString() {
-		String sResultado="";
-		sResultado+="Servicio: "+getsNombre_tipo_servicio()+"\n";
-		sResultado+="Tiempo de servicio estimado: "+getbTiempo_servicio()+"\n";
-		sResultado+="Con fecha: "+getdFecha()+"\n";
-		sResultado+="Para domicilio con CIF: "+getCif();
+		String sResultado = "";
+		sResultado += "Servicio: " + getsNombre_tipo_servicio() + "\n";
+		sResultado += "Tiempo de servicio estimado: " + getbTiempo_servicio() + "\n";
+		sResultado += "Con fecha: " + getdFecha() + "\n";
+		sResultado += "Para domicilio con CIF: " + getCif();
 		return sResultado;
 	}
 }
