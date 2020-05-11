@@ -2,8 +2,7 @@ package modelo.usuario;
 
 public class Empresa extends Persona implements IEmpresa{
 	private String sCif; //PK
-	private String sDomilio,sCiudad;
-	private String sNombre,sTelefono; //NN
+	private String sDomilio;
 		
 	public Empresa(String sCif, String sDomilio, String sCiudad, String sNombre, 
 			String sTelefono, String sEmail, String sContrasenia, String sApellidos,String sExperencia) {
