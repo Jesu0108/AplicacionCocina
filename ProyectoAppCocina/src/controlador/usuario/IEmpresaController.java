@@ -14,4 +14,6 @@ public interface IEmpresaController {
 
 	public List<Empresa> buscarEmpresaPorCif(Empresa oEmpresa);
 
+	Empresa searchEmpresa(Empresa oEmpresa);
+
 }

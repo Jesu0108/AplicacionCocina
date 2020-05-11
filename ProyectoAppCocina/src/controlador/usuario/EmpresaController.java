@@ -41,6 +41,36 @@ public class EmpresaController implements IEmpresaController{
 		return ConexionDB.executeCount(sql);
 	}
 	
+	@Override
+	public Empresa searchEmpresa(Empresa oEmpresa) {
+
+		Empresa lEmpresa = null;
+		String sql = "SELECT * FROM catador WHERE email=" + oEmpresa.getsEmail();
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sCif = rs.getString(1);
+				String sDomicilio = rs.getString(2);
+				String sCiudad = rs.getString(3);
+				String sNombre = rs.getString(4);
+				String sTelefono = rs.getString(5);
+				String sEmail = rs.getString(6);
+				String sContrasenia = rs.getString(7);
+				String sApellidos = rs.getString(8);
+				String sExperiencia = rs.getString(9);
+				
+				lEmpresa = new Empresa(sCif, sDomicilio, sCiudad, sNombre,sTelefono, sEmail, sContrasenia, sApellidos, sExperiencia);
+			}
+		} catch (SQLException e) {
+			lEmpresa = null;
+		}
+		return lEmpresa;
+	}
+	
+	
 	// Operacion de búsqueda por la PK
 
 	@Override
