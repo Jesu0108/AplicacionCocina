@@ -47,11 +47,10 @@ public class CatadorController implements ICatadorController{
 		return ConexionDB.executeCount(sql);
 	}
 	
-	
 	@Override
-	public List<Catador> searchCatadorPorEmail(Catador oCatador) {
+	public Catador searchCatador(Catador oCatador) {
 
-		List<Catador> lCatadores = new ArrayList<Catador>();
+		Catador lCatador = null;
 		String sql = "SELECT * FROM catador WHERE email=" + oCatador.getsEmail();
 		Statement stm = null;
 
@@ -67,7 +66,36 @@ public class CatadorController implements ICatadorController{
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
 				byte bCriterio = rs.getByte(8);
+				lCatador = new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio);
+			}
+		} catch (SQLException e) {
+			lCatador = null;
+		}
+		return lCatador;
+	}
+	
+	
+	@Override
+	public List<Catador> searchCatadorPorCiudad(Catador oCatador) {
+
+		List<Catador> lCatadores = new ArrayList<Catador>();
+		String sql = "SELECT * FROM catador WHERE ciudad=" + oCatador.getsCiudad();
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sEmail = rs.getString(1);
+				String sContrasenia = rs.getString(2);
+				String sNombre = rs.getString(3);
+				String sApellidos = rs.getString(4);
+				String sTelefono = rs.getString(5);
+				String sExperiencia = rs.getString(6);
+				String sCiudad = rs.getString(7);
+				byte bCriterio = rs.getByte(8);
 				lCatadores.add(new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio));
+				System.out.println("\n-----------------------------------------------------------------\n");
 			}
 			stm.close();
 		} catch (SQLException e) {

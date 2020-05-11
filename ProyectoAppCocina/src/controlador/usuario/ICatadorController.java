@@ -12,8 +12,10 @@ public interface ICatadorController {
 
 	public int existeCatador(Catador oCatador);
 
-	public List<Catador> searchCatadorPorEmail(Catador oCatador);
+	public List<Catador> searchCatadorPorCiudad(Catador oCatador);
 
 	public int checkLogin(Catador oCatador);
+
+	public Catador searchCatador(Catador oCatador);
 
 }
