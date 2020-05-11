@@ -10,9 +10,6 @@ public class Empresa extends Persona implements IEmpresa{
 		super(sEmail, sContrasenia, sCiudad, sNombre, sApellidos, sTelefono, sExperencia);
 		setsCif(sCif);
 		setsDomilio(sDomilio);
-		setsCiudad(sCiudad);
-		setsNombre(sNombre);
-		setsTelefono(sTelefono);
 	}
 	
 	public Empresa(String sEmail, String sContrasenia) {
