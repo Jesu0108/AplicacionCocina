@@ -57,51 +57,6 @@ public class Empresa extends Persona implements IEmpresa{
 		return bExito;	
 	}
 	
-	@Override
-	public String getsCiudad() {
-		return sCiudad;
-	}
-	
-	@Override
-	public boolean setsCiudad(String sCiudad) {
-		boolean bExito=false;
-		if(sCiudad != null) {
-			this.sCiudad = sCiudad;
-			bExito = true;
-		}
-		return bExito;	
-	}
-	
-	@Override
-	public String getsNombre() {
-		return sNombre;
-	}
-	
-	@Override
-	public boolean setsNombre(String sNombre) {
-		boolean bExito=false;
-		if(sNombre != null) {
-			this.sNombre = sNombre;
-			bExito = true;
-		}
-		return bExito;
-	}
-	
-	@Override
-	public String getsTelefono() {
-		return sTelefono;
-	}
-	
-	@Override
-	public boolean setsTelefono(String sTelefono) {
-		boolean bExito=false;
-		if(sTelefono != null) {
-			this.sTelefono = sTelefono;
-			bExito = true;
-		}
-		return bExito;
-	}
-
 	
 	//----------------------------------------------------------------------------------------
 	
@@ -110,10 +65,7 @@ public class Empresa extends Persona implements IEmpresa{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((sCif == null) ? 0 : sCif.hashCode());
-		result = prime * result + ((sCiudad == null) ? 0 : sCiudad.hashCode());
 		result = prime * result + ((sDomilio == null) ? 0 : sDomilio.hashCode());
-		result = prime * result + ((sNombre == null) ? 0 : sNombre.hashCode());
-		result = prime * result + ((sTelefono == null) ? 0 : sTelefono.hashCode());
 		return result;
 	}
 
