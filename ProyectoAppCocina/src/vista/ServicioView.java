@@ -8,7 +8,7 @@ import modelo.usuario.Servicio;
 import validaciones.ValidaLibrary;
 
 public class ServicioView {
-	public static void menuLocalidad(ControladorGeneral controlador) {
+	public static void menuServicio(ControladorGeneral controlador) {
 		byte bOpcion = 0;
 		do {
 			bOpcion = opcionMenuServicio();
@@ -64,7 +64,7 @@ public class ServicioView {
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static int aniadir(ControladorGeneral controlador) {
+	public static int aniadir(ControladorGeneral controlador, Empresa oEmp) {
 		boolean errorControl = true;
 		int iId_servicio;
 		String sNombre_tipo_servicio;
@@ -74,52 +74,13 @@ public class ServicioView {
 
 		while (errorControl) {
 			try {
-				sCodigoPostal = ValidaLibrary.leer("Introduce un codigo postal: ");
-				if (sCodigoPostal.length() == NUMCODPOSTAL) {
-					errorControl = false;
-				}
+				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a pedir: ");
 			} catch (Exception ex) {
-				System.out.println("Error en email: " + ex.getMessage());
+				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		errorControl = true;
-		while (errorControl) {
-			try {
-				sLocalidad = ValidaLibrary.leer("Introduce una localidad: ");
-				if (sLocalidad.length() <= MAXCHARACTERS) {
-					errorControl = false;
-				}
-			} catch (Exception ex) {
-				System.out.println("Error en email: " + ex.getMessage());
-			}
-		}
-
-		errorControl = true;
-		while (errorControl) {
-			try {
-				sProvincia = ValidaLibrary.leer("Introduce una provincia: ");
-				if (sProvincia.length() <= MAXCHARACTERS) {
-					errorControl = false;
-				}
-			} catch (Exception ex) {
-				System.out.println("Error en email: " + ex.getMessage());
-			}
-		}
-
-		errorControl = true;
-		while (errorControl) {
-			try {
-				sPais = ValidaLibrary.leer("Introduce un pais: ");
-				if (sPais.length() <= MAXCHARACTERS) {
-					errorControl = false;
-				}
-			} catch (Exception ex) {
-				System.out.println("Error en email: " + ex.getMessage());
-			}
-		}
-
-		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, cif, dFecha, bTiempo_servicio);
+		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, oEmp.getsCif();, dFecha, bTiempo_servicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 
