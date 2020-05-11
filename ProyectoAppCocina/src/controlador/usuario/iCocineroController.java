@@ -12,8 +12,10 @@ public interface iCocineroController {
 
 	public int existeCocinero(Cocinero oCocinero);
 
-	public List<Cocinero> searchCocineroPorEmail(Cocinero oCocinero);
+	public List<Cocinero> searchCocineroPorCiudad(Cocinero oCocinero);
 
 	public int checkLogin(Cocinero oCocinero);
+
+	public Cocinero searchCocinero(Cocinero oCocinero);
 
 }

@@ -47,7 +47,35 @@ public class CocineroController implements iCocineroController{
 	}
 	
 	@Override
-	public List<Cocinero> searchCocineroPorEmail(Cocinero oCocinero) {
+	public Cocinero searchCocinero(Cocinero oCocinero) {
+
+		Cocinero lCocinero = null;
+		String sql = "SELECT * FROM catador WHERE email=" + oCocinero.getsEmail();
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sEmail = rs.getString(1);
+				String sContrasenia = rs.getString(2);
+				String sNombre = rs.getString(3);
+				String sApellidos = rs.getString(4);
+				String sTelefono = rs.getString(5);
+				String sExperiencia = rs.getString(6);
+				String sCiudad = rs.getString(7);
+				String sEspecialidad = rs.getString(8);
+				lCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, sEspecialidad);
+			}
+		} catch (SQLException e) {
+			lCocinero = null;
+		}
+		return lCocinero;
+	}
+	
+	
+	@Override
+	public List<Cocinero> searchCocineroPorCiudad(Cocinero oCocinero) {
 
 		List<Cocinero> lCocineros = new ArrayList<Cocinero>();
 		String sql = "SELECT * FROM cocinero WHERE email=" + oCocinero.getsEmail();
