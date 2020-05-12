@@ -4,18 +4,9 @@ import java.sql.Date;
 
 public class Servicio implements IServicio {
 	private int iId_servicio; // PK
-	private String sNombre_tipo_servicio, cif;
+	private String sNombre_tipo_servicio;
 	private Date dFecha;
 	private byte bTiempo_servicio; // NN
-
-	public Servicio(int iId_servicio, String sNombre_tipo_servicio, String cif, Date dFecha, byte bTiempo_servicio) {
-
-		setiId_servicio(iId_servicio);
-		setsNombre_tipo_servicio(sNombre_tipo_servicio);
-		setCif(cif);
-		setdFecha(dFecha);
-		setbTiempo_servicio(bTiempo_servicio);
-	}
 
 	public Servicio(int iId_servicio, String sNombre_tipo_servicio, Date dFecha, byte bTiempo_servicio) {
 
@@ -23,6 +14,15 @@ public class Servicio implements IServicio {
 		setsNombre_tipo_servicio(sNombre_tipo_servicio);
 		setdFecha(dFecha);
 		setbTiempo_servicio(bTiempo_servicio);
+	}
+
+	public Servicio(int iId_servicio) {
+
+		setiId_servicio(iId_servicio);
+	}
+	
+	public Servicio(String sNombre_tipo_servicio) {
+		setsNombre_tipo_servicio(sNombre_tipo_servicio);
 	}
 
 	// Getters and Setters
