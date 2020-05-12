@@ -12,7 +12,6 @@ public class ServicioController implements IServicioController{
 		String sql = "INSERT INTO servicio VALUES (";
 		sql += "\"" + oServicio.getiId_servicio() + "\",";
 		sql += "\"" + oServicio.getsNombre_tipo_servicio() + "\",";
-		sql += "\"" + oServicio.getCif() + "\",";
 		sql += "\"" + oServicio.getdFecha();
 		sql += "\"" + oServicio.getbTiempo_servicio() + "\",";
 		sql += ")";
