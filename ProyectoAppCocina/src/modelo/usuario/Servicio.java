@@ -4,12 +4,11 @@ import java.sql.Date;
 
 public class Servicio implements IServicio {
 	private int iId_servicio; // PK
-	private String sNombre_tipo_servicio;
-	private Empresa cif;
+	private String sNombre_tipo_servicio, cif;
 	private Date dFecha;
 	private byte bTiempo_servicio; // NN
 
-	public Servicio(int iId_servicio, String sNombre_tipo_servicio, Empresa cif, Date dFecha, byte bTiempo_servicio) {
+	public Servicio(int iId_servicio, String sNombre_tipo_servicio, String cif, Date dFecha, byte bTiempo_servicio) {
 
 		setiId_servicio(iId_servicio);
 		setsNombre_tipo_servicio(sNombre_tipo_servicio);
@@ -58,12 +57,12 @@ public class Servicio implements IServicio {
 	}
 
 	@Override
-	public Empresa getCif() {
+	public String getCif() {
 		return cif;
 	}
 
 	@Override
-	public boolean setCif(Empresa cif) {
+	public boolean setCif(String cif) {
 		boolean bExito = false;
 		if (cif != null) {
 			this.cif = cif;
