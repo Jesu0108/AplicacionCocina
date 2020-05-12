@@ -64,7 +64,7 @@ public class ServicioView {
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static int aniadir(ControladorGeneral controlador, Empresa oEmp) {
+	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
 		int iId_servicio = 0;
 		String sNombre_tipo_servicio = "";
@@ -78,8 +78,8 @@ public class ServicioView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-
-		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, oEmp.getsCif(), dFecha, bTiempo_servicio);
+		
+		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, dFecha, bTiempo_servicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 
