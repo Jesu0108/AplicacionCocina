@@ -42,7 +42,7 @@ public class Alimento_x_servicio {
 	public boolean equals(Object obj) {
 		boolean bExito = false;
 		Alimento_x_servicio other = (Alimento_x_servicio) obj;
-		if(this.iIdSevicio == other.iIdSevicio && this.nombre_alimento == other.nombre_alimento) {
+		if(this.iIdSevicio.equals(other.iIdSevicio) && this.nombre_alimento.equals(other.nombre_alimento)) {
 		    bExito = true;
 		}
 		return bExito;
