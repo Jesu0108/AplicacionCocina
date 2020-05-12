@@ -46,6 +46,11 @@ DELETE FROM `empresa`;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 
+-- Volcando datos para la tabla appcocina.empresa_x_servicio: ~0 rows (aproximadamente)
+DELETE FROM `empresa_x_servicio`;
+/*!40000 ALTER TABLE `empresa_x_servicio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empresa_x_servicio` ENABLE KEYS */;
+
 -- Volcando datos para la tabla appcocina.material: ~0 rows (aproximadamente)
 DELETE FROM `material`;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
