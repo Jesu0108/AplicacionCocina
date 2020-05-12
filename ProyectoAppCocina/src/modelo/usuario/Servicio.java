@@ -57,21 +57,6 @@ public class Servicio implements IServicio {
 	}
 
 	@Override
-	public String getCif() {
-		return cif;
-	}
-
-	@Override
-	public boolean setCif(String cif) {
-		boolean bExito = false;
-		if (cif != null) {
-			this.cif = cif;
-			bExito = true;
-		}
-		return bExito;
-	}
-
-	@Override
 	public Date getdFecha() {
 		return dFecha;
 	}
@@ -105,7 +90,6 @@ public class Servicio implements IServicio {
 		result = prime * result + bTiempo_servicio;
 		result = prime * result + ((dFecha == null) ? 0 : dFecha.hashCode());
 		result = prime * result + iId_servicio;
-		result = prime * result + ((cif == null) ? 0 : cif.hashCode());
 		result = prime * result + ((sNombre_tipo_servicio == null) ? 0 : sNombre_tipo_servicio.hashCode());
 		return result;
 	}
@@ -126,7 +110,6 @@ public class Servicio implements IServicio {
 		sResultado += "Servicio: " + getsNombre_tipo_servicio() + "\n";
 		sResultado += "Tiempo de servicio estimado: " + getbTiempo_servicio() + "\n";
 		sResultado += "Con fecha: " + getdFecha() + "\n";
-		sResultado += "Para domicilio con CIF: " + getCif();
 		return sResultado;
 	}
 }
