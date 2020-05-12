@@ -66,11 +66,10 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador, Empresa oEmp) {
 		boolean errorControl = true;
-		int iId_servicio;
-		String sNombre_tipo_servicio;
-		Empresa cif;
-		Date dFecha;
-		byte bTiempo_servicio;
+		int iId_servicio = 0;
+		String sNombre_tipo_servicio = "";
+		Date dFecha = null;
+		byte bTiempo_servicio = 0;
 
 		while (errorControl) {
 			try {
@@ -80,7 +79,7 @@ public class ServicioView {
 			}
 		}
 
-		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, oEmp.getsCif();, dFecha, bTiempo_servicio);
+		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, oEmp.getsCif(), dFecha, bTiempo_servicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 
