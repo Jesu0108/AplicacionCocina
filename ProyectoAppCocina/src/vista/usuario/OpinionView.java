@@ -28,10 +28,10 @@ public class OpinionView {
 				}
 				break;
 			case 3: // Buscar
-				if (buscar(controlador) != null) {
-					System.out.println(buscar(controlador));
+				if (mostrar(controlador) != null) {
+					System.out.println(mostrar(controlador));
 				} else {
-					System.out.println("Error al buscar el Opinion");
+					System.out.println("Error al mostrar las opiniones");
 				}
 				break;
 			default:
@@ -70,13 +70,12 @@ public class OpinionView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_Opinion = "", sDateString = "";
-		Date dFecha = null;
-		byte bTiempo_Opinion = 0;
+		String sCritica = "";
+		byte bPuntuacion = 0;
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Opinion = ValidaLibrary.leer("Introduzca el tipo de Opinion que va a pedir: ");
+				sCritica = ValidaLibrary.leer("Introduzca una critica: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -85,33 +84,15 @@ public class OpinionView {
 
 		while (errorControl) {
 			try {
-				bTiempo_Opinion = (byte) ValidaLibrary.valida("Introduzca el tiempo estimado de Opinion (en horas): ",
-						1, 100, 3);
+				bPuntuacion = (byte) ValidaLibrary.valida("Introduzca la puntuación (1 - 10): ",1, 10, 3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		while (errorControl) {
-			try {
-				sDateString = ValidaLibrary.leer("Introduzca una fecha para el Opinion (22/5/2020): ");
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
 
-		while (errorControl) {
-			try {
-				dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
-
-		Opinion oOpinion = new Opinion(sNombre_tipo_Opinion, dFecha, bTiempo_Opinion);
+		Opinion oOpinion = new Opinion(sCritica, bPuntuacion);
 
 		return controlador.getUsuarioCtrl().getOpinionCtrl().add(oOpinion);
 	}
@@ -120,37 +101,35 @@ public class OpinionView {
 
 	public static int eliminar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_Opinion = "";
+		String sCritica = "";
+		byte bPuntuacion = 0;
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Opinion = ValidaLibrary.leer("Introduzca el tipo de Opinion que va a pedir: ");
+				sCritica = ValidaLibrary.leer("Introduzca una critica: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		Opinion oOpinion = new Opinion(sNombre_tipo_Opinion);
+		while (errorControl) {
+			try {
+				bPuntuacion = (byte) ValidaLibrary.valida("Introduzca la puntuación (1 - 10): ",1, 10, 3);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		Opinion oOpinion = new  Opinion(sCritica, bPuntuacion);
 		return controlador.getUsuarioCtrl().getOpinionCtrl().remove(oOpinion);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static Opinion buscar(ControladorGeneral controlador) {
-		boolean errorControl = true;
-		String sNombre_tipo_Opinion = "";
-
-		while (errorControl) {
-			try {
-				sNombre_tipo_Opinion = ValidaLibrary
-						.leer("Introduzca el nombre del tipo de Opinion que va a buscar: ");
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
-		return controlador.getUsuarioCtrl().getOpinionCtrl().searchOpinion(sNombre_tipo_Opinion);
+	public static Opinion mostrar(ControladorGeneral controlador) {
+		return controlador.getUsuarioCtrl().getOpinionCtrl().searchOpinion();
 	}
 }
 
