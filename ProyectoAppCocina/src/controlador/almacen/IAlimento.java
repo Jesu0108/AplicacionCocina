@@ -14,4 +14,8 @@ public interface IAlimento {
 
 	public List<Alimento> searchAlimentosPorNombre(Alimento oAlimento);
 
+	public Alimento searchAlimento(String sNombreAlimento);
+
+	public int updateAlimento(Alimento oAlimento);
+
 }

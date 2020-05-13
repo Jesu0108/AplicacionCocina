@@ -36,6 +36,40 @@ public class AlimentoController implements IAlimento {
 	}
 
 	@Override
+	public Alimento searchAlimento(String sNombreAlimento) {
+
+		Alimento lAlimento = null;
+		String sql = "SELECT * FROM alimento WHERE nombre_alimento=" + sNombreAlimento;
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sNombre_alimento = rs.getString(1);
+				byte bCantidad = rs.getByte(3);
+				lAlimento = new Alimento(sNombre_alimento, bCantidad);
+			}
+		} catch (SQLException e) {
+			lAlimento = null;
+		}
+		return lAlimento;
+	}
+	
+	
+	@Override
+	public int updateAlimento(Alimento oAlimento) {
+		
+		String sql = "UPDATE alimento ";
+	    sql += "SET nombre_alimento = '" + oAlimento.getsNombre_alimento()+ "',";
+	    sql += "cantidad = '" + oAlimento.getbCantidad() + " ";
+	    sql += "WHERE nombre_alimento=" + oAlimento.getsNombre_alimento();
+	    
+		return ConexionDB.executeUpdate(sql);
+	}
+	
+	
+	@Override
 	public List<Alimento> searchAlimentosPorNombre(Alimento oAlimento) {
 
 		List<Alimento> lAlimentos = new ArrayList<Alimento>();
