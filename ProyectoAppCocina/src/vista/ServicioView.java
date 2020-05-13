@@ -31,7 +31,11 @@ public class ServicioView {
 				}
 				break;
 			case 4: // Buscar
-
+				if (buscar(controlador) != null) {
+					System.out.println(buscar(controlador));
+				} else {
+					System.out.println("Error al buscar el servicio");
+				}
 				break;
 			default:
 				System.out.println("Volviendo...\n");
@@ -127,9 +131,20 @@ public class ServicioView {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
-	public static int Modificar(ControladorGeneral controlador) {
-		
-		return 0;
+
+	public static Servicio buscar(ControladorGeneral controlador) {
+		boolean errorControl = true;
+		String sNombre_tipo_servicio = "";
+
+		while (errorControl) {
+			try {
+				sNombre_tipo_servicio = ValidaLibrary
+						.leer("Introduzca el nombre del tipo de servicio que va a buscar: ");
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+		Servicio oServicio = new Servicio(sNombre_tipo_servicio);
+		return controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(oServicio);
 	}
 }
