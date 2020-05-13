@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.almacen.Material;
 import modelo.almacen.Tipo_material;
+import modelo.usuario.Servicio;
 
 
 public class MaterialController implements IMaterialController{
@@ -37,6 +39,28 @@ public class MaterialController implements IMaterialController{
 		return ConexionDB.executeCount(sql);
 	}
 
+	@Override
+	public Servicio searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial) {
+
+		Material lMaterial = null;
+		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio()=" + sNombreMaterial;
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sNombre_material = rs.getString(1);
+				int Icantidad = rs.getInt(2);
+				lMaterial = new Material(sNombre_material,Icantidad,oTipMaterial);
+			}
+		} catch (SQLException e) {
+			lMaterial = null;
+		}
+		return lMaterial;
+	}
+	
+	
 	@Override
 	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial) {
 

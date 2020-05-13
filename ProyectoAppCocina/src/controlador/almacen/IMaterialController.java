@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.almacen.Material;
 import modelo.almacen.Tipo_material;
+import modelo.usuario.Servicio;
 
 public interface IMaterialController {
 
@@ -16,5 +17,7 @@ public interface IMaterialController {
 	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial);
 
 	public List<Material> searchMaterialesPorNombre(Material oMaterial);
+
+	public Servicio searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial);
 
 }
