@@ -3,7 +3,6 @@ package vista;
 import java.sql.Date;
 
 import controlador.ControladorGeneral;
-import modelo.usuario.Empresa;
 import modelo.usuario.Servicio;
 import validaciones.ValidaLibrary;
 
@@ -74,6 +73,14 @@ public class ServicioView {
 		while (errorControl) {
 			try {
 				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a pedir: ");
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+		
+		while (errorControl) {
+			try {
+				bTiempo_servicio = (byte)ValidaLibrary.valida("Introduzca el tiempo estimado de servicio (en horas): ",1,100,3);
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
