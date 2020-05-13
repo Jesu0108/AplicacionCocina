@@ -60,10 +60,11 @@ public class ServicioController implements IServicioController {
 	@Override
 	public int updateServicio(Servicio oServicio) {
 
-		Servicio lServicio= null;
-		
-		String sql = "UPDATE servico set sNombre_tipo_servicio= '" + oServicio.getsNombre_tipo_servicio()
-				+ "', dFecha ='" + oServicio.getdFecha() + "'WHERE id_servicio=" + oServicio.getiId_servicio();
+		Servicio lServicio = null;
+
+		String sql = "UPDATE servico set nombre_tipo_servicio= '" + oServicio.getsNombre_tipo_servicio()
+				+ "', dFecha ='" + oServicio.getdFecha() + "', tiempo_servicio = " + oServicio.getbTiempo_servicio()
+				+ " WHERE id_servicio=" + oServicio.getiId_servicio();
 		Statement stm = null;
 
 		try {
