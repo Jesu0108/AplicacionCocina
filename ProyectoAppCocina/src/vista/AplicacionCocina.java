@@ -54,28 +54,28 @@ public class AplicacionCocina {
 
 					bOpcionMenuPrincipal = menuPrincipal();
 					switch (bOpcionMenuPrincipal) {
-					case 1: // Gestion de Articulos
+					case 1: // Gestion de Servicios
 						try {
 							ServicioView.menuServicio(controlador);
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
 						break;
-					case 2: // Gestion de Socios
+					case 2: // Gestion de Alimentos
 						try {
 							//AlimentoView.MenuAlimentos(controlador);
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
 						break;
-					case 3: // Gestion Instalacioines
+					case 3: // Gestion Materiales
 						try {
 							//MaterialView.MenuMateriales(controlador);
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
 						break;
-					case 4:// Gestion Reservas
+					case 4:// Gestion Opiniones
 						try {
 							//OpinionView.MenuOpiniones(controlador);
 						} catch (Exception ex) {
