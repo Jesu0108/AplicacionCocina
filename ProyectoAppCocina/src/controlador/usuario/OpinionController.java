@@ -31,13 +31,36 @@ public class OpinionController implements IOpinionController {
 		return ConexionDB.executeCount(sql);
 	}
 
+	@Override
+	public Opinion searchOpinionPorId(Opinion oOpinion) {
+
+		Opinion lOpiniones = null;
+		String sql = "SELECT * FROM opinion WHERE id_opinion="+oOpinion.getiId_opinion();
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				int iId_opinion = rs.getInt(1);
+				String sCritica = rs.getString(2);
+				byte bPuntuacion = (byte) rs.getInt(3);
+				lOpiniones= new Opinion(iId_opinion,sCritica, bPuntuacion);
+			}
+		} catch (SQLException e) {
+			lOpiniones = null;
+		}
+		return lOpiniones;
+	}
+	
+	
 	// Operacion de búsqueda por el ID
 
 	@Override
-	public List<Opinion> buscarOpinionPorId(Opinion oOpinion) {
+	public List<Opinion> buscarOpiniones() {
 
 		List<Opinion> lOpiniones = new ArrayList<Opinion>();
-		String sql = "SELECT * FROM opinion WHERE id=" + oOpinion.getiId_opinion();
+		String sql = "SELECT * FROM opinion;";
 		Statement stm = null;
 
 		try {

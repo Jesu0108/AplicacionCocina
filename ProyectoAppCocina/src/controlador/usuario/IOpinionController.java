@@ -12,6 +12,9 @@ public interface IOpinionController {
 
 	public int existeOpinion(Opinion oOpinion);
 
-	public List<Opinion> buscarOpinionPorId(Opinion oOpinion);
+	public List<Opinion> buscarOpiniones();
+
+	public Opinion searchOpinionPorId(Opinion oOpinion);
+	
 
 }
