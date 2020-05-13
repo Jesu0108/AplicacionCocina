@@ -1,6 +1,6 @@
 package modelo.usuario;
 
-import java.sql.Date;
+import java.util.Date;
 
 public interface IServicio {
 

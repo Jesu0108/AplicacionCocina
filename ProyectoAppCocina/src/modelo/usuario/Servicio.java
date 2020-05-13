@@ -1,6 +1,6 @@
 package modelo.usuario;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Servicio implements IServicio {
 	private int iId_servicio; // PK

@@ -1,6 +1,7 @@
 package vista;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import controlador.ControladorGeneral;
 import modelo.usuario.Servicio;
@@ -65,8 +66,7 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		int iId_servicio = 0;
-		String sNombre_tipo_servicio = "";
+		String sNombre_tipo_servicio = "",sDateString="";
 		Date dFecha = null;
 		byte bTiempo_servicio = 0;
 
@@ -86,7 +86,19 @@ public class ServicioView {
 			}
 		}
 		
-		Servicio oServicio = new Servicio(iId_servicio, sNombre_tipo_servicio, dFecha, bTiempo_servicio);
+		try {
+			sDateString = ValidaLibrary.leer("Introduce una fecha de nacimiento (31/12/1998): ");
+		}catch(Exception ex) {
+			System.out.println("Error: "+ex.getMessage());
+		}
+		
+		try {
+			dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
+		}catch(Exception ex) {
+			System.out.println("Error: "+ex.getMessage());
+		}
+		
+		Servicio oServicio = new Servicio(sNombre_tipo_servicio, dFecha, bTiempo_servicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 
