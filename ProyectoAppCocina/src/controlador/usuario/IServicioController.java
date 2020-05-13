@@ -12,4 +12,6 @@ public interface IServicioController {
 
 	public Servicio searchServicio(Servicio oServicio);
 
+	public int updateServicio(Servicio oServicio);
+
 }
