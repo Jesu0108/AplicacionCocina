@@ -1,14 +1,12 @@
 package vista.almacen;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import controlador.ControladorGeneral;
 import modelo.almacen.Material;
+import modelo.almacen.Tipo_material;
 import validaciones.ValidaLibrary;
 
 public class MaterialView {
-	public static void menuMaterial(ControladorGeneral controlador) {
+	public static void menuMaterial(ControladorGeneral controlador, Tipo_material oTipMaterial) {
 		byte bOpcion = 0;
 		do {
 			bOpcion = opcionMenuMaterial();
@@ -21,7 +19,7 @@ public class MaterialView {
 				}
 				break;
 			case 2: // Modificar
-				if (modificar(controlador) != 0) {
+				if (modificar(controlador,oTipMaterial) != 0) {
 					System.out.println("Material modificado");
 				} else {
 					System.out.println("Error al modificar el material");
@@ -35,8 +33,8 @@ public class MaterialView {
 				}
 				break;
 			case 4: // Buscar
-				if (buscar(controlador) != null) {
-					System.out.println(buscar(controlador));
+				if (buscar(controlador, oTipMaterial) != null) {
+					System.out.println(buscar(controlador, oTipMaterial));
 				} else {
 					System.out.println("Error al buscar el material");
 				}
@@ -78,13 +76,14 @@ public class MaterialView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_Material = "", sDateString = "";
-		Date dFecha = null;
-		byte bTiempo_Material = 0;
+		String sNombre_Material = "", sNombre_tipo_Material = "";
+		byte bCantidad = 0;
+
+		// Pido los datos del material
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el tipo de Material que va a pedir: ");
+				sNombre_Material = ValidaLibrary.leer("Introduzca el nombre del Material que va a pedir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -93,35 +92,30 @@ public class MaterialView {
 
 		while (errorControl) {
 			try {
-				bTiempo_Material = (byte) ValidaLibrary.valida("Introduzca el tiempo estimado de Material (en horas): ",
-						1, 100, 3);
+				bCantidad = (byte) ValidaLibrary
+						.valida("Introduzca ls cantidad de material que va a necesitar (1 - 100): ", 1, 100, 3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
+
+		// Pido la PK de Tipo_material
 
 		while (errorControl) {
 			try {
-				sDateString = ValidaLibrary.leer("Introduzca una fecha para el Material (22/5/2020): ");
+				sNombre_tipo_Material = ValidaLibrary
+						.leer("Introduzca el nombre del tipo de material que va a pedir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		while (errorControl) {
-			try {
-				dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
+		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material);
+		Material oMaterial = new Material(sNombre_Material, bCantidad, oTipoMaterial);
 
-		Material oMaterial = new Material(sNombre_tipo_Material, dFecha, bTiempo_Material);
-
-		return controlador.getUsuarioCtrl().getMaterialCtrl().add(oMaterial);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().add(oMaterial);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
@@ -140,48 +134,46 @@ public class MaterialView {
 		}
 
 		Material oMaterial = new Material(sNombre_tipo_Material);
-		return controlador.getUsuarioCtrl().getMaterialCtrl().remove(oMaterial);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().remove(oMaterial);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static Material buscar(ControladorGeneral controlador) {
+	public static Material buscar(ControladorGeneral controlador, Tipo_material oTipMaterial) {
 		boolean errorControl = true;
-		String sNombre_tipo_Material = "";
+		String sNombre_Material = "";
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Material = ValidaLibrary
-						.leer("Introduzca el nombre del tipo de Material que va a buscar: ");
+				sNombre_Material = ValidaLibrary.leer("Introduzca el nombre del Material que va a pedir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		return controlador.getUsuarioCtrl().getMaterialCtrl().searchMaterial(sNombre_tipo_Material);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(sNombre_Material, oTipMaterial);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static int modificar(ControladorGeneral controlador) {
+	public static int modificar(ControladorGeneral controlador, Tipo_material oTipMaterial) {
 		boolean errorControl = true;
-		String sNombre_tipo_Material = "", sDateString = "", sNew_tipo_Material = "";
-		Date dFecha = null;
-		byte bTiempo_Material = 0;
+		String sNombre_Material = "", sNombre_tipo_Material = "";
+		byte bCantidad = 0;
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el tipo de Material que va a modificar: ");
+				sNombre_Material = ValidaLibrary.leer("Introduzca el tipo de material que va a modificar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		if (controlador.getUsuarioCtrl().getMaterialCtrl().searchMaterial(sNombre_tipo_Material) != null) {
+		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(sNombre_Material, oTipMaterial) != null) {
 			while (errorControl) {
 				try {
-					sNew_tipo_Material = ValidaLibrary.leer("Introduzca el nuevo tipo de Material que va a pedir: ");
+					sNombre_Material = ValidaLibrary.leer("Introduzca el nombre del material que va a pedir: ");
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
@@ -190,26 +182,20 @@ public class MaterialView {
 
 			while (errorControl) {
 				try {
-					bTiempo_Material = (byte) ValidaLibrary
-							.valida("Introduzca el nuevo tiempo estimado de Material (en horas): ", 1, 100, 3);
+					bCantidad = (byte) ValidaLibrary
+							.valida("Introduzca ls cantidad de material que va a necesitar (1 - 100): ", 1, 100, 3);
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
 				}
 			}
 
-			while (errorControl) {
-				try {
-					sDateString = ValidaLibrary.leer("Introduzca una nuevo fecha para el Material (22/5/2020): ");
-					errorControl = false;
-				} catch (Exception ex) {
-					System.out.println("Error: " + ex.getMessage());
-				}
-			}
+			// Pido la PK de Tipo_material
 
 			while (errorControl) {
 				try {
-					dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
+					sNombre_tipo_Material = ValidaLibrary
+							.leer("Introduzca el nombre del tipo de material que va a pedir: ");
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
@@ -217,7 +203,8 @@ public class MaterialView {
 			}
 		}
 
-		Material oMaterial = new Material(sNew_tipo_Material, dFecha, bTiempo_Material);
-		return controlador.getUsuarioCtrl().getMaterialCtrl().updateMaterial(oMaterial);
+		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material);
+		Material oMaterial = new Material(sNombre_Material, bCantidad, oTipoMaterial);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().updateMaterial(oMaterial);
 	}
 }
