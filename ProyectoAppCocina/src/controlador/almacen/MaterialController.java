@@ -4,13 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.almacen.Material;
 import modelo.almacen.Tipo_material;
-import modelo.usuario.Servicio;
 
 
 public class MaterialController implements IMaterialController{
@@ -40,10 +38,10 @@ public class MaterialController implements IMaterialController{
 	}
 
 	@Override
-	public Servicio searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial) {
+	public Material searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial) {
 
 		Material lMaterial = null;
-		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio()=" + sNombreMaterial;
+		String sql = "SELECT * FROM Material WHERE nombre_tipo_Material()=" + sNombreMaterial;
 		Statement stm = null;
 
 		try {
@@ -60,6 +58,19 @@ public class MaterialController implements IMaterialController{
 		return lMaterial;
 	}
 	
+	@Override
+	public int updateMaterial(Material oMaterial) {
+		
+		String sql = "UPDATE material ";
+	    sql += "SET nombre_material = '" + oMaterial.getsNombre_material() + "',";
+	    sql += "nombre_tipo_material = '" + oMaterial.getoNombre_tipo_material() + " ";
+	    sql += "cantidad = \"" + oMaterial.getiCantidad();
+	    sql += "WHERE nombre_material=" + oMaterial.getsNombre_material();
+	    
+		return ConexionDB.executeUpdate(sql);
+	}
+	
+	
 	
 	@Override
 	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial) {
@@ -74,7 +85,7 @@ public class MaterialController implements IMaterialController{
 			while (rs.next()) {
 				String sNombre_material = rs.getString(1);
 				int iCantidad = rs.getInt(2);
-				lMateriales.add(new Material(sNombre_material, oTMaterial, iCantidad));
+				lMateriales.add(new Material(sNombre_material, iCantidad,oTMaterial));
 			}
 			stm.close();
 		} catch (SQLException e) {

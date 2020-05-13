@@ -18,6 +18,8 @@ public interface IMaterialController {
 
 	public List<Material> searchMaterialesPorNombre(Material oMaterial);
 
-	public Servicio searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial);
+	public Material searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial);
+
+	public int updateMaterial(Material oMaterial);
 
 }
