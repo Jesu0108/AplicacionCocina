@@ -36,7 +36,7 @@ public class ServicioController implements IServicioController{
 	}
 	
 	@Override
-	public Servicio searchCatador(Servicio oServicio) {
+	public Servicio searchServicio(Servicio oServicio) {
 
 		Servicio lServicio = null;
 		String sql = "SELECT * FROM catador WHERE email=" + oServicio.getsNombre_tipo_servicio();
