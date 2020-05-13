@@ -24,7 +24,11 @@ public class ServicioView {
 
 				break;
 			case 3: // Eliminar
-
+				if (eliminar(controlador) != 0) {
+					System.out.println("Servicio eliminado");
+				} else {
+					System.out.println("Error al eliminar el servicio");
+				}
 				break;
 			case 4: // Buscar
 
@@ -66,7 +70,7 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "",sDateString="";
+		String sNombre_tipo_servicio = "", sDateString = "";
 		Date dFecha = null;
 		byte bTiempo_servicio = 0;
 
@@ -77,31 +81,49 @@ public class ServicioView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		
+
 		while (errorControl) {
 			try {
-				bTiempo_servicio = (byte)ValidaLibrary.valida("Introduzca el tiempo estimado de servicio (en horas): ",1,100,3);
+				bTiempo_servicio = (byte) ValidaLibrary.valida("Introduzca el tiempo estimado de servicio (en horas): ",
+						1, 100, 3);
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		
+
 		try {
-			sDateString = ValidaLibrary.leer("Introduce una fecha de nacimiento (31/12/1998): ");
-		}catch(Exception ex) {
-			System.out.println("Error: "+ex.getMessage());
+			sDateString = ValidaLibrary.leer("Introduzca una fecha para el servicio (22/5/2020): ");
+		} catch (Exception ex) {
+			System.out.println("Error: " + ex.getMessage());
 		}
-		
+
 		try {
 			dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
-		}catch(Exception ex) {
-			System.out.println("Error: "+ex.getMessage());
+		} catch (Exception ex) {
+			System.out.println("Error: " + ex.getMessage());
 		}
-		
+
 		Servicio oServicio = new Servicio(sNombre_tipo_servicio, dFecha, bTiempo_servicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
+	}
 
+	// -------------------------------------------------------------------------------------------------------
+
+	public static int eliminar(ControladorGeneral controlador) {
+		boolean errorControl = true;
+		String sNombre_tipo_servicio = "", sDateString = "";
+
+		while (errorControl) {
+			try {
+				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a pedir: ");
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		Servicio oServicio = new Servicio(sNombre_tipo_servicio);
+		return controlador.getUsuarioCtrl().getServicioCtrl().remove(oServicio);
 	}
 
 }
