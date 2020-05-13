@@ -1,4 +1,4 @@
-package vista;
+package vista.usuario;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
