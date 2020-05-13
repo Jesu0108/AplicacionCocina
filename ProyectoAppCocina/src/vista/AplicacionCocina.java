@@ -79,7 +79,7 @@ public class AplicacionCocina {
 						break;
 					case 4:// Gestion Opiniones
 						try {
-							//OpinionView.MenuOpiniones(controlador);
+							OpinionView.menuOpinion(controlador);;
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
