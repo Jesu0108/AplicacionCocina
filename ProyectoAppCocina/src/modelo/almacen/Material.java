@@ -95,7 +95,11 @@ public class Material implements IMaterial{
 
 	@Override
 	public String toString() {
-		return "Material "+getsNombre_material()+" de tipo "+getoNombre_tipo_material();
+		String sResultado="";
+		sResultado+="Material: "+getsNombre_material()+"\n";
+		sResultado+="De tipo: "+getoNombre_tipo_material()+"\n";
+		sResultado+="Cantidad: "+getiCantidad();
+		return sResultado;
 	}
 	
 	
