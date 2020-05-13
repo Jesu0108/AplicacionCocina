@@ -14,28 +14,28 @@ public class AlimentoView {
 				if (aniadir(controlador) != 0) {
 					System.out.println("Alimento aniadido");
 				} else {
-					System.out.println("Error al aniadir el Alimento");
+					System.out.println("Error al aniadir el alimento");
 				}
 				break;
 			case 2: // Modificar
 				if (modificar(controlador) != 0) {
 					System.out.println("Alimento modificado");
 				} else {
-					System.out.println("Error al modificar el Alimento");
+					System.out.println("Error al modificar el alimento");
 				}
 				break;
 			case 3: // Eliminar
 				if (eliminar(controlador) != 0) {
 					System.out.println("Alimento eliminado");
 				} else {
-					System.out.println("Error al eliminar el Alimento");
+					System.out.println("Error al eliminar el alimento");
 				}
 				break;
 			case 4: // Buscar
 				if (buscar(controlador) != null) {
 					System.out.println(buscar(controlador));
 				} else {
-					System.out.println("Error al buscar el Alimento");
+					System.out.println("Error al buscar el alimento");
 				}
 				break;
 			default:
@@ -80,7 +80,7 @@ public class AlimentoView {
 
 		while (errorControl) {
 			try {
-				sNombre_alimento = ValidaLibrary.leer("Introduzca el tipo de Alimento que va a aniadir: ");
+				sNombre_alimento = ValidaLibrary.leer("Introduzca el tipo de alimento que va a aniadir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -135,16 +135,15 @@ public class AlimentoView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		return controlador);
+		return controlador.getAlmacenCtrl().getAlimentoCtrl().searchAlimento(sNombre_alimento);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
 	public static int modificar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_alimento = "", sDateString = "", sNew_tipo_servicio = "";
-		
-		byte bTiempo_servicio = 0;
+		String sNombre_alimento = "",sNewNombreAlimento="" ;
+		byte bCantidad = 0;
 
 		while (errorControl) {
 			try {
@@ -155,10 +154,10 @@ public class AlimentoView {
 			}
 		}
 
-		if (controlador.getAlmacenCtrl().getAlimentoCtrl() != null) {
+		if (controlador.getAlmacenCtrl().getAlimentoCtrl().searchAlimento(sNombre_alimento) != null) {
 			while (errorControl) {
 				try {
-					sNew_tipo_servicio = ValidaLibrary.leer("Introduzca el nuevo tipo de servicio que va a pedir: ");
+					sNewNombreAlimento = ValidaLibrary.leer("Introduzca el nuevo tipo de alimento que va a aniadir: ");
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
@@ -167,34 +166,15 @@ public class AlimentoView {
 
 			while (errorControl) {
 				try {
-					bTiempo_servicio = (byte) ValidaLibrary
-							.valida("Introduzca el nuevo tiempo estimado de servicio (en horas): ", 1, 100, 3);
+					bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad de alimentos que va a aniadir (1 - 100): ",1, 100, 3);
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
 				}
-			}
-
-			while (errorControl) {
-				try {
-					sDateString = ValidaLibrary.leer("Introduzca una nuevo fecha para el servicio (22/5/2020): ");
-					errorControl = false;
-				} catch (Exception ex) {
-					System.out.println("Error: " + ex.getMessage());
-				}
-			}
-
-			while (errorControl) {
-				try {
-					dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
-					errorControl = false;
-				} catch (Exception ex) {
-					System.out.println("Error: " + ex.getMessage());
-				}
-			}
+			}		
 		}
 
-		Servicio oServicio = new Servicio(sNew_tipo_servicio, dFecha, bTiempo_servicio);
-		return controlador.getUsuarioCtrl().getServicioCtrl().updateServicio(oServicio);
+		Alimento oAlimento = new Alimento(sNewNombreAlimento, bCantidad);
+		return controlador.getAlmacenCtrl().getAlimentoCtrl().updateAlimento(oAlimento);
 	}
 }
