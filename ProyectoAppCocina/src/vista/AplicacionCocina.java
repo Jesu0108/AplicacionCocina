@@ -65,7 +65,7 @@ public class AplicacionCocina {
 						break;
 					case 2: // Gestion de Alimentos
 						try {
-							AlimentoView.menuServicio(controlador);;
+							AlimentoView.menuAlimento(controlador);;
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}

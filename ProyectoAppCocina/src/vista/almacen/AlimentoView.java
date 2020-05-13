@@ -5,7 +5,7 @@ import modelo.almacen.Alimento;
 import validaciones.ValidaLibrary;
 
 public class AlimentoView {
-	public static void menuServicio(ControladorGeneral controlador) {
+	public static void menuAlimento(ControladorGeneral controlador) {
 		byte bOpcion = 0;
 		do {
 			bOpcion = opcionMenuServicio();
