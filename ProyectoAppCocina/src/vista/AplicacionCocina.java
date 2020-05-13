@@ -72,7 +72,7 @@ public class AplicacionCocina {
 						break;
 					case 3: // Gestion Materiales
 						try {
-							//MaterialView.MenuMateriales(controlador);
+							MaterialView.menuMaterial(controlador);
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
