@@ -112,7 +112,7 @@ public class ServicioView {
 
 	public static int eliminar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "", sDateString = "";
+		String sNombre_tipo_servicio = "";
 
 		while (errorControl) {
 			try {
@@ -126,4 +126,10 @@ public class ServicioView {
 		return controlador.getUsuarioCtrl().getServicioCtrl().remove(oServicio);
 	}
 
+	// -------------------------------------------------------------------------------------------------------
+	
+	public static int Modificar(ControladorGeneral controlador) {
+		
+		return 0;
+	}
 }
