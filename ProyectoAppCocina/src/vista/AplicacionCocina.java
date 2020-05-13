@@ -6,7 +6,8 @@ import modelo.usuario.Cocinero;
 import modelo.usuario.Empresa;
 import controlador.ConexionDB;
 import validaciones.ValidaLibrary;
-import vista.usuario.ServicioView;
+import vista.almacen.*;
+import vista.usuario.*;
 
 public class AplicacionCocina {
 
@@ -64,7 +65,7 @@ public class AplicacionCocina {
 						break;
 					case 2: // Gestion de Alimentos
 						try {
-							//AlimentoView.MenuAlimentos(controlador);
+							AlimentoView.menuServicio(controlador);;
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
 						}
