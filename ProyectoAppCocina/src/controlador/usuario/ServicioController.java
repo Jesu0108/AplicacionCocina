@@ -10,7 +10,7 @@ public class ServicioController implements IServicioController{
 	@Override
 	public int add(Servicio oServicio) {
 		String sql = "INSERT INTO servicio VALUES (";
-		sql += "\"" + oServicio.getiId_servicio() + "\",";
+		sql += "\"" + (oServicio.getiId_servicio()+1) + "\",";
 		sql += "\"" + oServicio.getsNombre_tipo_servicio() + "\",";
 		sql += "\"" + oServicio.getdFecha();
 		sql += "\"" + oServicio.getbTiempo_servicio() + "\",";
