@@ -62,7 +62,7 @@ public class ServicioController implements IServicioController {
 		
 		String sql = "UPDATE servicio ";
 	    sql += "SET nombre_tipo_servicio = '" + oServicio.getsNombre_tipo_servicio() + "',";
-	    sql += "dFecha = '" + oServicio.getdFecha() + " ";
+	    sql += "fecha = '" + oServicio.getdFecha() + " ";
 	    sql += "tiempo_servicio = \"" + oServicio.getbTiempo_servicio();
 	    sql += "WHERE id_servicio=" + oServicio.getiId_servicio();
 	    
