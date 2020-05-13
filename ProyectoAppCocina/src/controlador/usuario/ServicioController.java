@@ -36,10 +36,10 @@ public class ServicioController implements IServicioController {
 	}
 
 	@Override
-	public Servicio searchServicio(Servicio oServicio) {
+	public Servicio searchServicio(String sNombreTipoServicio) {
 
 		Servicio lServicio = null;
-		String sql = "SELECT * FROM servicio WHERE email=" + oServicio.getsNombre_tipo_servicio();
+		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio()=" + sNombreTipoServicio;
 		Statement stm = null;
 
 		try {
