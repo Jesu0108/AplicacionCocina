@@ -15,7 +15,7 @@ public class OpinionController implements IOpinionController {
 	@Override
 	public int add(Opinion oOpinion) {
 		String sql = "INSERT INTO opinion VALUES (\"" + oOpinion.getiPuntuacion() + "\",\"" + oOpinion.getsCritica()
-				+ "\",\"" + oOpinion.getiId_opinion() + ")";
+				+ "\",\"" + (oOpinion.getiId_opinion()+1) + ")";
 		return ConexionDB.executeUpdate(sql);
 	}
 
@@ -47,7 +47,7 @@ public class OpinionController implements IOpinionController {
 				int iId_opinion = rs.getInt(1);
 				String sCritica = rs.getString(2);
 				byte bPuntuacion = (byte) rs.getInt(3);
-				lOpiniones.add(new Opinion(iId_opinion, sCritica, bPuntuacion));
+				lOpiniones.add(new Opinion(iId_opinion,sCritica, bPuntuacion));
 			}
 			stm.close();
 		} catch (SQLException e) {

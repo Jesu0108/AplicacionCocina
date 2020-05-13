@@ -5,8 +5,15 @@ public class Opinion implements IOpinion{
 	private String sCritica;
 	private byte iPuntuacion;
 		
-	public Opinion(int iId_opinion, String sCritica, byte iPuntuacion) {
+	
+	public Opinion(int iId_opinion,String sCritica, byte iPuntuacion) {
 		setiId_opinion(iId_opinion);
+		setsCritica(sCritica);
+		setiPuntuacion(iPuntuacion);
+	}
+	
+	public Opinion(String sCritica, byte iPuntuacion) {
+		setiId_opinion(0);
 		setsCritica(sCritica);
 		setiPuntuacion(iPuntuacion);
 	}
