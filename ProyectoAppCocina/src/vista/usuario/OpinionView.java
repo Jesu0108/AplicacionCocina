@@ -1,7 +1,6 @@
 package vista.usuario;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import controlador.ControladorGeneral;
 import modelo.usuario.Opinion;
@@ -128,8 +127,8 @@ public class OpinionView {
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static Opinion mostrar(ControladorGeneral controlador) {
-		return controlador.getUsuarioCtrl().getOpinionCtrl().searchOpinion();
+	public static List<Opinion> mostrar(ControladorGeneral controlador) {
+		return controlador.getUsuarioCtrl().getOpinionCtrl().buscarOpiniones();
 	}
 }
 
