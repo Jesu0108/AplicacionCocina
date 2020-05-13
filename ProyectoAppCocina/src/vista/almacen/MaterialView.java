@@ -6,7 +6,7 @@ import modelo.almacen.Tipo_material;
 import validaciones.ValidaLibrary;
 
 public class MaterialView {
-	public static void menuMaterial(ControladorGeneral controlador, Tipo_material oTipMaterial) {
+	public static void menuMaterial(ControladorGeneral controlador) {
 		byte bOpcion = 0;
 		do {
 			bOpcion = opcionMenuMaterial();
