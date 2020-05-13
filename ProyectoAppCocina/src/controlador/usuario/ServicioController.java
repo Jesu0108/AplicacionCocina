@@ -25,7 +25,7 @@ public class ServicioController implements IServicioController{
 	}
 
 	@Override
-	public int existeCliente(Servicio oServicio) {
+	public int existeServicio(Servicio oServicio) {
 		String sql = "SELECT COUNT(*) FROM servicio WHERE id_servicio LIKE \"" + oServicio.getiId_servicio() + "\"";
 		return ConexionDB.executeCount(sql);
 	}

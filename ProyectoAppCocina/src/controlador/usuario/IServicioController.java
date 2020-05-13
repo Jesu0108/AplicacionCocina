@@ -8,6 +8,6 @@ public interface IServicioController {
 
 	public int remove(Servicio oServicio);
 
-	public int existeCliente(Servicio oServicio);
+	public int existeServicio(Servicio oServicio);
 
 }
