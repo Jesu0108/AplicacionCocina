@@ -10,4 +10,6 @@ public interface IServicioController {
 
 	public int existeServicio(Servicio oServicio);
 
+	public Servicio searchCatador(Servicio oServicio);
+
 }
