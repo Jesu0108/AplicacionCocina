@@ -147,4 +147,45 @@ public class ServicioView {
 		Servicio oServicio = new Servicio(sNombre_tipo_servicio);
 		return controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(oServicio);
 	}
+
+	// -------------------------------------------------------------------------------------------------------
+
+	public static int modificar(ControladorGeneral controlador) {
+		boolean errorControl = true;
+		String sNombre_tipo_servicio = "", sDateString = "";
+		Date dFecha = null;
+		byte bTiempo_servicio = 0;
+
+		while (errorControl) {
+			try {
+				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a modificar: ");
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		while (errorControl) {
+			try {
+				bTiempo_servicio = (byte) ValidaLibrary.valida("Introduzca el tiempo estimado de servicio (en horas): ",
+						1, 100, 3);
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		try {
+			sDateString = ValidaLibrary.leer("Introduzca una fecha para el servicio (22/5/2020): ");
+		} catch (Exception ex) {
+			System.out.println("Error: " + ex.getMessage());
+		}
+
+		try {
+			dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
+		} catch (Exception ex) {
+			System.out.println("Error: " + ex.getMessage());
+		}
+
+		Servicio oServicio = new Servicio(sNombre_tipo_servicio, dFecha, bTiempo_servicio);
+		return controlador.getUsuarioCtrl().getServicioCtrl().updateServicio(oServicio);
+	}
 }
