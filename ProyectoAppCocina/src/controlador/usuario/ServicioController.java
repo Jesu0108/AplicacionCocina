@@ -59,26 +59,13 @@ public class ServicioController implements IServicioController {
 
 	@Override
 	public int updateServicio(Servicio oServicio) {
-
-		Servicio lServicio = null;
-
-		String sql = "UPDATE servico set nombre_tipo_servicio= '" + oServicio.getsNombre_tipo_servicio()
-				+ "', dFecha ='" + oServicio.getdFecha() + "', tiempo_servicio = " + oServicio.getbTiempo_servicio()
-				+ " WHERE id_servicio=" + oServicio.getiId_servicio();
-		Statement stm = null;
-
-		try {
-			stm = ConexionDB.getConnection().createStatement();
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
-				String sNombre_tipo_servicio = rs.getString(1);
-				Date dFecha = rs.getDate(2);
-				byte bTiempo_servicio = rs.getByte(3);
-				lServicio = new Servicio(sNombre_tipo_servicio, dFecha, bTiempo_servicio);
-			}
-		} catch (SQLException e) {
-			lServicio = null;
-		}
+		
+		String sql = "UPDATE servicio ";
+	    sql += "SET nombre_tipo_servicio = '" + oServicio.getsNombre_tipo_servicio() + "',";
+	    sql += "dFecha = '" + oServicio.getdFecha() + " ";
+	    sql += "tiempo_servicio = \"" + oServicio.getbTiempo_servicio();
+	    sql += "WHERE id_servicio=" + oServicio.getiId_servicio();
+	    
 		return ConexionDB.executeUpdate(sql);
 	}
 }
