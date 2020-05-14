@@ -19,7 +19,7 @@ public class MaterialView {
 				}
 				break;
 			case 2: // Modificar
-				if (modificar(controlador,oTipMaterial) != 0) {
+				if (modificar(controlador) != 0) {
 					System.out.println("Material modificado");
 				} else {
 					System.out.println("Error al modificar el material");
@@ -33,8 +33,8 @@ public class MaterialView {
 				}
 				break;
 			case 4: // Buscar
-				if (buscar(controlador, oTipMaterial) != null) {
-					System.out.println(buscar(controlador, oTipMaterial));
+				if (buscar(controlador) != null) {
+					System.out.println(buscar(controlador));
 				} else {
 					System.out.println("Error al buscar el material");
 				}
@@ -139,7 +139,7 @@ public class MaterialView {
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static Material buscar(ControladorGeneral controlador, Tipo_material oTipMaterial) {
+	public static Material buscar(ControladorGeneral controlador) {
 		boolean errorControl = true;
 		String sNombre_Material = "";
 
@@ -151,12 +151,13 @@ public class MaterialView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		return controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(sNombre_Material, oTipMaterial);
+		Material oMaterial = new Material(sNombre_Material);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(oMaterial);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
-	public static int modificar(ControladorGeneral controlador, Tipo_material oTipMaterial) {
+	public static int modificar(ControladorGeneral controlador) {
 		boolean errorControl = true;
 		String sNombre_Material = "", sNombre_tipo_Material = "";
 		byte bCantidad = 0;
@@ -169,8 +170,10 @@ public class MaterialView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-
-		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(sNombre_Material, oTipMaterial) != null) {
+		
+		Material oMat = new Material(sNombre_Material);
+		
+		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(oMat) != null) {
 			while (errorControl) {
 				try {
 					sNombre_Material = ValidaLibrary.leer("Introduzca el nombre del material que va a pedir: ");

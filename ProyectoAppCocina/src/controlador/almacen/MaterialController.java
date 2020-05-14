@@ -10,9 +10,8 @@ import controlador.ConexionDB;
 import modelo.almacen.Material;
 import modelo.almacen.Tipo_material;
 
+public class MaterialController implements IMaterialController {
 
-public class MaterialController implements IMaterialController{
-	
 	// Operaciones CRUD
 
 	@Override
@@ -33,15 +32,16 @@ public class MaterialController implements IMaterialController{
 
 	@Override
 	public int existeCliente(Material oMaterial) {
-		String sql = "SELECT COUNT(*) FROM Material WHERE nombre_material LIKE \"" + oMaterial.getsNombre_material()+ "\"";
+		String sql = "SELECT COUNT(*) FROM Material WHERE nombre_material LIKE \"" + oMaterial.getsNombre_material()
+				+ "\"";
 		return ConexionDB.executeCount(sql);
 	}
 
 	@Override
-	public Material searchMaterial(String sNombreMaterial, Tipo_material oTipMaterial) {
+	public Material searchMaterial(Material oMaterial) {
 
 		Material lMaterial = null;
-		String sql = "SELECT * FROM Material WHERE nombre_tipo_Material()=" + sNombreMaterial;
+		String sql = "SELECT * FROM material WHERE nombre_tipo_Material=\"" + oMaterial.getoNombre_tipo_material().getsNombre_tipo_material()+"\"";
 		Statement stm = null;
 
 		try {
@@ -49,7 +49,9 @@ public class MaterialController implements IMaterialController{
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				String sNombre_material = rs.getString(1);
-				int Icantidad = rs.getInt(2);
+				String sNombreTipoMaterial = rs.getString(2);
+				int Icantidad = rs.getInt(3);
+				Tipo_material oTipMaterial = new Tipo_material (sNombreTipoMaterial);
 				lMaterial = new Material(sNombre_material,Icantidad,oTipMaterial);
 			}
 		} catch (SQLException e) {
@@ -57,21 +59,19 @@ public class MaterialController implements IMaterialController{
 		}
 		return lMaterial;
 	}
-	
+
 	@Override
 	public int updateMaterial(Material oMaterial) {
-		
+
 		String sql = "UPDATE material ";
-	    sql += "SET nombre_material = '" + oMaterial.getsNombre_material() + "',";
-	    sql += "nombre_tipo_material = '" + oMaterial.getoNombre_tipo_material() + " ";
-	    sql += "cantidad = \"" + oMaterial.getiCantidad();
-	    sql += "WHERE nombre_material=" + oMaterial.getsNombre_material();
-	    
+		sql += "SET nombre_material = '" + oMaterial.getsNombre_material() + "',";
+		sql += "nombre_tipo_material = '" + oMaterial.getoNombre_tipo_material() + " ";
+		sql += "cantidad = \"" + oMaterial.getiCantidad();
+		sql += "WHERE nombre_material=" + oMaterial.getsNombre_material();
+
 		return ConexionDB.executeUpdate(sql);
 	}
-	
-	
-	
+
 	@Override
 	public List<Material> searchMaterialesPorTipo(Tipo_material oTMaterial) {
 
@@ -85,7 +85,7 @@ public class MaterialController implements IMaterialController{
 			while (rs.next()) {
 				String sNombre_material = rs.getString(1);
 				int iCantidad = rs.getInt(2);
-				lMateriales.add(new Material(sNombre_material, iCantidad,oTMaterial));
+				lMateriales.add(new Material(sNombre_material, iCantidad, oTMaterial));
 			}
 			stm.close();
 		} catch (SQLException e) {
@@ -93,7 +93,7 @@ public class MaterialController implements IMaterialController{
 		}
 		return lMateriales;
 	}
-	
+
 	@Override
 	public List<Material> searchMaterialesPorNombre(Material oMaterial) {
 
