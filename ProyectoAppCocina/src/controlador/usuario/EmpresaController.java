@@ -9,23 +9,16 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Empresa;
 
-public class EmpresaController implements IEmpresaController{
+public class EmpresaController implements IEmpresaController {
 
 	// Operaciones CRUD
 
 	@Override
 	public int add(Empresa oEmpresa) {
-		String sql = "INSERT INTO empresa VALUES (";
-		sql += "\"" + oEmpresa.getsCif() + "\",";
-		sql += "\"" + oEmpresa.getsCiudad() + "\",";
-		sql += "\"" + oEmpresa.getsDomilio() + "\",";
-		sql += "\"" + oEmpresa.getsNombre() + "\",";
-		sql += "\"" + oEmpresa.getsTelefono() + "\",";
-		sql += "\"" + oEmpresa.getsApellidos()+ "\",";
-		sql += "\"" + oEmpresa.getsContrasenia() + "\",";
-		sql += "\"" + oEmpresa.getsEmail() + "\",";
-		sql += "\"" + oEmpresa.getsExperiencia() + "\",";
-		sql += ")";
+		String sql = "INSERT INTO empresa VALUES ( '" + oEmpresa.getsCif() + "', '" + oEmpresa.getsDomilio() + "', '"
+				+ oEmpresa.getsNombre() + "', '" + oEmpresa.getsTelefono() + "', '" + oEmpresa.getsCiudad() + "', '"
+				+ oEmpresa.getsEmail() + "', '" + oEmpresa.getsContrasenia() + "', '" + oEmpresa.getsApellidos()
+				+ "', '" + oEmpresa.getsExperiencia() + "' );";
 		return ConexionDB.executeUpdate(sql);
 	}
 
@@ -40,7 +33,7 @@ public class EmpresaController implements IEmpresaController{
 		String sql = "SELECT COUNT(*) FROM empresa WHERE cif LIKE \"" + oEmpresa.getsCif() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
-	
+
 	@Override
 	public Empresa searchEmpresa(Empresa oEmpresa) {
 
@@ -61,16 +54,16 @@ public class EmpresaController implements IEmpresaController{
 				String sContrasenia = rs.getString(7);
 				String sApellidos = rs.getString(8);
 				String sExperiencia = rs.getString(9);
-				
-				lEmpresa = new Empresa(sCif, sDomicilio, sCiudad, sNombre,sTelefono, sEmail, sContrasenia, sApellidos, sExperiencia);
+
+				lEmpresa = new Empresa(sCif, sDomicilio, sCiudad, sNombre, sTelefono, sEmail, sContrasenia, sApellidos,
+						sExperiencia);
 			}
 		} catch (SQLException e) {
 			lEmpresa = null;
 		}
 		return lEmpresa;
 	}
-	
-	
+
 	// Operacion de búsqueda por la PK
 
 	@Override
@@ -93,8 +86,9 @@ public class EmpresaController implements IEmpresaController{
 				String sContrasenia = rs.getString(7);
 				String sApellidos = rs.getString(8);
 				String sExperiencia = rs.getString(9);
-				
-				lEmpresas.add(new Empresa(sCif, sDomicilio, sCiudad, sNombre,sTelefono, sEmail, sContrasenia, sApellidos, sExperiencia));
+
+				lEmpresas.add(new Empresa(sCif, sDomicilio, sCiudad, sNombre, sTelefono, sEmail, sContrasenia,
+						sApellidos, sExperiencia));
 			}
 			stm.close();
 		} catch (SQLException e) {
@@ -103,5 +97,4 @@ public class EmpresaController implements IEmpresaController{
 		return lEmpresas;
 	}
 
-	
 }

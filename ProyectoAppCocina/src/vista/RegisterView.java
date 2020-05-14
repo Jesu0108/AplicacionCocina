@@ -8,9 +8,12 @@ import validaciones.ValidaLibrary;
 
 
 public class RegisterView {
-	public static String registro(byte bCuenta,ControladorGeneral controlador) {
-		String sResultado="";
+	public static boolean registro(byte bCuenta,ControladorGeneral controlador) {
+		boolean bExito=false;
+		
+		
 		if (bCuenta == 1) {
+			
 			String sEmail = "", sContrasenia = "", sNombre = "", sApellidos = "", 
 					sTelefono = "", sExperiencia = "", sCiudad = "", sEspecialidad = "";
 
@@ -24,7 +27,7 @@ public class RegisterView {
 			
 			
 			try {
-				sContrasenia = ValidaLibrary.leer("Ccontrasenia: ");
+				sContrasenia = ValidaLibrary.leer("Contrasenia (entre 6 y 15 caracteres): ");
 			} catch (NullPointerException ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
@@ -74,10 +77,13 @@ public class RegisterView {
 			Cocinero oNewCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia,
 					sCiudad, sEspecialidad);
 
+			//Comprobamos que se haya aniadido correctamente
+			
 			if(controlador.getUsuarioCtrl().getCocineroCtrl().add(oNewCocinero)>0) {
-				sResultado="Felicidades, ya tiene una cuenta como COCINERO";
+				System.out.println("Felicidades, ya tiene una cuenta como COCINERO\n");
+				bExito=true;
 			}else {
-				sResultado="Ha ocurrido un error";
+				System.out.println("Ha ocurrido un error\n");
 			}
 			
 			
@@ -98,7 +104,7 @@ public class RegisterView {
 			
 			
 			try {
-				sContrasenia = ValidaLibrary.leer("Ccontrasenia: ");
+				sContrasenia = ValidaLibrary.leer("Contrasenia (entre 6 y 15 caracteres): ");
 			} catch (NullPointerException ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
@@ -147,10 +153,16 @@ public class RegisterView {
 
 			Catador oNewCatador = new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia,
 					sCiudad, bCriterio);
-
-			controlador.getUsuarioCtrl().getCatadorCtrl().add(oNewCatador);
 			
-			sResultado="Felicidades, ya tiene una cuenta como CATADOR";
+			//Comprobamos que se haya aniadido correctamente
+			
+			if(controlador.getUsuarioCtrl().getCatadorCtrl().add(oNewCatador)>0) {
+				System.out.println("Felicidades, ya tiene una cuenta como CATADOR\n");
+				bExito=true;
+			}else {
+				System.out.println("Ha ocurrido un error\n");
+			}
+			
 			
 		}else {
 			String sEmail = "", sContrasenia = "", sNombre = "", sApellidos = "", 
@@ -167,7 +179,7 @@ public class RegisterView {
 			
 			
 			try {
-				sContrasenia = ValidaLibrary.leer("Ccontrasenia: ");
+				sContrasenia = ValidaLibrary.leer("Contrasenia (entre 6 y 15 caracteres): ");
 			} catch (NullPointerException ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
@@ -223,11 +235,17 @@ public class RegisterView {
 			Empresa oNewEmpresa = new Empresa(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia,
 					sCiudad, sDomicilio,sCif);
 
-			controlador.getUsuarioCtrl().getEmpresaCtrl().add(oNewEmpresa);
+			//Comprobamos que se haya aniadido correctamente
 			
-			sResultado= "Felicidades, ya tiene una cuenta como EMPRESA";
+			if(controlador.getUsuarioCtrl().getEmpresaCtrl().add(oNewEmpresa)>0) {
+				System.out.println("Felicidades, ya tiene una cuenta como EMPRESA\n");
+				bExito= true;
+			}else {
+				System.out.println("Ha ocurrido un error\n");
+			}
+			
 		}
 		
-		return sResultado;
+		return bExito;
 	}
 }

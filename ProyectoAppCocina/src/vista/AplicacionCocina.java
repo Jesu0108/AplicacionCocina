@@ -27,8 +27,7 @@ public class AplicacionCocina {
 
 				System.out.println("Introduzca el tipo de cuenta que tiene: ");
 
-				bEleccion = (byte) ValidaLibrary.valida("1 - Cocinero\\n2 - Catador\\3 - Empresa\nOpcion elejida: ", 1,
-						3, 3);
+				bEleccion = (byte) ValidaLibrary.valida("1 - Cocinero\n2 - Catador\n3 - Empresa\nOpcion elejida: ",1,3, 3);
 
 				if (bEleccion == 1) {
 					Cocinero oCocinero = LoginView.loginCocinero(controlador);
@@ -52,6 +51,7 @@ public class AplicacionCocina {
 
 				System.out.println("\n-----------Bienvenido/a a nuestra aplicacion-----------\n");
 
+				//Le dejamos acceder a las funciones
 				do {
 
 					bOpcionMenuPrincipal = menuPrincipal();
@@ -93,11 +93,56 @@ public class AplicacionCocina {
 				} while (bOpcionMenuPrincipal != 5);
 			}
 		} else {
+			
+			//Creamos la cuenta 
 			System.out.println("Elija el tipo de cuenta que quiere crear: ");
 			
-			bCuenta = (byte) ValidaLibrary.valida("1 - Cocinero\\n2 - Catador\\3 - Empresa\nOpcion elejida: ", 1, 3, 3);
+			bCuenta = (byte) ValidaLibrary.valida("1 - Cocinero\n2 - Catador\n3 - Empresa\nOpcion elejida: ", 1, 3, 3);
 			
-			System.out.println(RegisterView.registro(bCuenta,controlador));
+			if(RegisterView.registro(bCuenta,controlador)) {
+				//Le dejamos acceder a las funciones 
+				do {
+
+					bOpcionMenuPrincipal = menuPrincipal();
+					switch (bOpcionMenuPrincipal) {
+					case 1: // Gestion de Servicios
+						try {
+							ServicioView.menuServicio(controlador);
+						} catch (Exception ex) {
+							System.out.println("Error: " + ex.getMessage());
+						}
+						break;
+					case 2: // Gestion de Alimentos
+						try {
+							AlimentoView.menuAlimento(controlador);;
+						} catch (Exception ex) {
+							System.out.println("Error: " + ex.getMessage());
+						}
+						break;
+					case 3: // Gestion Materiales
+						try {
+							MaterialView.menuMaterial(controlador);
+						} catch (Exception ex) {
+							System.out.println("Error: " + ex.getMessage());
+						}
+						break;
+					case 4:// Gestion Opiniones
+						try {
+							OpinionView.menuOpinion(controlador);;
+						} catch (Exception ex) {
+							System.out.println("Error: " + ex.getMessage());
+						}
+						break;
+					case 5:
+						System.out.println("Adios.");
+						break;
+					default:
+						System.out.println("Opcion incorrecta.");
+					}
+				} while (bOpcionMenuPrincipal != 5);
+			}else {
+				System.out.println("Ha ocurrido un error inesperado");
+			}
 		}
 	}
 

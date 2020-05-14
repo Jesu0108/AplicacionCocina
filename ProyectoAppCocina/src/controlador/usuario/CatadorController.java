@@ -9,49 +9,42 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Catador;
 
-public class CatadorController implements ICatadorController{
-	
-	@Override
-	public int add (Catador oCatador) {
-		
-		String sql = "INSERT INTO catador VALUES (";
-		sql += "\"" + oCatador.getsEmail() + "\",";
-		sql += "\"" + oCatador.getCriterio() + "\",";
-		sql += "\"" + oCatador.getsContrasenia() + "\",";
-		sql += "\"" + oCatador.getsNombre() + "\",";
-		sql += "\"" + oCatador.getsApellidos() + "\",";
-		sql += "\"" + oCatador.getsTelefono() + "\",";
-		sql += "\"" + oCatador.getsExperiencia() + "\",";
-		sql += "\"" + oCatador.getsCiudad() + "\",";
-		sql += ")";
-		
-		return ConexionDB.executeUpdate(sql);
-	}
-	
-	@Override
-	public int remove (Catador oCatador) {
-	String sql = "DELETE FROM catador WHERE email LIKE \""+oCatador.getsEmail()+"\"";
-	return ConexionDB.executeUpdate(sql);
-    }
+public class CatadorController implements ICatadorController {
 
 	@Override
-    public int existeCatador (Catador oCatador) {
-	String sql = "SELECT COUNT(*) FROM catador WHERE email LIKE \"" + oCatador.getsEmail() + "\"";
-	return ConexionDB.executeCount(sql);
-    }
-	
+	public int add(Catador oCatador) {
+
+		String sql = "INSERT INTO catador VALUES ( '" + oCatador.getCriterio() + "', '" + oCatador.getsEmail() + "', '"
+				+ oCatador.getsContrasenia() + "', '" + oCatador.getsNombre() + "', '" + oCatador.getsApellidos()
+				+ "', '" + oCatador.getsCiudad() + "', '" + oCatador.getsTelefono() + "', '" + oCatador.getsExperiencia() + "' );";
+
+		return ConexionDB.executeUpdate(sql);
+	}
+
 	@Override
-	public int checkLogin(Catador oCatador) {
-		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCatador.getsEmail() 
-		+ "\" AND contraseña LIKE \"" + oCatador.getsContrasenia() + "\"";
+	public int remove(Catador oCatador) {
+		String sql = "DELETE FROM catador WHERE email LIKE \"" + oCatador.getsEmail() + "\"";
+		return ConexionDB.executeUpdate(sql);
+	}
+
+	@Override
+	public int existeCatador(Catador oCatador) {
+		String sql = "SELECT COUNT(*) FROM catador WHERE email LIKE \"" + oCatador.getsEmail() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
-	
+
+	@Override
+	public int checkLogin(Catador oCatador) {
+		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCatador.getsEmail()
+				+ "\" AND contraseña LIKE \"" + oCatador.getsContrasenia() + "\"";
+		return ConexionDB.executeCount(sql);
+	}
+
 	@Override
 	public Catador searchCatador(Catador oCatador) {
 
 		Catador lCatador = null;
-		String sql = "SELECT * FROM catador WHERE email=\"" + oCatador.getsEmail()+"\"";
+		String sql = "SELECT * FROM catador WHERE email=\"" + oCatador.getsEmail() + "\"";
 		Statement stm = null;
 
 		try {
@@ -66,16 +59,16 @@ public class CatadorController implements ICatadorController{
 				String sCiudad = rs.getString(6);
 				String sTelefono = rs.getString(7);
 				String sExperiencia = rs.getString(8);
-				
-				lCatador = new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio);
+
+				lCatador = new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad,
+						bCriterio);
 			}
 		} catch (SQLException e) {
 			lCatador = null;
 		}
 		return lCatador;
 	}
-	
-	
+
 	@Override
 	public List<Catador> searchCatadorPorCiudad(Catador oCatador) {
 
@@ -95,7 +88,8 @@ public class CatadorController implements ICatadorController{
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
 				byte bCriterio = rs.getByte(8);
-				lCatadores.add(new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio));
+				lCatadores.add(new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad,
+						bCriterio));
 				System.out.println("\n-----------------------------------------------------------------\n");
 			}
 			stm.close();
@@ -104,5 +98,5 @@ public class CatadorController implements ICatadorController{
 		}
 		return lCatadores;
 	}
-	
+
 }
