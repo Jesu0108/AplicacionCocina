@@ -39,7 +39,7 @@ public class AlimentoController implements IAlimento {
 	public Alimento searchAlimento(String sNombreAlimento) {
 
 		Alimento lAlimento = null;
-		String sql = "SELECT * FROM alimento WHERE nombre_alimento=" + sNombreAlimento;
+		String sql = "SELECT * FROM alimento WHERE nombre_alimento=\"" + sNombreAlimento+"\"";
 		Statement stm = null;
 
 		try {
@@ -47,7 +47,7 @@ public class AlimentoController implements IAlimento {
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				String sNombre_alimento = rs.getString(1);
-				byte bCantidad = rs.getByte(3);
+				byte bCantidad = rs.getByte(2);
 				lAlimento = new Alimento(sNombre_alimento, bCantidad);
 			}
 		} catch (SQLException e) {
