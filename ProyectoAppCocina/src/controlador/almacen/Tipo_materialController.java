@@ -38,7 +38,7 @@ public class Tipo_materialController implements ITipo_materialController{
 	public List<Tipo_material> searchTipo_materiales(Tipo_material oTMaterial) {
 
 		List<Tipo_material> lTipo_materiales = new ArrayList<Tipo_material>();
-		String sql = "SELECT * FROM Tipo_material WHERE nombre_Tipo_material=" + oTMaterial.getsNombre_tipo_material();
+		String sql = "SELECT * FROM Tipo_material WHERE nombre_Tipo_material=\"" + oTMaterial.getsNombre_tipo_material()+"\"";
 		Statement stm = null;
 
 		try {
