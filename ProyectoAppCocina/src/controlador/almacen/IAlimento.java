@@ -16,6 +16,6 @@ public interface IAlimento {
 
 	public Alimento searchAlimento(String sNombreAlimento);
 
-	public int updateAlimento(Alimento oAlimento);
+	public int updateAlimento(Alimento oAlimento,Alimento oAlim);
 
 }

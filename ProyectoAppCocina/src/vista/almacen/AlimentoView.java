@@ -80,13 +80,14 @@ public class AlimentoView {
 
 		while (errorControl) {
 			try {
-				sNombre_alimento = ValidaLibrary.leer("Introduzca el tipo de alimento que va a aniadir: ");
+				sNombre_alimento = ValidaLibrary.leer("Introduzca el nombre de alimento que va a aniadir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-
+		
+		errorControl = true;
 		while (errorControl) {
 			try {
 				bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad de alimentos que va a aniadir (1 - 100): ",1, 100, 3);
@@ -109,15 +110,14 @@ public class AlimentoView {
 
 		while (errorControl) {
 			try {
-				sNombre_alimento = ValidaLibrary.leer("Introduzca el tipo de Alimento que va a aniadir: ");
+				sNombre_alimento = ValidaLibrary.leer("Introduzca el nombre del alimento que va a borrar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-
-		Alimento oAlimento = new Alimento(sNombre_alimento);
-		return controlador.getAlmacenCtrl().getAlimentoCtrl().remove(oAlimento);
+		
+		return controlador.getAlmacenCtrl().getAlimentoCtrl().remove(new Alimento(sNombre_alimento));
 	}
 
 	// -------------------------------------------------------------------------------------------------------
@@ -155,6 +155,8 @@ public class AlimentoView {
 		}
 
 		if (controlador.getAlmacenCtrl().getAlimentoCtrl().searchAlimento(sNombre_alimento) != null) {
+			
+			errorControl = true;
 			while (errorControl) {
 				try {
 					sNewNombreAlimento = ValidaLibrary.leer("Introduzca el nuevo tipo de alimento que va a aniadir: ");
@@ -164,6 +166,7 @@ public class AlimentoView {
 				}
 			}
 
+			errorControl = true;
 			while (errorControl) {
 				try {
 					bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad de alimentos que va a aniadir (1 - 100): ",1, 100, 3);
@@ -174,7 +177,8 @@ public class AlimentoView {
 			}		
 		}
 
+		Alimento oAlim = new Alimento(sNombre_alimento);
 		Alimento oAlimento = new Alimento(sNewNombreAlimento, bCantidad);
-		return controlador.getAlmacenCtrl().getAlimentoCtrl().updateAlimento(oAlimento);
+		return controlador.getAlmacenCtrl().getAlimentoCtrl().updateAlimento(oAlimento,oAlim);
 	}
 }
