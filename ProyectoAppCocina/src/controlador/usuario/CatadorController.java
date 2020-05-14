@@ -51,21 +51,22 @@ public class CatadorController implements ICatadorController{
 	public Catador searchCatador(Catador oCatador) {
 
 		Catador lCatador = null;
-		String sql = "SELECT * FROM catador WHERE email=" + oCatador.getsEmail();
+		String sql = "SELECT * FROM catador WHERE email=\"" + oCatador.getsEmail()+"\"";
 		Statement stm = null;
 
 		try {
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String sEmail = rs.getString(1);
-				String sContrasenia = rs.getString(2);
-				String sNombre = rs.getString(3);
-				String sApellidos = rs.getString(4);
-				String sTelefono = rs.getString(5);
-				String sExperiencia = rs.getString(6);
-				String sCiudad = rs.getString(7);
-				byte bCriterio = rs.getByte(8);
+				byte bCriterio = rs.getByte(1);
+				String sEmail = rs.getString(2);
+				String sContrasenia = rs.getString(3);
+				String sNombre = rs.getString(4);
+				String sApellidos = rs.getString(5);
+				String sCiudad = rs.getString(6);
+				String sTelefono = rs.getString(7);
+				String sExperiencia = rs.getString(8);
+				
 				lCatador = new Catador(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, bCriterio);
 			}
 		} catch (SQLException e) {
