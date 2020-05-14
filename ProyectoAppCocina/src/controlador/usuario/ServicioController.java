@@ -46,9 +46,9 @@ public class ServicioController implements IServicioController {
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String sNombre_tipo_servicio = rs.getString(1);
-				Date dFecha = rs.getDate(2);
-				byte bTiempo_servicio = rs.getByte(3);
+				String sNombre_tipo_servicio = rs.getString(2);
+				Date dFecha = rs.getDate(3);
+				byte bTiempo_servicio = rs.getByte(4);
 				lServicio = new Servicio(sNombre_tipo_servicio, dFecha, bTiempo_servicio);
 			}
 		} catch (SQLException e) {

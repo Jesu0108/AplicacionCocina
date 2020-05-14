@@ -57,14 +57,15 @@ public class CocineroController implements iCocineroController{
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String sEmail = rs.getString(1);
-				String sContrasenia = rs.getString(2);
-				String sNombre = rs.getString(3);
-				String sApellidos = rs.getString(4);
-				String sTelefono = rs.getString(5);
+				String sEspecialidad = rs.getString(1);
+				String sEmail = rs.getString(2);
+				String sContrasenia = rs.getString(3);
+				String sNombre = rs.getString(4);
+				String sApellidos = rs.getString(5);
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
-				String sEspecialidad = rs.getString(8);
+				String sTelefono = rs.getString(8);
+				
 				lCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, sEspecialidad);
 			}
 		} catch (SQLException e) {
