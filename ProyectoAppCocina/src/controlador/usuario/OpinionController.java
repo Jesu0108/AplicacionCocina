@@ -35,7 +35,7 @@ public class OpinionController implements IOpinionController {
 	public Opinion searchOpinionPorId(Opinion oOpinion) {
 
 		Opinion lOpiniones = null;
-		String sql = "SELECT * FROM opinion WHERE id_opinion="+oOpinion.getiId_opinion();
+		String sql = "SELECT * FROM opinion WHERE id_opinion= \""+oOpinion.getiId_opinion()+"\"";
 		Statement stm = null;
 
 		try {
