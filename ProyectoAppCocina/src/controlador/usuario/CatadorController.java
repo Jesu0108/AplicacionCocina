@@ -35,7 +35,7 @@ public class CatadorController implements ICatadorController {
 
 	@Override
 	public int checkLogin(Catador oCatador) {
-		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCatador.getsEmail()
+		String sql = "SELECT COUNT(*) FROM catador WHERE email LIKE \"" + oCatador.getsEmail()
 				+ "\" AND contraseña LIKE \"" + oCatador.getsContrasenia() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
