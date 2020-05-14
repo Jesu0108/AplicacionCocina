@@ -152,7 +152,7 @@ public class MaterialView {
 			}
 		}
 		Material oMaterial = new Material(sNombre_Material);
-		return controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(oMaterial);
+		return controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterialPorNombre(oMaterial);
 	}
 
 	// -------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ public class MaterialView {
 
 		while (errorControl) {
 			try {
-				sNombre_Material = ValidaLibrary.leer("Introduzca el tipo de material que va a modificar: ");
+				sNombre_Material = ValidaLibrary.leer("Introduzca el nombre de material que va a modificar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -173,7 +173,7 @@ public class MaterialView {
 		
 		Material oMat = new Material(sNombre_Material);
 		
-		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterial(oMat) != null) {
+		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterialPorNombre(oMat) != null) {
 			while (errorControl) {
 				try {
 					sNombre_Material = ValidaLibrary.leer("Introduzca el nombre del material que va a pedir: ");
