@@ -74,9 +74,14 @@ public class RegisterView {
 			Cocinero oNewCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia,
 					sCiudad, sEspecialidad);
 
-			controlador.getUsuarioCtrl().getCocineroCtrl().add(oNewCocinero);
+			if(controlador.getUsuarioCtrl().getCocineroCtrl().add(oNewCocinero)>0) {
+				sResultado="Felicidades, ya tiene una cuenta como COCINERO";
+			}else {
+				sResultado="Ha ocurrido un error";
+			}
 			
-			sResultado="Felicidades, ya tiene una cuenta como COCINERO";
+			
+			
 			
 		}else if (bCuenta == 2) {
 			String sEmail = "", sContrasenia = "", sNombre = "", sApellidos = "", 

@@ -45,7 +45,7 @@ public class EmpresaController implements IEmpresaController{
 	public Empresa searchEmpresa(Empresa oEmpresa) {
 
 		Empresa lEmpresa = null;
-		String sql = "SELECT * FROM catador WHERE email=" + oEmpresa.getsEmail();
+		String sql = "SELECT * FROM empresa WHERE cif=" + oEmpresa.getsCif();
 		Statement stm = null;
 
 		try {
@@ -77,7 +77,7 @@ public class EmpresaController implements IEmpresaController{
 	public List<Empresa> buscarEmpresaPorCif(Empresa oEmpresa) {
 
 		List<Empresa> lEmpresas = new ArrayList<Empresa>();
-		String sql = "SELECT * FROM empresa WHERE cif=" + oEmpresa.getsCif();
+		String sql = "SELECT * FROM empresa;";
 		Statement stm = null;
 
 		try {

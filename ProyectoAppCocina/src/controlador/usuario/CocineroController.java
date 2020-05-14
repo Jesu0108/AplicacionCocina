@@ -9,20 +9,14 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.usuario.Cocinero;
 
-public class CocineroController implements iCocineroController{
+public class CocineroController implements iCocineroController {
 	@Override
 	public int add(Cocinero oCocinero) {
 
-		String sql = "INSERT INTO cocinero VALUES (";
-		sql += "\"" + oCocinero.getsEmail() + "\",";
-		sql += "\"" + oCocinero.getsEspecialidad() + "\",";
-		sql += "\"" + oCocinero.getsContrasenia() + "\",";
-		sql += "\"" + oCocinero.getsNombre() + "\",";
-		sql += "\"" + oCocinero.getsApellidos() + "\",";
-		sql += "\"" + oCocinero.getsTelefono() + "\",";
-		sql += "\"" + oCocinero.getsExperiencia() + "\",";
-		sql += "\"" + oCocinero.getsCiudad() + "\",";
-		sql += ")";
+		String sql = "INSERT INTO cocinero VALUES ( '" + oCocinero.getsEspecialidad() + "', '" + oCocinero.getsEmail()
+				+ "', '" + oCocinero.getsContrasenia() + "', '" + oCocinero.getsNombre() + "', '"
+				+ oCocinero.getsApellidos() + "', '" + oCocinero.getsExperiencia() + "', '" + oCocinero.getsCiudad()
+				+ "', '" + oCocinero.getsTelefono() + "' );";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -41,11 +35,11 @@ public class CocineroController implements iCocineroController{
 
 	@Override
 	public int checkLogin(Cocinero oCocinero) {
-		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCocinero.getsEmail() 
-		+ "\" AND contraseña LIKE \"" + oCocinero.getsContrasenia() + "\"";
+		String sql = "SELECT COUNT(*) FROM persona WHERE email LIKE \"" + oCocinero.getsEmail()
+				+ "\" AND contraseña LIKE \"" + oCocinero.getsContrasenia() + "\"";
 		return ConexionDB.executeCount(sql);
 	}
-	
+
 	@Override
 	public Cocinero searchCocinero(Cocinero oCocinero) {
 
@@ -65,16 +59,16 @@ public class CocineroController implements iCocineroController{
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
 				String sTelefono = rs.getString(8);
-				
-				lCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, sEspecialidad);
+
+				lCocinero = new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad,
+						sEspecialidad);
 			}
 		} catch (SQLException e) {
 			lCocinero = null;
 		}
 		return lCocinero;
 	}
-	
-	
+
 	@Override
 	public List<Cocinero> searchCocineroPorCiudad(Cocinero oCocinero) {
 
@@ -94,7 +88,8 @@ public class CocineroController implements iCocineroController{
 				String sExperiencia = rs.getString(6);
 				String sCiudad = rs.getString(7);
 				String sEspecialidad = rs.getString(8);
-				lCocineros.add(new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad, sEspecialidad));
+				lCocineros.add(new Cocinero(sEmail, sContrasenia, sNombre, sApellidos, sTelefono, sExperiencia, sCiudad,
+						sEspecialidad));
 			}
 			stm.close();
 		} catch (SQLException e) {

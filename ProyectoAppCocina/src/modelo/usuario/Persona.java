@@ -52,8 +52,8 @@ public abstract class Persona implements LimitsDB, IPersona{
 	@Override
 	public boolean setsContrasenia(String sContrasenia) {
 		boolean bExito = false;
-		if (sContrasenia != null && sContrasenia.length() > MINCHARPASSWORD
-				&& sContrasenia.length() < MAXCHARPASSWORD) {
+		if (sContrasenia != null && sContrasenia.length() >= MINCHARPASSWORD
+				&& sContrasenia.length() <= MAXCHARPASSWORD) {
 			this.sContrasenia = encryptSha512(sContrasenia);
 			bExito = true;
 		}

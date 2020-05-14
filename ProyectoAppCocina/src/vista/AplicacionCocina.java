@@ -14,7 +14,7 @@ public class AplicacionCocina {
 	public static void main(String[] args) {
 
 		byte bOpcionMenuPrincipal, bOpcion, bEleccion, bCuenta;
-		ControladorGeneral controlador = new ControladorGeneral("AppCocina");
+		ControladorGeneral controlador = new ControladorGeneral("appcocina");
 
 		System.out.println("\n-----------BIENVENIDO/A-----------\n");
 		System.out.println("Por favor elija entre las siguientes opciones: \n");
