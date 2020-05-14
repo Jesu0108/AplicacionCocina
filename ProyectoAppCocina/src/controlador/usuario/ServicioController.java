@@ -39,7 +39,7 @@ public class ServicioController implements IServicioController {
 	public Servicio searchServicio(String sNombreTipoServicio) {
 
 		Servicio lServicio = null;
-		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio()=" + sNombreTipoServicio;
+		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio()=\"" + sNombreTipoServicio+"\"";
 		Statement stm = null;
 
 		try {
