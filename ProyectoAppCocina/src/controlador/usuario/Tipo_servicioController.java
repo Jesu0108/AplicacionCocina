@@ -1,5 +1,9 @@
 package controlador.usuario;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import controlador.ConexionDB;
 import modelo.usuario.Tipo_servicio;
 
@@ -26,5 +30,27 @@ public class Tipo_servicioController implements ITipo_servicioController {
 		String sql = "SELECT COUNT(*) FROM tipo_servicio WHERE nombre_Tipo_servicio LIKE \""
 				+ oTipo_servicio.getsNombre_tipo_servicio() + "\"";
 		return ConexionDB.executeCount(sql);
+	}
+	
+	public Tipo_servicio searchTipoServicio(Tipo_servicio tipServicio) {
+
+		Tipo_servicio lTipServicio = null;
+		String sql = "SELECT * FROM tipo_servicio WHERE nombre_tipo_servicio='"
+				+ tipServicio.getsNombre_tipo_servicio() + "';";
+		Statement stm = null;
+
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String sNombre_tipo_servicio = rs.getString(1);
+				byte bCalidad = rs.getByte(2);
+				
+				lTipServicio = new Tipo_servicio(sNombre_tipo_servicio, bCalidad);
+			}
+		} catch (SQLException e) {
+			lTipServicio = null;
+		}
+		return lTipServicio;
 	}
 }

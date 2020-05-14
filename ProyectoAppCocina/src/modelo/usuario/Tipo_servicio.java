@@ -10,6 +10,10 @@ public class Tipo_servicio implements ITipo_servicio{
 		setsNombre_tipo_servicio(sNombre_tipo_servicio);
 	}
 	
+	
+	public Tipo_servicio(String sNombre_tipo_servicio) {
+		setsNombre_tipo_servicio(sNombre_tipo_servicio);
+	}
 	//Getters and Setters
 	
 	@Override
@@ -67,7 +71,7 @@ public class Tipo_servicio implements ITipo_servicio{
 	public String toString() {
 		String sResultado="";
 		sResultado+="Servicio: "+getsNombre_tipo_servicio()+"\n";
-		sResultado+="Calidad: "+getiCalidad();
+		sResultado+="Con calidad: "+getiCalidad()+"\n";
 		return sResultado;
 	}
 	

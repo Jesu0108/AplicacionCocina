@@ -4,14 +4,13 @@ import java.util.Date;
 
 public class Servicio implements IServicio {
 	private int iId_servicio; // PK
-	private String sNombre_tipo_servicio;
+	private Tipo_servicio oNombre_tipo_servicio;
 	private Date dFecha;
 	private byte bTiempo_servicio; // NN
 
-	public Servicio(String sNombre_tipo_servicio, Date dFecha, byte bTiempo_servicio) {
+	public Servicio(Date dFecha,byte bTiempo_servicio,Tipo_servicio oNombre_tipo_servicio) {
 
 		setiId_servicio(0);
-		setsNombre_tipo_servicio(sNombre_tipo_servicio);
 		setdFecha(dFecha);
 		setbTiempo_servicio(bTiempo_servicio);
 	}
@@ -21,8 +20,8 @@ public class Servicio implements IServicio {
 		setiId_servicio(iId_servicio);
 	}
 	
-	public Servicio(String sNombre_tipo_servicio) {
-		setsNombre_tipo_servicio(sNombre_tipo_servicio);
+	public Servicio(Tipo_servicio oNombre_tipo_servicio) {
+		setoNombre_tipo_servicio(oNombre_tipo_servicio);
 	}
 
 	// Getters and Setters
@@ -42,16 +41,16 @@ public class Servicio implements IServicio {
 	}
 
 	@Override
-	public String getsNombre_tipo_servicio() {
-		return sNombre_tipo_servicio;
+	public Tipo_servicio getoNombre_tipo_servicio() {
+		return oNombre_tipo_servicio;
 	}
 
 	@Override
-	public boolean setsNombre_tipo_servicio(String sNombre_tipo_servicio) {
-		boolean bExito = false;
-		if (sNombre_tipo_servicio != null) {
-			this.sNombre_tipo_servicio = sNombre_tipo_servicio;
-			bExito = true;
+	public boolean setoNombre_tipo_servicio(Tipo_servicio oNombre_tipo_servicio) {
+		boolean bExito=false;
+		if(oNombre_tipo_servicio != null){
+			this.oNombre_tipo_servicio = oNombre_tipo_servicio;
+			bExito=true;
 		}
 		return bExito;
 	}
@@ -84,13 +83,21 @@ public class Servicio implements IServicio {
 	// ----------------------------------------------------------------------------
 
 	@Override
+	public String toString() {
+		String sResultado = "";	
+		sResultado += "Tiempo de servicio estimado: " + getbTiempo_servicio() + "\n";
+		sResultado += "Con fecha: " + getdFecha() + "\n";
+		return sResultado;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + bTiempo_servicio;
 		result = prime * result + ((dFecha == null) ? 0 : dFecha.hashCode());
 		result = prime * result + iId_servicio;
-		result = prime * result + ((sNombre_tipo_servicio == null) ? 0 : sNombre_tipo_servicio.hashCode());
+		result = prime * result + ((oNombre_tipo_servicio == null) ? 0 : oNombre_tipo_servicio.hashCode());
 		return result;
 	}
 
@@ -102,14 +109,5 @@ public class Servicio implements IServicio {
 			bExito = true;
 		}
 		return bExito;
-	}
-
-	@Override
-	public String toString() {
-		String sResultado = "";
-		sResultado += "Servicio: " + getsNombre_tipo_servicio() + "\n";
-		sResultado += "Tiempo de servicio estimado: " + getbTiempo_servicio() + "\n";
-		sResultado += "Con fecha: " + getdFecha() + "\n";
-		return sResultado;
 	}
 }

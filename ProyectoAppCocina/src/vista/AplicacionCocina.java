@@ -109,7 +109,7 @@ public class AplicacionCocina {
 						try {
 							ServicioView.menuServicio(controlador);
 						} catch (Exception ex) {
-							System.out.println("Error: " + ex.getMessage());
+							System.out.println("Lio: " + ex.getMessage());
 						}
 						break;
 					case 2: // Gestion de Alimentos

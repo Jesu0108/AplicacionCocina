@@ -10,8 +10,8 @@ public interface IServicioController {
 
 	public int existeServicio(Servicio oServicio);
 
-	public Servicio searchServicio(String sNombreTipoServicio);
-
 	public int updateServicio(Servicio oServicio);
+
+	public Servicio searchServicio(Servicio sNombreTipoServicio);
 
 }
