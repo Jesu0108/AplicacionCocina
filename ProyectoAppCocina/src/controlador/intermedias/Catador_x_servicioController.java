@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controlador.ConexionDB;
-import controlador.usuario.CatadorController;
-import controlador.usuario.ServicioController;
 import modelo.intermedias.Catador_x_servicio;
 import modelo.usuario.Catador;
 import modelo.usuario.Opinion;
@@ -17,11 +15,8 @@ import modelo.usuario.Servicio;
 public class Catador_x_servicioController implements ICatador_x_servicioController {
 
 	@Override
-	public int add(Catador_x_servicio oCatXserv, CatadorController oCatador, ServicioController oServicio) {
-
-		oCatador.add(oCatXserv.getEmail());
-		oServicio.add(oCatXserv.getId_servicio());
-
+	public int add(Catador_x_servicio oCatXserv) {
+		
 		String sql = "INSERT INTO catador_x_servicio VALUES ( '" + oCatXserv.getEmail().getsEmail() + "', "
 				+ oCatXserv.getId_servicio().getiId_servicio() + ", " + oCatXserv.getOpinion().getiId_opinion() + ");";
 

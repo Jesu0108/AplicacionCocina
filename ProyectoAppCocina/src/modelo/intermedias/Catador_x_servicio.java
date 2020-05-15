@@ -16,7 +16,7 @@ public class Catador_x_servicio {
 	}
 
 	// Getters and Setters
-	
+
 	public Catador getEmail() {
 		return email;
 	}
@@ -42,13 +42,14 @@ public class Catador_x_servicio {
 	}
 
 	// -----------------------------------------------------------------------------
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id_servicio == null) ? 0 : id_servicio.hashCode());
+		result = prime * result + ((opinion == null) ? 0 : opinion.hashCode());
 		return result;
 	}
 
