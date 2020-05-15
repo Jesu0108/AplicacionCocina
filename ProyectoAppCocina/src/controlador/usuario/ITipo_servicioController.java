@@ -10,4 +10,6 @@ public interface ITipo_servicioController {
 
 	public int existeTipo_servicio(Tipo_servicio oTipo_servicio);
 
+	public Tipo_servicio searchTipoServicio(String tipServicio);
+
 }

@@ -16,8 +16,8 @@ public class ServicioController implements IServicioController {
 	@Override
 	public int add(Servicio oServicio) {
 		String sql = "INSERT INTO servicio VALUES ( " + (oServicio.getiId_servicio() + 1) + ", '"
-				+ oServicio.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "', '" + oServicio.getdFecha()
-				+ "'," + oServicio.getbTiempo_servicio() + ");";
+				+ oServicio.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "', " + oServicio.getdFecha()
+				+ "," + oServicio.getbTiempo_servicio() + ");";
 		return ConexionDB.executeUpdate(sql);
 	}
 
@@ -35,10 +35,11 @@ public class ServicioController implements IServicioController {
 	}
 
 	@Override
-	public Servicio searchServicio(Servicio fecha) {
+	public Servicio searchServicio(Servicio oServ) {
 
 		Servicio lServicio = null;
-		String sql = "SELECT * FROM servicio WHERE fecha='" + fecha.getdFecha() + "';";
+		String sql = "SELECT * FROM servicio WHERE nombre_tipo_servicio='"
+				+ oServ.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "';";
 		Statement stm = null;
 
 		try {

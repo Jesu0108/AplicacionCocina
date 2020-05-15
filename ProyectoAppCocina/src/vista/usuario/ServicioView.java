@@ -18,28 +18,28 @@ public class ServicioView {
 				if (aniadir(controlador) != 0) {
 					System.out.println("Servicio aniadido");
 				} else {
-					System.out.println("Error al aniadir el servicio");
+					System.out.println("Error al aniadir el Servicio");
 				}
 				break;
 			case 2: // Modificar
 				if (modificar(controlador) != 0) {
 					System.out.println("Servicio modificado");
 				} else {
-					System.out.println("Error al modificar el servicio");
+					System.out.println("Error al modificar el Servicio");
 				}
 				break;
 			case 3: // Eliminar
 				if (eliminar(controlador) != 0) {
 					System.out.println("Servicio eliminado");
 				} else {
-					System.out.println("Error al eliminar el servicio");
+					System.out.println("Error al eliminar el Servicio");
 				}
 				break;
 			case 4: // Buscar
 				if (buscar(controlador) != null) {
 					System.out.println(buscar(controlador));
 				} else {
-					System.out.println("Error al buscar el servicio");
+					System.out.println("Error al buscar el Servicio");
 				}
 				break;
 			default:
@@ -55,7 +55,7 @@ public class ServicioView {
 		byte bOpcion = 0;
 		boolean errorControl = true;
 
-		System.out.println("\n\nGestion de Servicios");
+		System.out.println("\nGestion de Servicios");
 		System.out.println("#############################");
 		System.out.println("1. Aniadir.");
 		System.out.println("2. Modificar.");
@@ -80,13 +80,15 @@ public class ServicioView {
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
 		String sNombre_tipo_servicio = "", sDateString = "";
-		Date dFecha = null;
-		byte bTiempo_servicio = 0;
 		int iCalidad = 0;
+		Date dFecha = null;
+		byte bTiempo_servicio=0;
+
+		// Pedimos los datos para el tipo de servicio
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a pedir: ");
+				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a aniadir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -96,26 +98,28 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima del servicio que va a pedir (0 - 600): ",0,600,1);
+				iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima para el servicio (1 - 600): ", 1,
+						600, 1);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		Tipo_servicio oTipServicio = new Tipo_servicio(sNombre_tipo_servicio, iCalidad);
+
+		//Pedimos los datos para el Servicio
+		
+		errorControl = true;
+		while (errorControl) {
+			try {
+				bTiempo_servicio = (byte) ValidaLibrary.valida("Introduzca el tiempo minnimo de servicio (en horas): ", 1,100, 3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}		
 		
-		Tipo_servicio oTipServ = new Tipo_servicio(sNombre_tipo_servicio,iCalidad);
-		
-		errorControl = true;
-		while (errorControl) {
-			try {
-				bTiempo_servicio = (byte) ValidaLibrary.valida("Introduzca el tiempo estimado de servicio (en horas): ",
-						1, 100, 3);
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
-
 		errorControl = true;
 		while (errorControl) {
 			try {
@@ -135,8 +139,16 @@ public class ServicioView {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		
-		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio,oTipServ);
+		// Aniadimos el tipo de servicio a la DB
+
+		if (controlador.getUsuarioCtrl().getTipoServicioCtrl().add(oTipServicio) != 0) {
+			System.out.println("Tipo de servicio aniadido correctamente\n");
+		} else {
+			System.out.println("Ha ocurrido un problema al aniadir el tipo de servicio\n");
+		}
+
+		// Aniadimos el servicio a la DB
+		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio, oTipServicio);
 
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 	}
@@ -145,78 +157,65 @@ public class ServicioView {
 
 	public static int eliminar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "";
+		String sNombre_Servicio = "";
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a pedir: ");
+				sNombre_Servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a borrar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		
-		Tipo_servicio oTipServ = new Tipo_servicio(sNombre_tipo_servicio);
-		Servicio oServ = new Servicio (oTipServ);
-		return controlador.getUsuarioCtrl().getServicioCtrl().remove(oServ);
+
+		return controlador.getUsuarioCtrl().getServicioCtrl().remove(new Servicio(new Tipo_servicio(sNombre_Servicio)));
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
 	public static Servicio buscar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "";
+		String sNombre_Servicio = "";
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_servicio = ValidaLibrary
-						.leer("Introduzca el nombre del tipo de servicio que va a buscar: ");
+				sNombre_Servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a buscar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
-		
-		Tipo_servicio oTipServ = new Tipo_servicio(sNombre_tipo_servicio);
-		Servicio oServ = new Servicio (oTipServ);
-		return controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(oServ);
+		return controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(new Servicio(new Tipo_servicio(sNombre_Servicio)));
 	}
 
 	// -------------------------------------------------------------------------------------------------------
 
 	public static int modificar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "", sDateString = "", sNew_tipo_servicio = "";
+		Servicio oServ = null;
+		String sNombre_Servicio = "", sDateString = "";
 		Date dFecha = null;
-		byte bTiempo_servicio = 0;
-		int iCalidad =0;
-
+		byte bTiempo_servicio=0;
+		
 		while (errorControl) {
 			try {
-				sNombre_tipo_servicio = ValidaLibrary.leer("Introduzca el tipo de servicio que va a modificar: ");
+				sNombre_Servicio = ValidaLibrary.leer("Introduzca el nombre de Servicio que va a modificar: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		Tipo_servicio oTipServ = new Tipo_servicio(sNombre_tipo_servicio);
-		if (controlador.getUsuarioCtrl().getTipoServicioCtrl().searchTipoServicio(oTipServ) != null) {
+		if (controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(new Servicio(new Tipo_servicio (sNombre_Servicio)))!= null) {
+			
+			oServ = controlador.getUsuarioCtrl().getServicioCtrl().searchServicio(new Servicio(new Tipo_servicio (sNombre_Servicio)));
+			
+			//Pedimos los nuevos datos
 			
 			errorControl = true;
 			while (errorControl) {
 				try {
-					sNew_tipo_servicio = ValidaLibrary.leer("Introduzca el nuevo tipo de servicio que va a pedir: ");
-					errorControl = false;
-				} catch (Exception ex) {
-					System.out.println("Error: " + ex.getMessage());
-				}
-			}
-
-			errorControl = true;
-			while (errorControl) {
-				try {
-					iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima del servicio que va a pedir (0 - 1000): ",0,1000,1);
+					bTiempo_servicio = (byte) ValidaLibrary.valida("Introduzca el nuevo tiempo de servicio (en horas): ", 1,100, 3);
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
@@ -226,18 +225,7 @@ public class ServicioView {
 			errorControl = true;
 			while (errorControl) {
 				try {
-					bTiempo_servicio = (byte) ValidaLibrary
-							.valida("Introduzca el nuevo tiempo estimado de servicio (en horas): ", 1, 100, 3);
-					errorControl = false;
-				} catch (Exception ex) {
-					System.out.println("Error: " + ex.getMessage());
-				}
-			}
-
-			errorControl = true;
-			while (errorControl) {
-				try {
-					sDateString = ValidaLibrary.leer("Introduzca una nuevo fecha para el servicio (22/5/2020): ");
+					sDateString = ValidaLibrary.leer("Introduzca la nueva fecha para el servicio (22/5/2020): ");
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
@@ -253,9 +241,13 @@ public class ServicioView {
 					System.out.println("Error: " + ex.getMessage());
 				}
 			}
+		}else {
+			System.out.println("No se encuentra un servicio con ese nombre\n");
 		}
-		Tipo_servicio oNewTipServ = new Tipo_servicio(sNew_tipo_servicio,iCalidad);
-		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio,oNewTipServ);
-		return controlador.getUsuarioCtrl().getServicioCtrl().updateServicio(oServicio);
+
+		oServ.setbTiempo_servicio(bTiempo_servicio);
+		oServ.setdFecha(dFecha);
+		
+		return controlador.getUsuarioCtrl().getServicioCtrl().updateServicio(oServ);
 	}
 }
