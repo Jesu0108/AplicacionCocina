@@ -96,7 +96,7 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima del servicio que va a pedir (0 - 1000): ",0,1000,1);
+				iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima del servicio que va a pedir (0 - 600): ",0,600,1);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());

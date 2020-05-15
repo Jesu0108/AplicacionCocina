@@ -8,8 +8,8 @@ public interface IOpinion {
 
 	public boolean setsCritica(String sCritica);
 
-	public byte getiPuntuacion();
+	public byte getbPuntuacion();
 
-	public boolean setiPuntuacion(byte iPuntuacion);
+	public boolean setbPuntuacion(byte iPuntuacion);
 
 }

@@ -155,7 +155,7 @@ public class AplicacionCocina {
 		System.out.println("1. Gestionar servicios.");
 		System.out.println("2. Gestionar Alimentos.");
 		System.out.println("3. Gestionar Materiales");
-		System.out.println("4. Gestionar Opiniones");
+		System.out.println("4. Valorar la APP");
 		System.out.println("5. Salir");
 		do {
 			try {

@@ -3,19 +3,19 @@ package modelo.usuario;
 public class Opinion implements IOpinion{
 	private int iId_opinion; //PK
 	private String sCritica;
-	private byte iPuntuacion;
+	private byte bPuntuacion;
 		
 	
-	public Opinion(int iId_opinion,String sCritica, byte iPuntuacion) {
+	public Opinion(int iId_opinion,String sCritica, byte bPuntuacion) {
 		setiId_opinion(iId_opinion);
 		setsCritica(sCritica);
-		setiPuntuacion(iPuntuacion);
+		setbPuntuacion(bPuntuacion);
 	}
 	
-	public Opinion(String sCritica, byte iPuntuacion) {
+	public Opinion(String sCritica, byte bPuntuacion) {
 		setiId_opinion(0);
 		setsCritica(sCritica);
-		setiPuntuacion(iPuntuacion);
+		setbPuntuacion(bPuntuacion);
 	}
 	
 	public Opinion(int iId_opinion) {
@@ -52,15 +52,15 @@ public class Opinion implements IOpinion{
 	}
 	
 	@Override
-	public byte getiPuntuacion() {
-		return iPuntuacion;
+	public byte getbPuntuacion() {
+		return bPuntuacion;
 	}
 	
 	@Override
-	public boolean setiPuntuacion(byte iPuntuacion) {
+	public boolean setbPuntuacion(byte bPuntuacion) {
 		boolean bExito=false;
-		if(iPuntuacion > -1) {
-			this.iPuntuacion = iPuntuacion;
+		if(bPuntuacion > -1) {
+			this.bPuntuacion = bPuntuacion;
 			bExito=true;
 		}
 		bExito = true;
@@ -70,7 +70,7 @@ public class Opinion implements IOpinion{
 	@Override
 	public String toString() {
 		String sResultado="";
-		sResultado+= "Puntuacion: "+getiPuntuacion();
+		sResultado+= "Puntuacion: "+getbPuntuacion();
 		sResultado+="Critica: "+getsCritica();
 		return sResultado;
 	}
@@ -80,7 +80,7 @@ public class Opinion implements IOpinion{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + iId_opinion;
-		result = prime * result + iPuntuacion;
+		result = prime * result + bPuntuacion;
 		result = prime * result + ((sCritica == null) ? 0 : sCritica.hashCode());
 		return result;
 	}
