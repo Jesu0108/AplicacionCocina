@@ -83,9 +83,7 @@ public class MaterialController implements IMaterialController {
 	@Override
 	public int updateMaterial(Material oMaterial) {
 
-		String sql = "UPDATE material SET nombre_material = '" + oMaterial.getsNombre_material()
-				+ "', nombre_tipo_material = '" + oMaterial.getoNombre_tipo_material() + " cantidad = "
-				+ oMaterial.getiCantidad() + "WHERE nombre_material= '" + oMaterial.getsNombre_material()+"' ;";
+		String sql = "UPDATE material SET cantidad = "	+ oMaterial.getiCantidad() + "WHERE nombre_material= '" + oMaterial.getsNombre_material()+"' ;";
 
 		return ConexionDB.executeUpdate(sql);
 	}

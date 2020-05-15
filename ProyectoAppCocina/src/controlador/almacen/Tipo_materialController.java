@@ -3,9 +3,6 @@ package controlador.almacen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import controlador.ConexionDB;
 import modelo.almacen.Tipo_material;
 
@@ -32,12 +29,13 @@ public class Tipo_materialController implements ITipo_materialController {
 				+ oTMaterial.getsNombre_tipo_material() + "' ;";
 		return ConexionDB.executeCount(sql);
 	}
-	
+
 	@Override
 	public Tipo_material searchTipo_material(Tipo_material oTMaterial) {
-		
+
 		Tipo_material lTpipMaterial = null;
-		String sql = "SELECT * FROM tipo_material WHERE nombre_tipo_material= '" + oTMaterial.getsNombre_tipo_material()+ "' ;";
+		String sql = "SELECT * FROM tipo_material WHERE nombre_tipo_material= '" + oTMaterial.getsNombre_tipo_material()
+				+ "' ;";
 		Statement stm = null;
 
 		try {
@@ -54,27 +52,13 @@ public class Tipo_materialController implements ITipo_materialController {
 		}
 		return lTpipMaterial;
 	}
-	
+
 	@Override
-	public List<Tipo_material> searchListaTipo_materiales(Tipo_material oTMaterial) {
+	public int updateTipo_material(Tipo_material oTMaterial) {
 
-		List<Tipo_material> lTipo_materiales = new ArrayList<Tipo_material>();
-		String sql = "SELECT * FROM tipo_material WHERE nombre_tipo_material= '" + oTMaterial.getsNombre_tipo_material()
-				+ "' ;";
-		Statement stm = null;
+		String sql = "UPDATE tipo_material SET calidad = " + oTMaterial.getiCalidad() + "WHERE nombre_material= '"
+				+ oTMaterial.getsNombre_tipo_material() + "' ;";
 
-		try {
-			stm = ConexionDB.getConnection().createStatement();
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
-				String sNombre_Tipo_material = rs.getString(1);
-				int iCalidad = rs.getInt(2);
-				lTipo_materiales.add(new Tipo_material(sNombre_Tipo_material, iCalidad));
-			}
-			stm.close();
-		} catch (SQLException e) {
-			lTipo_materiales = null;
-		}
-		return lTipo_materiales;
+		return ConexionDB.executeUpdate(sql);
 	}
 }

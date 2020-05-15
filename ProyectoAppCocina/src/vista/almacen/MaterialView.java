@@ -81,25 +81,27 @@ public class MaterialView {
 
 		// Pido la PK de Tipo_material
 
-				while (errorControl) {
-					try {
-						sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el nombre del tipo de material que va a pedir: ");
-						errorControl = false;
-					} catch (Exception ex) {
-						System.out.println("Error: " + ex.getMessage());
-					}
-				}
-				
-				errorControl = true;
-				while (errorControl) {
-					try {
-						iCalidad = (int) ValidaLibrary.valida("Introduzca la calidad minima del tipo de material que va a pedir(1 - 1000): ",1,1000,1);
-						errorControl = false;
-					} catch (Exception ex) {
-						System.out.println("Error: " + ex.getMessage());
-					}
-				}
-		
+		while (errorControl) {
+			try {
+				sNombre_tipo_Material = ValidaLibrary
+						.leer("Introduzca el nombre del tipo de material que va a pedir: ");
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		errorControl = true;
+		while (errorControl) {
+			try {
+				iCalidad = (int) ValidaLibrary.valida(
+						"Introduzca la calidad minima del tipo de material que va a pedir(1 - 1000): ", 1, 1000, 1);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
 		// Pido los datos del material
 
 		errorControl = true;
@@ -115,33 +117,34 @@ public class MaterialView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				iCantidad = (int) ValidaLibrary.valida("Introduzca la cantidad de material que va a necesitar (1 - 100): ", 1, 100, 1);
+				iCantidad = (int) ValidaLibrary
+						.valida("Introduzca la cantidad de material que va a necesitar (1 - 100): ", 1, 100, 1);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		//Aniadimos a la DB el tipo de material si no existe
-		
-		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material,iCalidad);
-		
-		if(controlador.getAlmacenCtrl().getTipoMaterialCtrl().searchTipo_material(oTipoMaterial)== null) {
-			
-			//Comprobamos que se ha aniadido
-			
-			if(controlador.getAlmacenCtrl().getTipoMaterialCtrl().add(oTipoMaterial) != 0) {
+		// Aniadimos a la DB el tipo de material si no existe
+
+		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material, iCalidad);
+
+		if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().searchTipo_material(oTipoMaterial) == null) {
+
+			// Comprobamos que se ha aniadido
+
+			if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().add(oTipoMaterial) != 0) {
 				System.out.println("Se ha aniadido el tipo de material");
-			}else {
+			} else {
 				System.out.println("Error al aniadir el tipo de material");
 			}
-			
-		}else {
+
+		} else {
 			System.out.println("El tipo de material ya existe, no se creará uno nuevo");
 		}
-		
-		//Aniadimos el amterial
-		
+
+		// Aniadimos el material
+
 		Material oMaterial = new Material(sNombre_Material, iCantidad);
 
 		return controlador.getAlmacenCtrl().getMaterialCtrl().add(oMaterial);
@@ -150,20 +153,43 @@ public class MaterialView {
 	// -------------------------------------------------------------------------------------------------------
 
 	public static int eliminar(ControladorGeneral controlador) {
+		int iError = 0;
 		boolean errorControl = true;
-		String sNombre_tipo_Material = "";
+		String sNombre_tipo_Material = "", sNombre_Material = "";
+		byte bEleccion = 0;
 
-		while (errorControl) {
-			try {
-				sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el tipo de Material que va a eliminar: ");
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
+		System.out.println("¿Que quiere eliminar?");
+		bEleccion = (byte) ValidaLibrary.valida("1 - Tipo de material\n2 - Material\nOpcion elegida: ", 1, 2, 3);
+
+		if (bEleccion == 1) {
+			while (errorControl) {
+				try {
+					sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el tipo de material que va a eliminar: ");
+					errorControl = false;
+				} catch (Exception ex) {
+					System.out.println("Error: " + ex.getMessage());
+				}
 			}
+
+			Tipo_material oTipMaterial = new Tipo_material(sNombre_tipo_Material);
+
+			iError = controlador.getAlmacenCtrl().getTipoMaterialCtrl().remove(oTipMaterial);
+		} else {
+			while (errorControl) {
+				try {
+					sNombre_Material = ValidaLibrary.leer("Introduzca el material que va a eliminar: ");
+					errorControl = false;
+				} catch (Exception ex) {
+					System.out.println("Error: " + ex.getMessage());
+				}
+			}
+
+			Material oMaterial = new Material(sNombre_Material);
+
+			iError = controlador.getAlmacenCtrl().getMaterialCtrl().remove(oMaterial);
 		}
 
-		Material oMaterial = new Material(sNombre_tipo_Material);
-		return controlador.getAlmacenCtrl().getMaterialCtrl().remove(oMaterial);
+		return iError;
 	}
 
 	// -------------------------------------------------------------------------------------------------------
@@ -188,37 +214,88 @@ public class MaterialView {
 
 	public static int modificar(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_Material = "";
-		int iCantidad = 0;
-		
-		while (errorControl) {
-			try {
-				sNombre_Material = ValidaLibrary.leer("Introduzca el nombre de material para modificar su cantidad: ");
-				errorControl = false;
-			} catch (Exception ex) {
-				System.out.println("Error: " + ex.getMessage());
-			}
-		}
-		
-		Material oMat = new Material(sNombre_Material);
-		
-		if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterialPorNombre(oMat) != null) {
+		String sNombre_Material = "", sNombre_tipo_Material = "";
+		int iCantidad = 0,iCalidad=0, iError = 0;
+		byte bEleccion = 0;
 
-			errorControl = true;
+		//Hacemos un filtro para saber que hay que modificar
+		
+		System.out.println("¿Que quiere modificar?");
+		bEleccion = (byte) ValidaLibrary.valida("1 - Tipo de material\n2 - Material\nOpcion elegida: ", 1, 2, 3);
+
+		//Aplicamos el filtro y pedimos los datos
+		
+		if (bEleccion == 1) {
 			while (errorControl) {
 				try {
-					iCantidad = (int) ValidaLibrary
-							.valida("Introduzca la nueva cantidad de material que va a necesitar (1 - 100): ", 1, 100, 3);
+					sNombre_tipo_Material = ValidaLibrary
+							.leer("Introduzca el nombre de material para modificar su calidad: ");
 					errorControl = false;
 				} catch (Exception ex) {
 					System.out.println("Error: " + ex.getMessage());
 				}
 			}
 
+			Tipo_material oTipMaterial = new Tipo_material(sNombre_tipo_Material);
+
+			if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().searchTipo_material(oTipMaterial) != null) {
+
+				errorControl = true;
+				while (errorControl) {
+					try {
+						iCalidad = (int) ValidaLibrary.valida(
+								"Introduzca la nueva calidad de material que va a necesitar (1 - 600): ", 1, 600, 1);
+						errorControl = false;
+					} catch (Exception ex) {
+						System.out.println("Error: " + ex.getMessage());
+					}
+				}
+
+			}
+
+			//Con los datos modificamos los datos anteriores
+			
+			oTipMaterial.setiCalidad(iCalidad);
+
+			iError = controlador.getAlmacenCtrl().getTipoMaterialCtrl().updateTipo_material(oTipMaterial);
+		} else {
+			
+			//Pedimos los datos
+			
+			while (errorControl) {
+				try {
+					sNombre_Material = ValidaLibrary
+							.leer("Introduzca el nombre de material para modificar su cantidad: ");
+					errorControl = false;
+				} catch (Exception ex) {
+					System.out.println("Error: " + ex.getMessage());
+				}
+			}
+
+			Material oMat = new Material(sNombre_Material);
+
+			if (controlador.getAlmacenCtrl().getMaterialCtrl().searchMaterialPorNombre(oMat) != null) {
+
+				errorControl = true;
+				while (errorControl) {
+					try {
+						iCantidad = (int) ValidaLibrary.valida(
+								"Introduzca la nueva cantidad de material que va a necesitar (1 - 500): ", 1, 500, 1);
+						errorControl = false;
+					} catch (Exception ex) {
+						System.out.println("Error: " + ex.getMessage());
+					}
+				}
+
+			}
+
+			oMat.setiCantidad(iCantidad);
+
+			//Con los datos modificamos los datos anteriores
+			
+			iError = controlador.getAlmacenCtrl().getMaterialCtrl().updateMaterial(oMat);
 		}
 
-		oMat.setiCantidad(iCantidad);
-		
-		return controlador.getAlmacenCtrl().getMaterialCtrl().updateMaterial(oMat);
+		return iError;
 	}
 }
