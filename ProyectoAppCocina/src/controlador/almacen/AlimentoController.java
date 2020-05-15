@@ -54,10 +54,10 @@ public class AlimentoController implements IAlimento {
 	}
 
 	@Override
-	public int updateAlimento(Alimento oAlimento, Alimento oAlim) {
+	public int updateAlimento(Alimento oAlimento) {
 
 		String sql = "UPDATE alimento SET nombre_alimento = '" + oAlimento.getsNombre_alimento() + "', cantidad = "
-				+ oAlimento.getbCantidad() + " WHERE nombre_alimento= '" + oAlim.getsNombre_alimento() + "' ;";
+				+ oAlimento.getbCantidad() + " WHERE nombre_alimento= '" + oAlimento.getsNombre_alimento() + "' ;";
 
 		return ConexionDB.executeUpdate(sql);
 	}

@@ -10,7 +10,7 @@ public class Alimento implements IAlimento{
 	}
 	
 	public Alimento(String sNombre_alimento) {
-		setbCantidad(bCantidad);
+		setsNombre_alimento(sNombre_alimento);
 	}
 
 	//-------------------------------------------------------------------------------
