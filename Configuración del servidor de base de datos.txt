@@ -1,0 +1,3 @@
+user and password: Paquete: controlador -> ConexionDB --> lineas 8 y 9
+
+name DB: Paquete: vista: -> AplicacionCocina -> linea 17
