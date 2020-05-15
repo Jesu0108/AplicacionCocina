@@ -83,8 +83,7 @@ public class MaterialView {
 
 		while (errorControl) {
 			try {
-				sNombre_tipo_Material = ValidaLibrary
-						.leer("Introduzca el nombre del tipo de material que va a pedir: ");
+				sNombre_tipo_Material = ValidaLibrary.leer("Introduzca el nombre del tipo de material que va a pedir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -129,8 +128,6 @@ public class MaterialView {
 
 		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material, iCalidad);
 
-		if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().searchTipo_material(oTipoMaterial) == null) {
-
 			// Comprobamos que se ha aniadido
 
 			if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().add(oTipoMaterial) != 0) {
@@ -138,10 +135,6 @@ public class MaterialView {
 			} else {
 				System.out.println("Error al aniadir el tipo de material");
 			}
-
-		} else {
-			System.out.println("El tipo de material ya existe, no se creará uno nuevo");
-		}
 
 		// Aniadimos el material
 

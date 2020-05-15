@@ -139,7 +139,7 @@ public class AplicacionCocina {
 					default:
 						System.out.println("Opcion incorrecta.");
 					}
-				} while (bOpcionMenuPrincipal != 5);
+				} while (bOpcionMenuPrincipal != 6);
 			}else {
 				System.out.println("Ha ocurrido un error inesperado");
 			}
@@ -155,11 +155,12 @@ public class AplicacionCocina {
 		System.out.println("1. Gestionar servicios.");
 		System.out.println("2. Gestionar Alimentos.");
 		System.out.println("3. Gestionar Materiales");
-		System.out.println("4. Valorar la APP");
-		System.out.println("5. Salir");
+		System.out.println("4. Historial");
+		System.out.println("5. Valorar la APP");
+		System.out.println("6. Salir");
 		do {
 			try {
-				bOpcion = (byte) ValidaLibrary.valida("Introduce una opcion valida: ", 1, 5, 3);
+				bOpcion = (byte) ValidaLibrary.valida("Introduce una opcion valida: ", 1, 6, 3);
 				bExito = true;
 			} catch (NumberFormatException ex) {
 				System.out.println("Error: " + ex.getMessage());

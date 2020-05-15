@@ -7,6 +7,7 @@ import controlador.ControladorGeneral;
 import modelo.usuario.Servicio;
 import modelo.usuario.Tipo_servicio;
 import validaciones.ValidaLibrary;
+import vista.almacen.AlimentoView;
 
 public class ServicioView {
 	public static void menuServicio(ControladorGeneral controlador) {
@@ -147,9 +148,14 @@ public class ServicioView {
 			System.out.println("Ha ocurrido un problema al aniadir el tipo de servicio\n");
 		}
 
-		// Aniadimos el servicio a la DB
+		
 		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio, oTipServicio);
 
+		//Recogemos los datos de los alimentos para el servicio
+		
+		AlimentoView.aniadir(controlador);
+		
+		// Aniadimos el servicio a la DB
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 	}
 
