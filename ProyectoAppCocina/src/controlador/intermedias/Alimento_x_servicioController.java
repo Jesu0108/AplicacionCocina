@@ -9,7 +9,6 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.almacen.Alimento;
 import modelo.intermedias.Alimento_x_servicio;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Alimento_x_servicioController implements IAlimento_x_servicioController {
@@ -18,8 +17,7 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 	public int add(Alimento_x_servicio oAlimXserv) {
 
 		String sql = "INSERT INTO alimento_x_servicio VALUES ( " + oAlimXserv.getiIdSevicio().getiId_servicio() + ", '"
-				+ oAlimXserv.getNombre_alimento().getsNombre_alimento() + "', "
-				+ oAlimXserv.getOpinion().getiId_opinion() + ")";
+				+ oAlimXserv.getNombre_alimento().getsNombre_alimento() + "' )";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -45,13 +43,11 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 	    while (rs.next()) {
 	    	String email = rs.getString(1);
 	    	int id_servicio = rs.getInt(2);
-	    	int id_opinion = rs.getInt(3);
 	    	
 	    	Alimento oAlim = new Alimento(email);
 	    	Servicio oServ = new Servicio (id_servicio);
-	    	Opinion oOpin = new Opinion (id_opinion);
 	    	
-	    	lAlimXserv.add(new Alimento_x_servicio(oAlim,oServ,oOpin));
+	    	lAlimXserv.add(new Alimento_x_servicio(oAlim,oServ));
 	    }
 	    stm.close();
 	} catch (SQLException e) {

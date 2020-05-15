@@ -1,5 +1,6 @@
 package controlador.almacen;
 
+import controlador.ControladorGeneral;
 import modelo.almacen.Material;
 
 public interface IMaterialController {
@@ -14,6 +15,6 @@ public interface IMaterialController {
 
 	public int updateMaterial(Material oMaterial);
 
-	public Material searchMaterialPorNombre(Material oMaterial);
+	public Material searchMaterialPorNombre(Material oMaterial, ControladorGeneral oCont);
 
 }

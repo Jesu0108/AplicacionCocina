@@ -3,7 +3,8 @@ package controlador.usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 import controlador.ConexionDB;
 import modelo.usuario.Servicio;
@@ -15,9 +16,13 @@ public class ServicioController implements IServicioController {
 
 	@Override
 	public int add(Servicio oServicio) {
+		
+		  SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		  String sFecha=formato.format(oServicio.getdFecha());
+		  
 		String sql = "INSERT INTO servicio VALUES ( " + (oServicio.getiId_servicio() + 1) + ", '"
-				+ oServicio.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "', " + oServicio.getdFecha()
-				+ "," + oServicio.getbTiempo_servicio() + ");";
+				+ oServicio.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "', '" + sFecha
+				+ "', " + oServicio.getbTiempo_servicio() + ");";
 		return ConexionDB.executeUpdate(sql);
 	}
 

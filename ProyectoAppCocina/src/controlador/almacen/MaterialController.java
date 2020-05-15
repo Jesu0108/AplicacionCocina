@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import controlador.ConexionDB;
+import controlador.ControladorGeneral;
 import modelo.almacen.Material;
 import modelo.almacen.Tipo_material;
 
@@ -58,10 +59,11 @@ public class MaterialController implements IMaterialController {
 	}
 
 	@Override
-	public Material searchMaterialPorNombre(Material oMaterial) {
+	public Material searchMaterialPorNombre(Material oMaterial, ControladorGeneral oCont) {
 
 		Material lMaterial = null;
-		String sql = "SELECT * FROM material WHERE nombre_Material=\"" + oMaterial.getoNombre_tipo_material() + "\"";
+		String sql = "SELECT * FROM material WHERE nombre_material= '"
+				+ oMaterial.getsNombre_material() + "';";
 		Statement stm = null;
 
 		try {
@@ -72,6 +74,9 @@ public class MaterialController implements IMaterialController {
 				String sNombreTipoMaterial = rs.getString(2);
 				int iCantidad = rs.getInt(3);
 				Tipo_material oTipMaterial = new Tipo_material(sNombreTipoMaterial);
+				
+				oTipMaterial=oCont.getAlmacenCtrl().getTipoMaterialCtrl().searchTipo_material(oTipMaterial);
+				
 				lMaterial = new Material(sNombre_material, oTipMaterial, iCantidad);
 			}
 		} catch (SQLException e) {
@@ -83,7 +88,8 @@ public class MaterialController implements IMaterialController {
 	@Override
 	public int updateMaterial(Material oMaterial) {
 
-		String sql = "UPDATE material SET cantidad = "	+ oMaterial.getiCantidad() + "WHERE nombre_material= '" + oMaterial.getsNombre_material()+"' ;";
+		String sql = "UPDATE material SET cantidad = " + oMaterial.getiCantidad() + " WHERE nombre_material= '"
+				+ oMaterial.getsNombre_material() + "' ;";
 
 		return ConexionDB.executeUpdate(sql);
 	}

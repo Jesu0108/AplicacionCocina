@@ -1,13 +1,15 @@
 package vista.usuario;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 
 import controlador.ControladorGeneral;
+import modelo.almacen.Alimento;
+import modelo.intermedias.Alimento_x_servicio;
 import modelo.usuario.Servicio;
 import modelo.usuario.Tipo_servicio;
 import validaciones.ValidaLibrary;
-import vista.almacen.AlimentoView;
 
 public class ServicioView {
 	public static void menuServicio(ControladorGeneral controlador) {
@@ -80,10 +82,11 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "", sDateString = "";
+		String sNombre_tipo_servicio = "";
 		int iCalidad = 0;
 		Date dFecha = null;
-		byte bTiempo_servicio=0;
+		byte bTiempo_servicio=0,bDia=0,bMes=0;
+		short shAnio=0;
 
 		// Pedimos los datos para el tipo de servicio
 
@@ -124,7 +127,7 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				sDateString = ValidaLibrary.leer("Introduzca una fecha para el servicio (22/5/2020): ");
+				bDia = (byte)ValidaLibrary.valida("Introduzca el dia del servicio (22/5/2020): ",1,31,3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -134,7 +137,27 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				dFecha = new SimpleDateFormat("dd/MM/yyyy").parse(sDateString);
+				bMes = (byte)ValidaLibrary.valida("Introduzca una fecha para el servicio (22/5/2020): ",1,31,3);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+		
+		errorControl = true;
+		while (errorControl) {
+			try {
+				shAnio = (byte)ValidaLibrary.valida("Introduzca una fecha para el servicio (22/5/2020): ",1,3000,1);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+		
+		errorControl = true;
+		while (errorControl) {
+			try {
+				dFecha = new GregorianCalendar(shAnio, bMes - 1, bDia).getTime();
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -153,7 +176,45 @@ public class ServicioView {
 
 		//Recogemos los datos de los alimentos para el servicio
 		
-		AlimentoView.aniadir(controlador);
+		String sNombre_alimento = "";
+		byte bCantidad = 0;
+
+		while (errorControl) {
+			try {
+				sNombre_alimento = ValidaLibrary.leer("Introduzca el nombre de alimento que va a aniadir: ");
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+		
+		errorControl = true;
+		while (errorControl) {
+			try {
+				bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad de alimentos que va a aniadir (1 - 100): ",1, 100, 3);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		Alimento oAlimento = new Alimento(sNombre_alimento, bCantidad);
+
+		if(controlador.getAlmacenCtrl().getAlimentoCtrl().add(oAlimento)!=0) {
+			System.out.println("Alimento aniadido con exito");
+		}else {
+			System.out.println("Error al aniadir el alimento");
+		}
+		
+		//Hacemos el historial con los datos
+		
+		Alimento_x_servicio AlimXserv = new Alimento_x_servicio(oAlimento,oServicio);
+		
+		if(controlador.getInterCtrl().getAlimXservCtrl().add(AlimXserv)!=0) {
+			System.out.println("Servicio guardado en el historial");
+		}else {
+			System.out.println("Error al guardar en el historial");
+		}
 		
 		// Aniadimos el servicio a la DB
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);

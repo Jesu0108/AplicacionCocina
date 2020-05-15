@@ -1,18 +1,15 @@
 package modelo.intermedias;
 
 import modelo.almacen.Alimento;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Alimento_x_servicio {
 	private Alimento nombre_alimento; //PK and FK
 	private Servicio iIdSevicio; //PK and FK
-	private Opinion opinion; //PK and FK
 	
-	public Alimento_x_servicio(Alimento nombre_alimento, Servicio iIdSevicio, Opinion opinion) {
+	public Alimento_x_servicio(Alimento nombre_alimento, Servicio iIdSevicio) {
 		setiIdSevicio(iIdSevicio);
 		setNombre_alimento(nombre_alimento);	
-		setOpinion(opinion);
 	}
 	
 	//Getters and Setters
@@ -20,14 +17,7 @@ public class Alimento_x_servicio {
 	public Alimento getNombre_alimento() {
 		return nombre_alimento;
 	}
-	public Opinion getOpinion() {
-		return opinion;
-	}
-
-	public void setOpinion(Opinion opinion) {
-		this.opinion = opinion;
-	}
-
+	
 	private void setNombre_alimento(Alimento nombre_alimento) {
 		this.nombre_alimento = nombre_alimento;
 	}
@@ -46,7 +36,6 @@ public class Alimento_x_servicio {
 		int result = 1;
 		result = prime * result + ((iIdSevicio == null) ? 0 : iIdSevicio.hashCode());
 		result = prime * result + ((nombre_alimento == null) ? 0 : nombre_alimento.hashCode());
-		result = prime * result + ((opinion == null) ? 0 : opinion.hashCode());
 		return result;
 	}
 
