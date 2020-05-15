@@ -5,7 +5,7 @@ public class Material implements IMaterial{
 	private Tipo_material oNombre_tipo_material; //FK
 	private int iCantidad;
 
-	public Material(String sNombre_material, int Icantidad,Tipo_material oNombre_tipo_material) {
+	public Material(String sNombre_material, Tipo_material oNombre_tipo_material,int iCantidad) {
 		setsNombre_material(sNombre_material);
 		setoNombre_tipo_material(oNombre_tipo_material);
 		setiCantidad(iCantidad);
