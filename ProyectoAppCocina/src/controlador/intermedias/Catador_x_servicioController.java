@@ -16,8 +16,29 @@ public class Catador_x_servicioController implements ICatador_x_servicioControll
 	@Override
 	public int add(Catador_x_servicio oCatXserv) {
 		
+		int i = 0;
+
+		// Seleccionamos el id_servicio que queremos para poder
+		// usarlo en la query del insert
+
+		String sql1 = "SELECT id_servicio FROM servicio WHERE nombre_tipo_servicio = '"
+				+ oCatXserv.getId_servicio().getoNombre_tipo_servicio().getsNombre_tipo_servicio()+ "' ;";
+
+		Statement stm = null;
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql1);
+
+			i = rs.getInt(1);
+
+			stm.close();
+		} catch (SQLException e) {
+			i = 0;
+		}
+		
+		
 		String sql = "INSERT INTO catador_x_servicio VALUES ( '" + oCatXserv.getEmail().getsEmail() + "', "
-				+ null + ");";
+				+ i + ");";
 
 		return ConexionDB.executeUpdate(sql);
 	}

@@ -89,7 +89,7 @@ public class ServicioView {
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
 		String sNombre_tipo_servicio = "", sNombre_alimento = "", sNombre_Material = "", sNombre_tipo_Material = "";
-		int iCalidad = 0, iAnio = 0, iCantidad = 0;
+		int iCalidad = 0, iAnio = 0, iCantidad = 0, iError = 0;
 		Date dFecha = null;
 		byte bTiempo_servicio = 0, bDia = 0, bMes = 0, bCantidad = 0, bCuenta = 0;
 
@@ -180,6 +180,8 @@ public class ServicioView {
 
 		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio, oTipServicio);
 
+		iError = controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
+
 		// Recogemos los datos de los alimentos para el servicio
 		errorControl = true;
 		while (errorControl) {
@@ -209,6 +211,16 @@ public class ServicioView {
 			System.out.println("Plato aniadido con exito");
 		} else {
 			System.out.println("Error al aniadir el Plato");
+		}
+
+		// Hacemos el historial con los datos
+
+		Alimento_x_servicio AlimXserv = new Alimento_x_servicio(oAlimento, oServicio);
+
+		if (controlador.getInterCtrl().getAlimXservCtrl().add(AlimXserv) != 0) {
+			System.out.println("\nAlimento guardado en el historial\n");
+		} else {
+			System.out.println("\nError al guardar en el historial de alimentos\n");
 		}
 
 		// Recogemos los datos de los materiales para el servicio
@@ -293,64 +305,41 @@ public class ServicioView {
 
 		System.out.println("\nVerifique su cuenta para poder terminar su pedido");
 
-		bCuenta = (byte) ValidaLibrary.valida("1 - Catador\n2 - Cocinero\n3 - Empresa\nOpcion Elegida: ", 1, 3, 3);
+		bCuenta = (byte) ValidaLibrary.valida("1 - Cocinero\n2 - Catador\n3 - Empresa\nOpcion Elegida: ", 1, 3, 3);
 
-		if(bCuenta ==1) {
-			if (LoginView.loginCatador(controlador) != null) {
+		if (bCuenta == 2) {
+			Catador oCat = LoginView.loginCatador(controlador);
+			Catador_x_servicio oCatXserv = new Catador_x_servicio(oCat, oServicio);
 
-				Catador oCat = LoginView.loginCatador(controlador);
-				Catador_x_servicio oCatXserv = new Catador_x_servicio(oCat, oServicio);
-
-				if (controlador.getInterCtrl().getCatXservCtrl().add(oCatXserv) != 0) {
-					System.out.println("Aniadido al historial de usuario");
-				} else {
-					System.out.println("Error al aniadir al historial de usuario");
-				}
-			}else {
-				System.out.println("Error al registrarse");
+			if (controlador.getInterCtrl().getCatXservCtrl().add(oCatXserv) != 0) {
+				System.out.println("Aniadido al historial de usuario");
+			} else {
+				System.out.println("Error al aniadir al historial de usuario");
 			}
-			
-		}else if (bCuenta == 2) {
-			
-			if (LoginView.loginCocinero(controlador) != null) {
 
-				Cocinero oCoc = LoginView.loginCocinero(controlador);
-				Cocinero_x_servicio oCocXserv = new Cocinero_x_servicio(oCoc, oServicio);
+		} else if (bCuenta == 1) {
 
-				if (controlador.getInterCtrl().getCocXservCtrl().add(oCocXserv) != 0) {
-					System.out.println("Aniadido al historial de usuario");
-				} else {
-					System.out.println("Error al aniadir al historial de usuario");
-				}
+			Cocinero oCoc = LoginView.loginCocinero(controlador);
+			Cocinero_x_servicio oCocXserv = new Cocinero_x_servicio(oCoc, oServicio);
+
+			if (controlador.getInterCtrl().getCocXservCtrl().add(oCocXserv) != 0) {
+				System.out.println("Aniadido al historial de usuario");
 			}
-		}else {
-			
-			if (LoginView.loginEmpresa(controlador)!= null){
 
-				Empresa oEmp = LoginView.loginEmpresa(controlador);
-				Empresa_x_servicio oEmpXserv = new Empresa_x_servicio(oEmp, oServicio);
-
-				if (controlador.getInterCtrl().getEmpXservCrtl().add(oEmpXserv) != 0) {
-					System.out.println("Aniadido al historial de usuario");
-				} else {
-					System.out.println("Error al aniadir al historial de usuario");
-				}
-			}
-		}
-			
-		// Hacemos el historial con los datos
-
-		Alimento_x_servicio AlimXserv = new Alimento_x_servicio(oAlimento, oServicio);
-
-		if (controlador.getInterCtrl().getAlimXservCtrl().add(AlimXserv) != 0) {
-			System.out.println("Servicio guardado en el historial");
 		} else {
-			System.out.println("Error al guardar en el historial");
+
+			Empresa oEmp = LoginView.loginEmpresa(controlador);
+			Empresa_x_servicio oEmpXserv = new Empresa_x_servicio(oEmp, oServicio);
+
+			if (controlador.getInterCtrl().getEmpXservCrtl().add(oEmpXserv) != 0) {
+				System.out.println("Aniadido al historial de usuario");
+
+			}
 		}
 
 		// Aniadimos el servicio a la DB
 
-		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
+		return iError;
 	}
 
 	// -------------------------------------------------------------------------------------------------------

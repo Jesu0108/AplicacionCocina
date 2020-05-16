@@ -16,8 +16,27 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 	@Override
 	public int add(Empresa_x_servicio oEmpXserv) {
 
-		String sql = "INSERT INTO empresa_x_servicio VALUES ( '" + oEmpXserv.getsCif().getsCif() + "', "
-				+ null + ")";
+		int i = 0;
+
+		// Seleccionamos el id_servicio que queremos para poder
+		// usarlo en la query del insert
+
+		String sql1 = "SELECT id_servicio FROM servicio WHERE nombre_tipo_servicio = '"
+				+ oEmpXserv.getiIdSevicio().getoNombre_tipo_servicio().getsNombre_tipo_servicio()+ "' ;";
+
+		Statement stm = null;
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql1);
+
+			i = rs.getInt(1);
+
+			stm.close();
+		} catch (SQLException e) {
+			i = 0;
+		}
+
+		String sql = "INSERT INTO empresa_x_servicio VALUES ( '" + oEmpXserv.getsCif().getsCif() + "', " + i + ")";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -33,7 +52,7 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 	}
 
 	@Override
-	public List<Empresa_x_servicio> HistorialEmpXServ( ) {
+	public List<Empresa_x_servicio> HistorialEmpXServ() {
 		List<Empresa_x_servicio> lEmpXserv = new ArrayList<Empresa_x_servicio>();
 
 		String sql = "SELECT * FROM empresa_x_servicio;";

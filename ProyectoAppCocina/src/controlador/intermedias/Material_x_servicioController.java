@@ -15,9 +15,31 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 
 	@Override
 	public int add(Material_x_servicio oMatXserv) {
+		
+		int i=0;
+		
+		// Seleccionamos el id_servicio que queremos para poder
+		// usarlo en la query del insert
+
+		String sql1 = "SELECT id_servicio FROM servicio WHERE nombre_tipo_servicio = '"
+				+ oMatXserv.getId_servicio().getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "' ;";
+
+		Statement stm = null;
+		try {
+			stm = ConexionDB.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql1);
+
+			i = rs.getInt(1);
+			
+			stm.close();
+		} catch (SQLException e) {
+			i=0;
+		}
+		
+		// Hacemos la query
 
 		String sql = "INSERT INTO material_x_servicio VALUES ( '" + oMatXserv.getNombre_material().getsNombre_material()
-				+ "', " + null +" );";
+				+ "', " + i + " );";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -25,13 +47,12 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 	@Override
 	public int remove(Material_x_servicio oMatXserv) {
 
-		String sql = "DELETE FROM material_x_servicio WHERE id_servicio LIKE ";
-		sql += "\"" + oMatXserv.getId_servicio() + "\" AND nombre_material LIKE ";
-		sql += "\"" + oMatXserv.getNombre_material() + "\"";
+		String sql = "DELETE FROM material_x_servicio WHERE id_servicio LIKE " + oMatXserv.getId_servicio()
+				+ " AND nombre_material LIKE '" + oMatXserv.getNombre_material().getsNombre_material() + "' ;";
 
 		return ConexionDB.executeUpdate(sql);
 	}
-	
+
 	@Override
 	public List<Material_x_servicio> HistorialCatXServ() {
 
