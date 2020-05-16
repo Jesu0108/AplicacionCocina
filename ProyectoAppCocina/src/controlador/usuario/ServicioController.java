@@ -20,7 +20,7 @@ public class ServicioController implements IServicioController {
 		  SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		  String sFecha=formato.format(oServicio.getdFecha());
 		  
-		String sql = "INSERT INTO servicio VALUES ( " + (oServicio.getiId_servicio() + 1) + ", '"
+		String sql = "INSERT INTO servicio VALUES ( " + null + ", '"
 				+ oServicio.getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "', '" + sFecha
 				+ "', " + oServicio.getbTiempo_servicio() + ");";
 		return ConexionDB.executeUpdate(sql);
