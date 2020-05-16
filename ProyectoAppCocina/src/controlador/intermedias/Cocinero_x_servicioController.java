@@ -9,7 +9,6 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.intermedias.Cocinero_x_servicio;
 import modelo.usuario.Cocinero;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Cocinero_x_servicioController implements ICocinero_x_servicioController {
@@ -18,7 +17,7 @@ public class Cocinero_x_servicioController implements ICocinero_x_servicioContro
 	public int add(Cocinero_x_servicio oCocXserv) {
 
 		String sql = "INSERT INTO cocinero_x_servicio VALUES ( '" + oCocXserv.getEmail().getsEmail() + "', "
-				+ oCocXserv.getId_servicio().getiId_servicio() + oCocXserv.getOpinion().getiId_opinion()+")";
+				+ null + ")";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -47,13 +46,11 @@ public class Cocinero_x_servicioController implements ICocinero_x_servicioContro
 			while (rs.next()) {
 				String email = rs.getString(1);
 				int id_servicio = rs.getInt(2);
-				int id_opinion = rs.getInt(3);
 
 				Cocinero oCoc = new Cocinero(email);
 				Servicio oServ = new Servicio(id_servicio);
-				Opinion oOpin = new Opinion(id_opinion);
 
-				lCocXserv.add(new Cocinero_x_servicio(oCoc, oServ, oOpin));
+				lCocXserv.add(new Cocinero_x_servicio(oCoc, oServ));
 			}
 			stm.close();
 		} catch (SQLException e) {

@@ -1,32 +1,21 @@
 package modelo.intermedias;
 
 import modelo.usuario.Cocinero;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Cocinero_x_servicio {
 	private Cocinero email; // PK and FK
 	private Servicio id_servicio; // PK and FK
-	private Opinion opinion; // PK and FK
 
-	public Cocinero_x_servicio(Cocinero email, Servicio id_servicio, Opinion opinion) {
+	public Cocinero_x_servicio(Cocinero email, Servicio id_servicio) {
 		setEmail(email);
 		setId_servicio(id_servicio);
-		setOpinion(opinion);
 	}
 
 	// Getters and Setters
 
 	public Cocinero getEmail() {
 		return email;
-	}
-
-	public Opinion getOpinion() {
-		return opinion;
-	}
-
-	public void setOpinion(Opinion opinion) {
-		this.opinion = opinion;
 	}
 
 	private void setEmail(Cocinero email) {
@@ -49,7 +38,6 @@ public class Cocinero_x_servicio {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id_servicio == null) ? 0 : id_servicio.hashCode());
-		result = prime * result + ((opinion == null) ? 0 : opinion.hashCode());
 		return result;
 	}
 

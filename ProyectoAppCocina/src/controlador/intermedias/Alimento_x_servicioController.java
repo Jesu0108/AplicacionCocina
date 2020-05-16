@@ -17,7 +17,7 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 	public int add(Alimento_x_servicio oAlimXserv) {
 
 		String sql = "INSERT INTO alimento_x_servicio VALUES ( '" + oAlimXserv.getNombre_alimento().getsNombre_alimento() + "', "
-				+ oAlimXserv.getiIdSevicio().getiId_servicio() + " );";
+				+ null + " );";
 
 		return ConexionDB.executeUpdate(sql);
 	}

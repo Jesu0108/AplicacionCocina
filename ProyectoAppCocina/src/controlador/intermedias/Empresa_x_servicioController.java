@@ -9,7 +9,6 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.intermedias.Empresa_x_servicio;
 import modelo.usuario.Empresa;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Empresa_x_servicioController implements IEmpresa_x_servicioController {
@@ -18,7 +17,7 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 	public int add(Empresa_x_servicio oEmpXserv) {
 
 		String sql = "INSERT INTO empresa_x_servicio VALUES ( '" + oEmpXserv.getsCif().getsCif() + "', "
-				+ oEmpXserv.getiIdSevicio() + ", "+oEmpXserv.getOpinion().getiId_opinion()+")";
+				+ null + ")";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -46,13 +45,11 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 			while (rs.next()) {
 				String cif = rs.getString(1);
 				int id_servicio = rs.getInt(2);
-				int id_opinion = rs.getInt(3);
 
 				Empresa oEmp = new Empresa(cif);
 				Servicio oServ = new Servicio(id_servicio);
-				Opinion oOpin = new Opinion(id_opinion);
 
-				lEmpXserv.add(new Empresa_x_servicio(oEmp, oServ, oOpin));
+				lEmpXserv.add(new Empresa_x_servicio(oEmp, oServ));
 			}
 			stm.close();
 		} catch (SQLException e) {

@@ -6,10 +6,16 @@ import java.text.SimpleDateFormat;
 
 import controlador.ControladorGeneral;
 import modelo.almacen.Alimento;
+import modelo.almacen.Material;
+import modelo.almacen.Tipo_material;
 import modelo.intermedias.Alimento_x_servicio;
-import modelo.usuario.Servicio;
-import modelo.usuario.Tipo_servicio;
+import modelo.intermedias.Catador_x_servicio;
+import modelo.intermedias.Cocinero_x_servicio;
+import modelo.intermedias.Empresa_x_servicio;
+import modelo.intermedias.Material_x_servicio;
+import modelo.usuario.*;
 import validaciones.ValidaLibrary;
+import vista.LoginView;
 
 public class ServicioView {
 	public static void menuServicio(ControladorGeneral controlador) {
@@ -82,10 +88,10 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "", sNombre_alimento = "";
-		int iCalidad = 0,iAnio=0;
+		String sNombre_tipo_servicio = "", sNombre_alimento = "", sNombre_Material = "", sNombre_tipo_Material = "";
+		int iCalidad = 0, iAnio = 0, iCantidad = 0;
 		Date dFecha = null;
-		byte bTiempo_servicio = 0, bDia = 0, bMes = 0, bCantidad = 0;
+		byte bTiempo_servicio = 0, bDia = 0, bMes = 0, bCantidad = 0, bCuenta = 0;
 
 		// Pedimos los datos para el tipo de servicio
 
@@ -188,24 +194,150 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad (1 - 100): ", 1, 100,
-						3);
+				bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad (1 - 100): ", 1, 100, 3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
-		//Aniadimos el alimento a la DB
-		
+		// Aniadimos el alimento a la DB
+
 		Alimento oAlimento = new Alimento(sNombre_alimento, bCantidad);
 
 		if (controlador.getAlmacenCtrl().getAlimentoCtrl().add(oAlimento) != 0) {
-			System.out.println("Alimento aniadido con exito");
+			System.out.println("Plato aniadido con exito");
 		} else {
-			System.out.println("Error al aniadir el alimento");
+			System.out.println("Error al aniadir el Plato");
 		}
 
+		// Recogemos los datos de los materiales para el servicio
+		// Pido la PK de Tipo_material
+
+		errorControl = true;
+		while (errorControl) {
+			try {
+				sNombre_tipo_Material = ValidaLibrary
+						.leer("Introduzca el nombre del tipo de material que va a pedir: ");
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		errorControl = true;
+		while (errorControl) {
+			try {
+				iCalidad = (int) ValidaLibrary.valida(
+						"\nIntroduzca la calidad minima del tipo de material que va a pedir(1 - 1000): ", 1, 1000, 1);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		// Pido los datos del material
+
+		errorControl = true;
+		while (errorControl) {
+			try {
+				sNombre_Material = ValidaLibrary.leer("Introduzca de que material lo va a pedir: ");
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		errorControl = true;
+		while (errorControl) {
+			try {
+				iCantidad = (int) ValidaLibrary
+						.valida("Introduzca la cantidad de material que va a necesitar (1 - 100): ", 1, 100, 1);
+				errorControl = false;
+			} catch (Exception ex) {
+				System.out.println("Error: " + ex.getMessage());
+			}
+		}
+
+		// Aniadimos a la DB el tipo de material
+
+		Tipo_material oTipoMaterial = new Tipo_material(sNombre_tipo_Material, iCalidad);
+
+		if (controlador.getAlmacenCtrl().getTipoMaterialCtrl().add(oTipoMaterial) != 0) {
+			System.out.println("Se ha aniadido el tipo de material\n");
+		} else {
+			System.out.println("Error al aniadir el tipo de material\n");
+		}
+
+		// Aniadimos el material
+
+		Material oMaterial = new Material(sNombre_Material, oTipoMaterial, iCantidad);
+
+		if (controlador.getAlmacenCtrl().getMaterialCtrl().add(oMaterial) != 0) {
+			System.out.println("Material aniadido con exito\n");
+		} else {
+			System.out.println("Error al aniadir el Material\n");
+		}
+
+		// Lo aniadimos al historial de material
+
+		Material_x_servicio oMatXser = new Material_x_servicio(oMaterial, oServicio);
+
+		if (controlador.getInterCtrl().getMatXservCtrl().add(oMatXser) != 0) {
+			System.out.println("Aniadido al historial de material");
+		} else {
+			System.out.println("Error al aniadir al historial de material");
+		}
+
+		// Vemos que tipo de cuenta tiene y la aniadimos a su respectivo historial
+
+		System.out.println("\nVerifique su cuenta para poder terminar su pedido");
+
+		bCuenta = (byte) ValidaLibrary.valida("1 - Catador\n2 - Cocinero\n3 - Empresa\nOpcion Elegida: ", 1, 3, 3);
+
+		if(bCuenta ==1) {
+			if (LoginView.loginCatador(controlador) != null) {
+
+				Catador oCat = LoginView.loginCatador(controlador);
+				Catador_x_servicio oCatXserv = new Catador_x_servicio(oCat, oServicio);
+
+				if (controlador.getInterCtrl().getCatXservCtrl().add(oCatXserv) != 0) {
+					System.out.println("Aniadido al historial de usuario");
+				} else {
+					System.out.println("Error al aniadir al historial de usuario");
+				}
+			}else {
+				System.out.println("Error al registrarse");
+			}
+			
+		}else if (bCuenta == 2) {
+			
+			if (LoginView.loginCocinero(controlador) != null) {
+
+				Cocinero oCoc = LoginView.loginCocinero(controlador);
+				Cocinero_x_servicio oCocXserv = new Cocinero_x_servicio(oCoc, oServicio);
+
+				if (controlador.getInterCtrl().getCocXservCtrl().add(oCocXserv) != 0) {
+					System.out.println("Aniadido al historial de usuario");
+				} else {
+					System.out.println("Error al aniadir al historial de usuario");
+				}
+			}
+		}else {
+			
+			if (LoginView.loginEmpresa(controlador)!= null){
+
+				Empresa oEmp = LoginView.loginEmpresa(controlador);
+				Empresa_x_servicio oEmpXserv = new Empresa_x_servicio(oEmp, oServicio);
+
+				if (controlador.getInterCtrl().getEmpXservCrtl().add(oEmpXserv) != 0) {
+					System.out.println("Aniadido al historial de usuario");
+				} else {
+					System.out.println("Error al aniadir al historial de usuario");
+				}
+			}
+		}
+			
 		// Hacemos el historial con los datos
 
 		Alimento_x_servicio AlimXserv = new Alimento_x_servicio(oAlimento, oServicio);
@@ -217,6 +349,7 @@ public class ServicioView {
 		}
 
 		// Aniadimos el servicio a la DB
+
 		return controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
 	}
 

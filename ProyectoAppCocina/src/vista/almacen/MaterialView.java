@@ -136,7 +136,7 @@ public class MaterialView {
 		} else {
 			System.out.println("Error al aniadir el tipo de material");
 		}
-
+		
 		// Aniadimos el material
 
 		Material oMaterial = new Material(sNombre_Material, oTipoMaterial, iCantidad);

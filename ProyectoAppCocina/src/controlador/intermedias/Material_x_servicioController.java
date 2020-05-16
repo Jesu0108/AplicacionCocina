@@ -9,7 +9,6 @@ import java.util.List;
 import controlador.ConexionDB;
 import modelo.almacen.Material;
 import modelo.intermedias.Material_x_servicio;
-import modelo.usuario.Opinion;
 import modelo.usuario.Servicio;
 
 public class Material_x_servicioController implements IMaterial_x_servicioController {
@@ -18,7 +17,7 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 	public int add(Material_x_servicio oMatXserv) {
 
 		String sql = "INSERT INTO material_x_servicio VALUES ( '" + oMatXserv.getNombre_material().getsNombre_material()
-				+ "', " + oMatXserv.getId_servicio() +", "+ oMatXserv.getOpinion().getiId_opinion()+");";
+				+ "', " + null +" );";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -47,13 +46,11 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 			while (rs.next()) {
 				String email = rs.getString(1);
 				int id_servicio = rs.getInt(2);
-				int id_opinion = rs.getInt(3);
 
 				Material oNomMat = new Material(email);
 				Servicio oServ = new Servicio(id_servicio);
-				Opinion oOpin = new Opinion(id_opinion);
 
-				lMatXserv.add(new Material_x_servicio(oNomMat, oServ, oOpin));
+				lMatXserv.add(new Material_x_servicio(oNomMat, oServ));
 			}
 			stm.close();
 		} catch (SQLException e) {
