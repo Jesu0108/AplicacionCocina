@@ -14,7 +14,7 @@ public class OpinionController implements IOpinionController {
 	
 	@Override
 	public int add(Opinion oOpinion) {
-		String sql = "INSERT INTO opinion VALUES ( " + (oOpinion.getiId_opinion()+1) + ", '" + oOpinion.getsCritica()
+		String sql = "INSERT INTO opinion VALUES ( " + null + ", '" + oOpinion.getsCritica()
 				+ "', " + oOpinion.getbPuntuacion() + ")";
 		return ConexionDB.executeUpdate(sql);
 	}

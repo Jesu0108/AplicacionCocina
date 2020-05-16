@@ -33,11 +33,11 @@ public class OpinionView {
 		System.out.println("\nGestion de Opiniones");
 		System.out.println("#############################");
 		System.out.println("1. Aniadir nueva opinion.");
-		System.out.println("4. Volver.");
+		System.out.println("2. Volver.");
 
 		while (errorControl) {
 			try {
-				bOpcion = (byte) ValidaLibrary.valida("Introduce una opcion: ", 1, 4, 3);
+				bOpcion = (byte) ValidaLibrary.valida("Introduce una opcion: ", 1, 2, 3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
