@@ -10,6 +10,6 @@ public interface ICocinero_x_servicioController {
 
 	public int remove(Cocinero_x_servicio oCocXserv);
 
-	public List<Cocinero_x_servicio> HistorialCatXServ(Cocinero_x_servicio oCatXserv);
+	public List<Cocinero_x_servicio> HistorialCocXServ();
 
 }

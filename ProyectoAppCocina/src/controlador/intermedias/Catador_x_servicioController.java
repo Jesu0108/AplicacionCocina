@@ -33,10 +33,10 @@ public class Catador_x_servicioController implements ICatador_x_servicioControll
 	}
 
 	@Override
-    public List<Catador_x_servicio> HistorialCatXServ (Catador_x_servicio oCatXserv) {
+    public List<Catador_x_servicio> HistorialCatXServ ( ) {
 	List<Catador_x_servicio> lCatXserv = new ArrayList<Catador_x_servicio>();
 
-	String sql = "SELECT * FROM catador_x_servicio WHERE email LIKE '" + oCatXserv.getEmail().getsEmail() + "';";
+	String sql = "SELECT * FROM catador_x_servicio;";
 	Statement stm = null;
 
 	try {

@@ -10,6 +10,6 @@ public interface ICatador_x_servicioController {
 
 	public int remove(Catador_x_servicio oCatXserv);
 
-	public List<Catador_x_servicio> HistorialCatXServ(Catador_x_servicio oCatXserv);
+	public List<Catador_x_servicio> HistorialCatXServ();
 
 }

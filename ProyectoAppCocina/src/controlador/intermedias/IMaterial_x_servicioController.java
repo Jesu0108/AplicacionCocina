@@ -10,6 +10,6 @@ public interface IMaterial_x_servicioController {
 
 	public int remove(Material_x_servicio oMatXserv);
 
-	public List<Material_x_servicio> HistorialCatXServ(Material_x_servicio oMatXserv);
+	public List<Material_x_servicio> HistorialCatXServ();
 
 }

@@ -10,7 +10,7 @@ public interface IEmpresa_x_servicioController {
 
 	public int remove(Empresa_x_servicio oEmpXserv);
 
-	public List<Empresa_x_servicio> HistorialEmpXServ(Empresa_x_servicio oCatXserv);
+	public List<Empresa_x_servicio> HistorialEmpXServ();
 
 
 }

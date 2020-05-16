@@ -34,10 +34,10 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 	}
 
 	@Override
-	public List<Empresa_x_servicio> HistorialEmpXServ(Empresa_x_servicio oEmpXserv) {
+	public List<Empresa_x_servicio> HistorialEmpXServ( ) {
 		List<Empresa_x_servicio> lEmpXserv = new ArrayList<Empresa_x_servicio>();
 
-		String sql = "SELECT * FROM empresa_x_servicio WHERE cif LIKE '" + oEmpXserv.getsCif().getsCif() + "';";
+		String sql = "SELECT * FROM empresa_x_servicio;";
 		Statement stm = null;
 
 		try {

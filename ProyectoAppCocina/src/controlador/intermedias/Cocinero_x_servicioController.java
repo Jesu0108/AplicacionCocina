@@ -34,11 +34,11 @@ public class Cocinero_x_servicioController implements ICocinero_x_servicioContro
 	}
 
 	@Override
-	public List<Cocinero_x_servicio> HistorialCatXServ(Cocinero_x_servicio oCocXserv) {
+	public List<Cocinero_x_servicio> HistorialCocXServ( ) {
 
 		List<Cocinero_x_servicio> lCocXserv = new ArrayList<Cocinero_x_servicio>();
 
-		String sql = "SELECT * FROM catador_x_servicio WHERE email LIKE '" + oCocXserv.getEmail().getsEmail() + "';";
+		String sql = "SELECT * FROM catador_x_servicio ;";
 		Statement stm = null;
 
 		try {

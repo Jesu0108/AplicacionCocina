@@ -34,11 +34,11 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 	}
 	
 	@Override
-	public List<Material_x_servicio> HistorialCatXServ(Material_x_servicio oMatXserv) {
+	public List<Material_x_servicio> HistorialCatXServ() {
 
 		List<Material_x_servicio> lMatXserv = new ArrayList<Material_x_servicio>();
 
-		String sql = "SELECT * FROM catador_x_servicio WHERE nombre_material LIKE '" + oMatXserv.getNombre_material().getsNombre_material() + "';";
+		String sql = "SELECT * FROM catador_x_servicio;";
 		Statement stm = null;
 
 		try {

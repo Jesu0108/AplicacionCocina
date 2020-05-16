@@ -7,6 +7,7 @@ import modelo.usuario.Empresa;
 import controlador.ConexionDB;
 import validaciones.ValidaLibrary;
 import vista.almacen.*;
+import vista.intermedias.HistorialesView;
 import vista.usuario.*;
 
 public class AplicacionCocina {
@@ -81,7 +82,7 @@ public class AplicacionCocina {
 						break;
 					case 4:// Gestion Opiniones
 						try {
-							//HistorialView.menuHistorial(controlador);
+							HistorialesView.menuHistorial(controlador);
 							;
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
@@ -140,7 +141,7 @@ public class AplicacionCocina {
 						break;
 					case 4:// Gestion Opiniones
 						try {
-							//HistorialView.menuHistorial(controlador);
+							HistorialesView.menuHistorial(controlador);
 							;
 						} catch (Exception ex) {
 							System.out.println("Error: " + ex.getMessage());
