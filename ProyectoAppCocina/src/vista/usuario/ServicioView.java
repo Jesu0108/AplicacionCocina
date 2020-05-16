@@ -82,11 +82,10 @@ public class ServicioView {
 
 	public static int aniadir(ControladorGeneral controlador) {
 		boolean errorControl = true;
-		String sNombre_tipo_servicio = "";
-		int iCalidad = 0;
+		String sNombre_tipo_servicio = "", sNombre_alimento = "";
+		int iCalidad = 0,iAnio=0;
 		Date dFecha = null;
-		byte bTiempo_servicio = 0, bDia = 0, bMes = 0;
-		int iAnio = 0;
+		byte bTiempo_servicio = 0, bDia = 0, bMes = 0, bCantidad = 0;
 
 		// Pedimos los datos para el tipo de servicio
 
@@ -176,14 +175,10 @@ public class ServicioView {
 		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio, oTipServicio);
 
 		// Recogemos los datos de los alimentos para el servicio
-
-		String sNombre_alimento = "";
-		byte bCantidad = 0;
-
 		errorControl = true;
 		while (errorControl) {
 			try {
-				sNombre_alimento = ValidaLibrary.leer("Introduzca el nombre de alimento que va a aniadir: ");
+				sNombre_alimento = ValidaLibrary.leer("Introduzca el nombre del plato que va a aniadir: ");
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
@@ -193,14 +188,16 @@ public class ServicioView {
 		errorControl = true;
 		while (errorControl) {
 			try {
-				bCantidad = (byte) ValidaLibrary
-						.valida("Introduzca la cantidad de alimentos que va a aniadir (1 - 100): ", 1, 100, 3);
+				bCantidad = (byte) ValidaLibrary.valida("Introduzca la cantidad (1 - 100): ", 1, 100,
+						3);
 				errorControl = false;
 			} catch (Exception ex) {
 				System.out.println("Error: " + ex.getMessage());
 			}
 		}
 
+		//Aniadimos el alimento a la DB
+		
 		Alimento oAlimento = new Alimento(sNombre_alimento, bCantidad);
 
 		if (controlador.getAlmacenCtrl().getAlimentoCtrl().add(oAlimento) != 0) {

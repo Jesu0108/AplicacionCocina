@@ -10,7 +10,6 @@ public class Servicio implements IServicio {
 
 	public Servicio(Date dFecha,byte bTiempo_servicio,Tipo_servicio oNombre_tipo_servicio) {
 
-		setiId_servicio(0);
 		setdFecha(dFecha);
 		setbTiempo_servicio(bTiempo_servicio);
 		setoNombre_tipo_servicio(oNombre_tipo_servicio);
