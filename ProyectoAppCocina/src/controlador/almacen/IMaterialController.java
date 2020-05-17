@@ -9,7 +9,7 @@ public interface IMaterialController {
 
 	public int remove(Material oMaterial);
 
-	public int existeCliente(Material oMaterial);
+	public int existeMaterial(Material oMaterial);
 
 	public Material searchMaterialPorTipo(Material oMaterial);
 

@@ -28,7 +28,7 @@ public class MaterialController implements IMaterialController {
 	}
 
 	@Override
-	public int existeCliente(Material oMaterial) {
+	public int existeMaterial(Material oMaterial) {
 		String sql = "SELECT COUNT(*) FROM material WHERE nombre_material LIKE '" + oMaterial.getsNombre_material()
 				+ "' ;";
 		return ConexionDB.executeCount(sql);
