@@ -43,11 +43,9 @@ public class Catador_x_servicioController implements ICatador_x_servicioControll
 	}
 
 	@Override
-	public int remove(Catador_x_servicio oCatXserv) {
+	public int remove() {
 
-		String sql = "DELETE FROM catador_x_servicio WHERE id_servicio LIKE "
-				+ oCatXserv.getId_servicio().getiId_servicio() + " AND email LIKE '" + oCatXserv.getEmail().getsEmail()
-				+ "';";
+		String sql = "DELETE FROM catador_x_servicio;";
 
 		return ConexionDB.executeUpdate(sql);
 	}
