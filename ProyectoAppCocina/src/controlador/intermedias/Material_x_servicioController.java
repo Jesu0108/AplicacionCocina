@@ -44,11 +44,9 @@ public class Material_x_servicioController implements IMaterial_x_servicioContro
 	}
 
 	@Override
-	public int remove(Material_x_servicio oMatXserv) {
+	public int remove() {
 
-		String sql = "DELETE FROM material_x_servicio WHERE id_servicio LIKE " + oMatXserv.getId_servicio()
-				+ " AND nombre_material LIKE '" + oMatXserv.getNombre_material().getsNombre_material() + "' ;";
-
+		String sql = "DELETE FROM material_x_servicio;";
 		return ConexionDB.executeUpdate(sql);
 	}
 
