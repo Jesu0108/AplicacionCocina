@@ -10,7 +10,7 @@ public interface IAlimento {
 
 	public int remove(Alimento oAlimento);
 
-	public int existeCliente(Alimento oAlimento);
+	public int existeAlimento(Alimento oAlimento);
 
 	public List<Alimento> searchAlimentosPorNombre(Alimento oAlimento);
 

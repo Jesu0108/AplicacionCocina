@@ -26,7 +26,7 @@ public class AlimentoController implements IAlimento {
 	}
 
 	@Override
-	public int existeCliente(Alimento oAlimento) {
+	public int existeAlimento(Alimento oAlimento) {
 		String sql = "SELECT COUNT(*) FROM Alimento WHERE nombre_alimento LIKE '" + oAlimento.getsNombre_alimento()
 				+ "' ;";
 		return ConexionDB.executeCount(sql);
