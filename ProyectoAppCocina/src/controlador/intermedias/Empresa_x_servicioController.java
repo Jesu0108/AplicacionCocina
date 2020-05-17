@@ -8,8 +8,6 @@ import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.intermedias.Empresa_x_servicio;
-import modelo.usuario.Empresa;
-import modelo.usuario.Servicio;
 
 public class Empresa_x_servicioController implements IEmpresa_x_servicioController {
 
@@ -62,13 +60,8 @@ public class Empresa_x_servicioController implements IEmpresa_x_servicioControll
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String cif = rs.getString(1);
-				int id_servicio = rs.getInt(2);
-
-				Empresa oEmp = new Empresa(cif);
-				Servicio oServ = new Servicio(id_servicio);
-
-				lEmpXserv.add(new Empresa_x_servicio(oEmp, oServ));
+				System.out.print("\n"+rs.getString(1)+" - ");
+				System.out.println(rs.getInt(2));
 			}
 			stm.close();
 		} catch (SQLException e) {

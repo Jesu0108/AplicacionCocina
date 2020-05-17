@@ -8,8 +8,6 @@ import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.intermedias.Cocinero_x_servicio;
-import modelo.usuario.Cocinero;
-import modelo.usuario.Servicio;
 
 public class Cocinero_x_servicioController implements ICocinero_x_servicioController {
 
@@ -63,13 +61,8 @@ public class Cocinero_x_servicioController implements ICocinero_x_servicioContro
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String email = rs.getString(1);
-				int id_servicio = rs.getInt(2);
-
-				Cocinero oCoc = new Cocinero(email);
-				Servicio oServ = new Servicio(id_servicio);
-
-				lCocXserv.add(new Cocinero_x_servicio(oCoc, oServ));
+				System.out.print("\n"+rs.getString(1)+" - ");
+				System.out.println(rs.getInt(2));
 			}
 			stm.close();
 		} catch (SQLException e) {

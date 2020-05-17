@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controlador.ConexionDB;
-import modelo.almacen.Alimento;
 import modelo.intermedias.Alimento_x_servicio;
-import modelo.usuario.Servicio;
 
 public class Alimento_x_servicioController implements IAlimento_x_servicioController {
 
@@ -36,8 +34,10 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 			i = 0;
 		}
 
-		String sql = "INSERT INTO alimento_x_servicio VALUES ( '"
-				+ oAlimXserv.getNombre_alimento().getsNombre_alimento() + "', " + i + " );";
+		// Hacemos la query
+		
+		String sql = "INSERT INTO alimento_x_servicio VALUES ( '" + oAlimXserv.getNombre_alimento().getsNombre_alimento()
+				+ "', " + i + " );";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -61,13 +61,8 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String email = rs.getString(1);
-				int id_servicio = rs.getInt(2);
-
-				Alimento oAlim = new Alimento(email);
-				Servicio oServ = new Servicio(id_servicio);
-
-				lAlimXserv.add(new Alimento_x_servicio(oAlim, oServ));
+				System.out.print("\n"+rs.getString(1)+" - ");
+				System.out.println(rs.getInt(2));
 			}
 			stm.close();
 		} catch (SQLException e) {

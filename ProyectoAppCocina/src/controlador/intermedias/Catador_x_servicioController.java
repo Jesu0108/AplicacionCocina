@@ -8,8 +8,6 @@ import java.util.List;
 
 import controlador.ConexionDB;
 import modelo.intermedias.Catador_x_servicio;
-import modelo.usuario.Catador;
-import modelo.usuario.Servicio;
 
 public class Catador_x_servicioController implements ICatador_x_servicioController {
 
@@ -37,8 +35,7 @@ public class Catador_x_servicioController implements ICatador_x_servicioControll
 		}
 		
 		
-		String sql = "INSERT INTO catador_x_servicio VALUES ( '" + oCatXserv.getEmail().getsEmail() + "', "
-				+ i + ");";
+		String sql = "INSERT INTO catador_x_servicio VALUES ( '" + oCatXserv.getEmail().getsEmail() + "', "+ i + " );";
 
 		return ConexionDB.executeUpdate(sql);
 	}
@@ -63,13 +60,8 @@ public class Catador_x_servicioController implements ICatador_x_servicioControll
 	    stm = ConexionDB.getConnection().createStatement();
 	    ResultSet rs = stm.executeQuery(sql);
 	    while (rs.next()) {
-	    	String email = rs.getString(1);
-	    	int id_servicio = rs.getInt(2);
-	    	
-	    	Catador oCat = new Catador(email);
-	    	Servicio oServ = new Servicio (id_servicio);
-	    	
-	    	lCatXserv.add(new Catador_x_servicio(oCat,oServ));
+	    	System.out.print("\n"+rs.getString(1)+" - ");
+			System.out.println(rs.getInt(2));
 	    }
 	    stm.close();
 	} catch (SQLException e) {

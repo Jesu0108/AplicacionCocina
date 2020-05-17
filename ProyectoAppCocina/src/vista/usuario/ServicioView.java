@@ -181,7 +181,7 @@ public class ServicioView {
 		Servicio oServicio = new Servicio(dFecha, bTiempo_servicio, oTipServicio);
 
 		iError = controlador.getUsuarioCtrl().getServicioCtrl().add(oServicio);
-
+		
 		// Recogemos los datos de los alimentos para el servicio
 		errorControl = true;
 		while (errorControl) {

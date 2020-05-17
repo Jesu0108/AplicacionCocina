@@ -17,39 +17,21 @@ public class HistorialesView {
 			bOpcion = opcionMenuHistoriales();
 			switch (bOpcion) {
 			case 1: // Alimentos
-				if (mostrarAlim(controlador) != null) {
-					System.out.println(mostrarAlim(controlador));
-				} else {
-					System.out.println("Error al aniadir el alimento");
-				}
+				mostrarAlim(controlador);
 				break;
 			case 2: // Material
-				if (mostrarMaterial(controlador) != null) {
-					System.out.println(mostrarMaterial(controlador));
-				} else {
-					System.out.println("Error al modificar el alimento");
-				}
+				mostrarMaterial(controlador);
+
 				break;
 			case 3: // Catador
-				if (mostrarCatador(controlador) != null) {
-					System.out.println(mostrarCatador(controlador));
-				} else {
-					System.out.println("Error al eliminar el alimento");
-				}
+				mostrarCatador(controlador);
+
 				break;
 			case 4: // Cocinero
-				if (mostrarCatador(controlador) != null) {
-					System.out.println(mostrarCatador(controlador));
-				} else {
-					System.out.println("Error al buscar el alimento");
-				}
+				mostrarCatador(controlador);
 				break;
 			case 5: // Empresa
-				if (mostrarEmpresa(controlador) != null) {
-					System.out.println(mostrarEmpresa(controlador));
-				} else {
-					System.out.println("Error al buscar el alimento");
-				}
+				mostrarEmpresa(controlador);
 				break;
 			default:
 				System.out.println("Volviendo...\n");
@@ -93,7 +75,7 @@ public class HistorialesView {
 	// -------------------------------------------------------------------------------------------------------
 
 	public static List<Material_x_servicio> mostrarMaterial(ControladorGeneral controlador) {
-		return controlador.getInterCtrl().getMatXservCtrl().HistorialCatXServ();
+		return controlador.getInterCtrl().getMatXservCtrl().HistorialMatXServ();
 	}
 
 	// -------------------------------------------------------------------------------------------------------
