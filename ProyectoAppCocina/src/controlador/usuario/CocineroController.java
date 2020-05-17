@@ -70,7 +70,7 @@ public class CocineroController implements iCocineroController {
 	}
 
 	@Override
-	public List<Cocinero> searchCocineroPorCiudad(Cocinero oCocinero) {
+	public List<Cocinero> searchCocineroPorEmail(Cocinero oCocinero) {
 
 		List<Cocinero> lCocineros = new ArrayList<Cocinero>();
 		String sql = "SELECT * FROM cocinero WHERE email=" + oCocinero.getsEmail();
