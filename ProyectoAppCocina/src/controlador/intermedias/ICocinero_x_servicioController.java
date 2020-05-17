@@ -12,4 +12,6 @@ public interface ICocinero_x_servicioController {
 
 	public List<Cocinero_x_servicio> HistorialCocXServ();
 
+	public int idDB();
+
 }

@@ -11,35 +11,37 @@ import modelo.intermedias.Alimento_x_servicio;
 
 public class Alimento_x_servicioController implements IAlimento_x_servicioController {
 
+	// Hacemos esta funcion para conseguir el id del ultimo servicio
+	// que se meta para asi poder enlazarlo en la db en el historial
+
 	@Override
-	public int add(Alimento_x_servicio oAlimXserv) {
+	public int idDB() {
+
+		String sql = "SELECT MAX(id_servicio) FROM servicio";
 
 		int i = 0;
-
-		// Seleccionamos el id_servicio que queremos para poder
-		// usarlo en la query del insert
-
-		String sql1 = "SELECT id_servicio FROM servicio WHERE nombre_tipo_servicio = '"
-				+ oAlimXserv.getiIdSevicio().getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "' ;";
-
 		Statement stm = null;
 		try {
 			stm = ConexionDB.getConnection().createStatement();
-			ResultSet rs = stm.executeQuery(sql1);
-
-			i = rs.getInt(1);
-
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				i = rs.getInt(1);
+			}
 			stm.close();
 		} catch (SQLException e) {
 			i = 0;
 		}
+		return i;
+	}
 
-		// Hacemos la query
-		
-		String sql = "INSERT INTO alimento_x_servicio VALUES ( '" + oAlimXserv.getNombre_alimento().getsNombre_alimento()
-				+ "', " + i + " );";
+	@Override
+	public int add(Alimento_x_servicio oAlimXserv) {
+
+		String sql = "INSERT INTO alimento_x_servicio VALUES ( '"
+				+ oAlimXserv.getNombre_alimento().getsNombre_alimento() + "', " + idDB() + " );";
 
 		return ConexionDB.executeUpdate(sql);
+
 	}
 
 	@Override
@@ -61,7 +63,7 @@ public class Alimento_x_servicioController implements IAlimento_x_servicioContro
 			stm = ConexionDB.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				System.out.print("\n"+rs.getString(1)+" - ");
+				System.out.print("\n" + rs.getString(1) + " - ");
 				System.out.println(rs.getInt(2));
 			}
 			stm.close();

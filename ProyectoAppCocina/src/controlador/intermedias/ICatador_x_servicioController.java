@@ -12,4 +12,6 @@ public interface ICatador_x_servicioController {
 
 	public List<Catador_x_servicio> HistorialCatXServ();
 
+	public int idDB();
+
 }

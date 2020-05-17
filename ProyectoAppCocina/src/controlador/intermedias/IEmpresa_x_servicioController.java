@@ -12,5 +12,7 @@ public interface IEmpresa_x_servicioController {
 
 	public List<Empresa_x_servicio> HistorialEmpXServ();
 
+	public int idDB();
+
 
 }

@@ -12,4 +12,6 @@ public interface IMaterial_x_servicioController {
 
 	public List<Material_x_servicio> HistorialMatXServ();
 
+	public int idDB();
+
 }

@@ -8,6 +8,14 @@ public class Servicio implements IServicio {
 	private Date dFecha;
 	private byte bTiempo_servicio; // NN
 
+	public Servicio(int iId_servicio,Date dFecha,byte bTiempo_servicio,Tipo_servicio oNombre_tipo_servicio) {
+
+		setiId_servicio(iId_servicio);
+		setdFecha(dFecha);
+		setbTiempo_servicio(bTiempo_servicio);
+		setoNombre_tipo_servicio(oNombre_tipo_servicio);
+	}
+	
 	public Servicio(Date dFecha,byte bTiempo_servicio,Tipo_servicio oNombre_tipo_servicio) {
 
 		setdFecha(dFecha);

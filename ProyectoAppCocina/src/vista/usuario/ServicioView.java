@@ -214,12 +214,14 @@ public class ServicioView {
 		}
 
 		// Hacemos el historial con los datos
-
+		
 		Alimento_x_servicio AlimXserv = new Alimento_x_servicio(oAlimento, oServicio);
 
 		if (controlador.getInterCtrl().getAlimXservCtrl().add(AlimXserv) != 0) {
+			
 			System.out.println("\nAlimento guardado en el historial\n");
 		} else {
+						
 			System.out.println("\nError al guardar en el historial de alimentos\n");
 		}
 

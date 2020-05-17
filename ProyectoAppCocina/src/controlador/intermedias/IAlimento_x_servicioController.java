@@ -12,5 +12,7 @@ public interface IAlimento_x_servicioController {
 
 	public List<Alimento_x_servicio> HistorialAlimXServ( );
 
+	public int idDB();
+
 
 }

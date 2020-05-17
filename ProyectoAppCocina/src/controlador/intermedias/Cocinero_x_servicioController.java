@@ -11,30 +11,32 @@ import modelo.intermedias.Cocinero_x_servicio;
 
 public class Cocinero_x_servicioController implements ICocinero_x_servicioController {
 
+	//Hacemos esta funcion para conseguir el id del ultimo servicio
+	//que se meta para asi poder enlazarlo en la db en el historial
+	
 	@Override
-	public int add(Cocinero_x_servicio oCocXserv) {
-
-		int i = 0;
-
-		// Seleccionamos el id_servicio que queremos para poder
-		// usarlo en la query del insert
-
-		String sql1 = "SELECT id_servicio FROM servicio WHERE nombre_tipo_servicio = '"
-				+ oCocXserv.getId_servicio().getoNombre_tipo_servicio().getsNombre_tipo_servicio() + "' ;";
-
+	public int idDB() {
+		
+		String sql = "SELECT MAX(id_servicio) FROM servicio";
+		
+		int i =0;
 		Statement stm = null;
 		try {
 			stm = ConexionDB.getConnection().createStatement();
-			ResultSet rs = stm.executeQuery(sql1);
-
-			i = rs.getInt(1);
-
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				i = rs.getInt(1);
+			}
 			stm.close();
 		} catch (SQLException e) {
 			i = 0;
 		}
-
-		String sql = "INSERT INTO cocinero_x_servicio VALUES ( '" + oCocXserv.getEmail().getsEmail() + "', " + i+ ")";
+		return i;
+	}
+	
+	@Override
+	public int add(Cocinero_x_servicio oCocXserv) {
+		String sql = "INSERT INTO cocinero_x_servicio VALUES ( '" + oCocXserv.getEmail().getsEmail() + "', " + idDB() + " )";
 
 		return ConexionDB.executeUpdate(sql);
 	}
